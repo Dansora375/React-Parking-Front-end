@@ -192,9 +192,8 @@ export function Hogares() {
 
     return (
 
-        <div className="Hogares">
-            <MiniDrawer contenido = { contenido }/>
-        </div>
+        contenido
+
         
     );
 

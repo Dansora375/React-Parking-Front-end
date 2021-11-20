@@ -14,8 +14,19 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
+
+
+// importando los iconos personalizados
+import EntradasIcon from './icons/Entradas'
+import ParqueaderoIcon from './icons/Parqueadero'
+import ResidenteIcon from './icons/Residentes'
+import VehiculosIcon from './icons/Vehiculos'
+import HomeIcon from './icons/Home'
+
+import { Link, Switch, Route } from 'react-router-dom';
+
+import {Hogares} from "../views/Hogares/Hogares"
 
 const drawerWidth = 240;
 
@@ -132,7 +143,7 @@ export default function MiniDrawer( { contenido } ) {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon sx={{color:"#14ffec"}}/>}
           </IconButton>
         </DrawerHeader>
-        <List>
+        {/* <List>
           {['Entrada y Salida', 'Parqueadero', 'Residentes', 'Hogares', 'Vehiculos'].map((text, index) => (
             <ListItem button key={text} >
               <ListItemIcon>
@@ -141,11 +152,56 @@ export default function MiniDrawer( { contenido } ) {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+        </List> */}
+        <List disablePadding>
+          <ListItem button component={Link} to={"/hogares"}>
+            <ListItemIcon>
+              <HomeIcon viewBox="0 -20 130 120" width="80" height="80"></HomeIcon>
+            </ListItemIcon>
+            <ListItemText primary={"Hogares"}/>
+          </ListItem>
         </List>
+
+        <List disablePadding>
+          <ListItem  button component={Link} to={"/entradas"}>
+            <ListItemIcon >
+              <EntradasIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></EntradasIcon>
+            </ListItemIcon>
+            <ListItemText primary={"Entradas"}/>
+          </ListItem>
+        </List>
+
+        <List disablePadding>
+          <ListItem  button component={Link} to={"/parqueadero"}>
+            <ListItemIcon >
+              <ParqueaderoIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></ParqueaderoIcon>
+            </ListItemIcon>
+            <ListItemText primary={"Parqueadero"}/>
+          </ListItem>
+        </List>
+
+        <List disablePadding>
+          <ListItem  button component={Link} to={"/residentes"}>
+            <ListItemIcon >
+              <ResidenteIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></ResidenteIcon>
+            </ListItemIcon>
+            <ListItemText primary={"Residentes"}/>
+          </ListItem>
+        </List>
+
+        <List disablePadding>
+          <ListItem  button component={Link} to={"/vehiculos"}>
+            <ListItemIcon >
+              <VehiculosIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></VehiculosIcon>
+            </ListItemIcon>
+            <ListItemText primary={"Vehiculos"}/>
+          </ListItem>
+        </List>
+        
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {content}
+        {contenido}
       </Box>
     </Box>
   );

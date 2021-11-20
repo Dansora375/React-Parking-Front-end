@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 // import {BrowserRouter, Link, Route, Routes} from 'react-router-dom'
-// import {Hogares} from './views/Hogares/Hogares.jsx'
 
 // hooks react redux
-import {useDispatch, useSelector} from 'react-redux'
+// import {useDispatch, useSelector} from 'react-redux'
+
+
 
 // importamos la acción
-import { loguinWithEmailAction } from './redux/Ducks/authDuck'
+// import { loguinWithEmailAction } from './redux/Ducks/authDuck'
+
+
+
+import MiniDrawer from './components/Drawer';
 
 import { Hogares } from './views/Hogares/Hogares';
 
-  import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    NavLink
-  } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 function App() {
 
@@ -59,19 +62,37 @@ function App() {
 
     //   </header>
     // </div>
+    <div>
+      {/* <ResponsiveDrawer></ResponsiveDrawer> */}
 
-    <Router>
-      <Link to='/hogares'>
-        hogares
-      </Link>
+      <Router>
+        
+        <MiniDrawer contenido={
+          <Switch>
+            <Route path='/hogares'>
+              <Hogares/>
+            </Route>
+          </Switch>
+        }></MiniDrawer>
 
-      <Switch>
-          <Route path="/hogares" exact>
-            <Hogares />
-          </Route>
+        
+      </Router>
+      
+    </div>
+    
+
+    // <Router>
+    //   <Link to='/hogares'>
+    //     hogares
+    //   </Link>
+
+    //   <Switch>
+    //       <Route path="/hogares" exact>
+    //         <Hogares />
+    //       </Route>
           
-        </Switch>
-    </Router>
+    //     </Switch>
+    // </Router>
   );
 }
 

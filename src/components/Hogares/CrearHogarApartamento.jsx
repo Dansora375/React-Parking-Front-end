@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import '../../views/Hogares/Hogares.css'
 import Checkbox from '@mui/material/Checkbox';
+import { submitApto } from './ConexionBack/FormCrearApto';
 
 const currencies2 = [
     {
@@ -32,13 +33,21 @@ export default function CrearHogarApartamento() {
 
     const [estadoModal2, cambiarEstadoModal2] = useState(false);
  
-    const [currency2, setCurrency2] = React.useState('Torre A');
+    const [tower, setCurrency2] = React.useState('Torre A');
 
     const handleChange2 = (event) => {
         setCurrency2(event.target.value);
     };
 
     const [checked, setChecked] = React.useState(false);
+
+    const [aptoName, setaptoName] = useState('');
+
+    const SubApto = (event) => {
+
+        submitApto(aptoName, tower);
+        cambiarEstadoModal2();
+    }
 
     const handleChangeCheck = (event) => {
         setChecked(event.target.checked);
@@ -52,7 +61,8 @@ export default function CrearHogarApartamento() {
             </Fab>
             <Modal1 
                 estado = {estadoModal2}
-                cambiarEstado = {cambiarEstadoModal2}>
+                cambiarEstado = {cambiarEstadoModal2}
+                funcion = {SubApto}>
                 <h2>Agregar nuevo hogar </h2>
                 <Grid container spacing={2}>  
                     <Grid item xs={6} sx={{textAlign: 'right'}}>
@@ -64,7 +74,7 @@ export default function CrearHogarApartamento() {
                             id="outlined-select-currency"
                             select
                             label="Torre"
-                            value={currency2}
+                            value={tower}
                             onChange={handleChange2}
                             size="small"
                             sx={{width: '100%'}}
@@ -76,7 +86,8 @@ export default function CrearHogarApartamento() {
                             ))}
                         </TextField>
                         <TextField id="outlined-basic" label="Numero apto" variant="outlined" size="small" margin="normal"
-                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}} />
+                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}} 
+                        onChange={event => setaptoName(event.target.value)}/>
                     </Grid>
                 </Grid>
                 <h4><Checkbox checked={checked}

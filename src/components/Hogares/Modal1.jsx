@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+//import { submitTorre } from './ConexionBack/FormCrearTorre';
 
 
 const Overlay = styled.div`
@@ -114,7 +115,7 @@ function ConfirmButton(props) {
     return <ButtonUnstyled {...props} component={BotonConfirmar} />;
   }
 
-export default function Modal1({children, estado, cambiarEstado}) {
+export default function Modal1({children, estado, cambiarEstado, funcion}) {
     return (
         <>
             {estado &&
@@ -130,7 +131,7 @@ export default function Modal1({children, estado, cambiarEstado}) {
                                     </CancelButton>
                                 </Grid>
                                 <Grid item xs={6} sx={{textAlign: 'center'}}>
-                                    <ConfirmButton> Confirmar </ConfirmButton>
+                                    <ConfirmButton onClick={() => funcion()}> Confirmar </ConfirmButton>
                                 </Grid>
                             </Grid>
                         </Box>

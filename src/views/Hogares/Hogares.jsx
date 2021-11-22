@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './Hogares.css';
 import Grid from '@mui/material/Grid';
-import MiniDrawer from '../../components/Drawer';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -116,85 +115,82 @@ export function Hogares() {
         setAnchorEl(null);
     };
 
-    const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
-                            <Box sx={{ flexGrow: 1, p: 3 }}>
-                                <Grid container spacing={2}>
-                                    
-                                    <Grid item xs={1} className="plus">
-                                        <CrearTorre/>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <b className="texto-creacion">Crear Torre</b>
-                                    </Grid>
-                                    <Grid item xs={1} className="plus">
-                                        <CrearHogarApartamento/>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <b className="texto-creacion">Crear Hogar</b>
-                                    </Grid>
-                                    
-                                </Grid>
-                            </Box>
-                                
-                            {/* Barra de opciones */}
-                            <Box sx={{ flexGrow: 1, p: 1, border:'1px solid #14FFEC'}}>
-                            <Grid container spacing={2} >
-                                <Grid item xs={3}>
-                                    <NavButton>Asignar Parqueadero</NavButton>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <NavButton aria-label="more"
-                                        id="long-button"
-                                        aria-controls="long-menu"
-                                        aria-expanded={open ? 'true' : undefined}
-                                        aria-haspopup="true"
-                                        onClick={handleClick}>
-                                            TORRE A &nbsp;&nbsp;
-                                        <FontAwesomeIcon icon={faEllipsisV} />
-                                        </NavButton>
-                                        <Menu
-                                            id="long-menu"
-                                            MenuListProps={{
-                                            'aria-labelledby': 'long-button',
-                                            }}
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            onClose={handleClose}
-                                            PaperProps={{
-                                            style: {
-                                                maxHeight: ITEM_HEIGHT * 4.5,
-                                                width: '15ch',
-                                                backgroundColor: '#0D7377',
-                                                color: '#BCFFFA',
-                                            },
-                                            }}
-                                        >
-                                            {options.map((option) => (
-                                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                                                {option}
-                                            </MenuItem>
-                                            ))}
-                                        </Menu>
-                                </Grid>
-                                <Grid item xs={5} sx={{textAlign: "right"}}>
-                                    <CustomInput aria-label="Demo input" placeholder="Buscar apartamento..." />
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <SearchIcon fontSize="large" sx={{color: "#14FFEC"}}/>
-                                </Grid>
-                            </Grid>
-                            </Box>
-                            <Grid item xs={12} className="titulo">
-                                <b><br/>TORRE A</b>
-                            </Grid>
-                            <p id="info">En este momento no hay apartamentos</p>
-                        </Box>
-
     return (
 
-        <div className="Hogares">
-            <MiniDrawer contenido = { contenido }/>
-        </div>
+      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
+      <Box sx={{ flexGrow: 1, p: 3 }}>
+          <Grid container spacing={2}>
+              
+              <Grid item xs={1} className="plus">
+                  <CrearTorre/>
+              </Grid>
+              <Grid item xs={5}>
+                  <b className="texto-creacion">Crear Torre</b>
+              </Grid>
+              <Grid item xs={1} className="plus">
+                  <CrearHogarApartamento/>
+              </Grid>
+              <Grid item xs={5}>
+                  <b className="texto-creacion">Crear Hogar</b>
+              </Grid>
+              
+          </Grid>
+      </Box>
+          
+      {/* Barra de opciones */}
+      <Box sx={{ flexGrow: 1, p: 1, border:'1px solid #14FFEC'}}>
+      <Grid container spacing={2} >
+          <Grid item xs={3}>
+              <NavButton>Asignar Parqueadero</NavButton>
+          </Grid>
+          <Grid item xs={3}>
+              <NavButton aria-label="more"
+                  id="long-button"
+                  aria-controls="long-menu"
+                  aria-expanded={open ? 'true' : undefined}
+                  aria-haspopup="true"
+                  onClick={handleClick}>
+                      TORRE A &nbsp;&nbsp;
+                  <FontAwesomeIcon icon={faEllipsisV} />
+                  </NavButton>
+                  <Menu
+                      id="long-menu"
+                      MenuListProps={{
+                      'aria-labelledby': 'long-button',
+                      }}
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      PaperProps={{
+                      style: {
+                          maxHeight: ITEM_HEIGHT * 4.5,
+                          width: '15ch',
+                          backgroundColor: '#0D7377',
+                          color: '#BCFFFA',
+                      },
+                      }}
+                  >
+                      {options.map((option) => (
+                      <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                          {option}
+                      </MenuItem>
+                      ))}
+                  </Menu>
+          </Grid>
+          <Grid item xs={5} sx={{textAlign: "right"}}>
+              <CustomInput aria-label="Demo input" placeholder="Buscar apartamento..." />
+          </Grid>
+          <Grid item xs={1}>
+              <SearchIcon fontSize="large" sx={{color: "#14FFEC"}}/>
+          </Grid>
+      </Grid>
+      </Box>
+      <Grid item xs={12} className="titulo">
+          <b><br/>TORRE A</b>
+      </Grid>
+      <p id="info">En este momento no hay apartamentos</p>
+  </Box>
+
         
     );
 

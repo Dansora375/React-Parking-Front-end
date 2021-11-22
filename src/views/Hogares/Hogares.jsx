@@ -12,6 +12,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CrearTorre from '../../components/Hogares/CrearTorre';
 import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartamento';
+import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
 
 const BotonNav = styled('button')`
   background-color: #0D7377;
@@ -107,6 +108,7 @@ export function Hogares() {
     //const [Torre, setTorre] = React.useState(options[0]);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selecttorre, setselecttorre] = React.useState('TORRE A');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -188,7 +190,18 @@ export function Hogares() {
       <Grid item xs={12} className="titulo">
           <b><br/>TORRE A</b>
       </Grid>
-      <p id="info">En este momento no hay apartamentos</p>
+      <div>
+        <br/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+        <ObtenerHogares/>
+      </div>
   </Box>
 
         

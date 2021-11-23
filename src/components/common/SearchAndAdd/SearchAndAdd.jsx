@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import './SearchAndAdd.css'
 
-const IconColor= "#14FFEC"
+
 
 function SearchAndAdd() {
   return (
@@ -15,34 +15,23 @@ function SearchAndAdd() {
       alignItems="flex-end"
       spacing={0} >
         <Grid item xs={8.8}>
-          <Fab aria-label="add" size="small" id="boton"
-                 >
+          <Fab aria-label="add" size="small" id="boton">
                 <AddIcon   />
             </Fab>
-            
         </Grid>
-
-          
         <Grid item xs={2}>
           <Box className='input-container'> 
             <TextField id="standard-basic" label="Filtrar..." variant="standard" 
             size="large"/>
-          </Box> 
-            
-          
-           
-              
+          </Box>               
             </Grid>
              <Grid item xs={1}>
               <IconButton aria-label="search"> 
-              <SearchIcon fontSize="large" sx={{ color: IconColor}}/>  
+              <SearchIcon fontSize="large" sx={{ color:'primary.main'}}/>  
               </IconButton>
             </Grid>
-
-       
-          
     </Grid>
-    
+
     </>
   )
 }

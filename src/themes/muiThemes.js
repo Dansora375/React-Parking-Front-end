@@ -14,15 +14,27 @@ export const darkTheme  = createTheme({
   palette: {
     mode:'dark',
     primary: {
-      main: '#14FFEC'
+      main: '#14FFEC',
+      contrastText:'#e5e8ec'
     },
     secondary: {
       main: '#0D7377'
     },
+    tertiary:{
+      main:'#BCFFFA',
+    },  
     background:{
       main: '#323232'
-    }
+    },
+    text:{
+    primary:'#14FFEC',
+    secondary:'#BCFFFA',
+    tertiary:'#0D7377',
+    dark:'#323232',
+    other:'#e5e8ec'
   },
+  },
+  
   // Por si se desean cambiar los colores de warning
   // y otros
 

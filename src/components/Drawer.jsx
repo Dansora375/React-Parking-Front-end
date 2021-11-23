@@ -23,6 +23,7 @@ import ParqueaderoIcon from './icons/Parqueadero'
 import ResidenteIcon from './icons/Residentes'
 import VehiculosIcon from './icons/Vehiculos'
 import HomeIcon from './icons/Home'
+import Usuario from '../views/Entrada/Usuario';
 
 import { Link } from 'react-router-dom';
 
@@ -126,6 +127,7 @@ export default function MiniDrawer( { contenido } ) {
           <Typography variant="h6" noWrap component="div" >
             REACTPARKING
           </Typography>
+          <Usuario />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open} PaperProps={{

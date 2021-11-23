@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './Hogares.css';
 import Grid from '@mui/material/Grid';
-import MiniDrawer from '../../components/Drawer';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +12,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import CrearTorre from '../../components/Hogares/CrearTorre';
 import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartamento';
+import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
 
 const BotonNav = styled('button')`
   background-color: #0D7377;
@@ -108,6 +108,7 @@ export function Hogares() {
     //const [Torre, setTorre] = React.useState(options[0]);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selecttorre, setselecttorre] = React.useState('TORRE A');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -115,7 +116,6 @@ export function Hogares() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
     const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
                             <Box sx={{ flexGrow: 1, p: 3 }}>
                                 <Grid container spacing={2}>

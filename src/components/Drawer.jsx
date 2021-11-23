@@ -27,6 +27,9 @@ import HomeIcon from './icons/Home'
 import { Link, Switch, Route } from 'react-router-dom';
 
 import {Hogares} from "../views/Hogares/Hogares"
+import Usuario from '../views/Entrada/Usuario';
+
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -98,8 +101,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer( { contenido } ) {
 
-  const content = contenido;
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -130,6 +131,7 @@ export default function MiniDrawer( { contenido } ) {
           <Typography variant="h6" noWrap component="div" >
             REACTPARKING
           </Typography>
+          <Usuario />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open} PaperProps={{
@@ -143,16 +145,6 @@ export default function MiniDrawer( { contenido } ) {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon sx={{color:"#14ffec"}}/>}
           </IconButton>
         </DrawerHeader>
-        {/* <List>
-          {['Entrada y Salida', 'Parqueadero', 'Residentes', 'Hogares', 'Vehiculos'].map((text, index) => (
-            <ListItem button key={text} >
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon sx={{color:"#14ffec"}}/> : <MailIcon sx={{color:"#14ffec"}}/>}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
         <List disablePadding>
           <ListItem button component={Link} to={"/hogares"}>
             <ListItemIcon>
@@ -199,7 +191,7 @@ export default function MiniDrawer( { contenido } ) {
         </List>
         
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
         <DrawerHeader />
         {contenido}
       </Box>

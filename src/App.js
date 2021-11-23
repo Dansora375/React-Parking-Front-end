@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 // import {BrowserRouter, Link, Route, Routes} from 'react-router-dom'
 
@@ -15,6 +14,9 @@ import './App.css';
 import MiniDrawer from './components/Drawer';
 
 import { Hogares } from './views/Hogares/Hogares';
+
+import {Entrada} from './views/Entrada/Entrada';
+// import {Register} from './views/Registro/Register';
 
 import {
   HashRouter as Router,
@@ -70,7 +72,11 @@ function App() {
         <MiniDrawer contenido={
           <Switch>
             <Route path='/hogares'>
+              {/* <Register/> */}
               <Hogares/>
+            </Route>
+            <Route path='/entrada'>
+              <Entrada/>
             </Route>
           </Switch>
         }></MiniDrawer>

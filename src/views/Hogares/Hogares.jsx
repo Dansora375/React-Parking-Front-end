@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import { styled } from '@mui/system';
+import styled  from 'styled-components';
 import InputUnstyled from '@mui/core/InputUnstyled';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,7 +15,7 @@ import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartament
 import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
 
 const BotonNav = styled('button')`
-  background-color: #0D7377;
+  background-color: ${({theme})=>theme.secondary };
   padding: 6px 16px;
   border-radius: 4px;
   color: #BCFFFA;

@@ -9,8 +9,10 @@ import './App.css';
 // importamos la acción
 // import { loguinWithEmailAction } from './redux/Ducks/authDuck'
 
-
-
+import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles'
+import themes from './themes/themes'
+import {darkTheme} from './themes/muiThemes'
 import MiniDrawer from './components/Drawer';
 
 import { Hogares } from './views/Hogares/Hogares';
@@ -23,6 +25,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Parking from './views/Parking/Parking';
 
 function App() {
 
@@ -64,11 +67,12 @@ function App() {
 
     //   </header>
     // </div>
-    <div>
+    <>
       {/* <ResponsiveDrawer></ResponsiveDrawer> */}
 
       <Router>
-        
+        <MuiThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={themes['dark']}>
         <MiniDrawer contenido={
           <Switch>
             <Route path='/hogares'>
@@ -78,13 +82,17 @@ function App() {
             <Route path='/entrada'>
               <Entrada/>
             </Route>
+            <Route path='/Parqueadero'>
+              <Parking/>
+            </Route>
           </Switch>
         }></MiniDrawer>
 
-        
+        </ThemeProvider>
+        </MuiThemeProvider>
       </Router>
       
-    </div>
+    </>
     
 
     // <Router>

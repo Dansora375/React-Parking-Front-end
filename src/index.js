@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './views/authentication/login';
+import Register from './views/Registro/Register'
 import {Hogares} from './views/Hogares/Hogares';
 
 
@@ -29,6 +30,9 @@ ReactDOM.render(
         </Route>
         <Route path="/signin">
           <Login />
+        </Route>
+        <Route path="/signup">
+          <Register/>
         </Route>
       </Switch>
     </Router>

@@ -9,17 +9,8 @@ function Parking() {
   return (
     <>  
       <SearchAndAdd></SearchAndAdd>
-      <Grid>
-        asdas
-        <Box
-        color='primary.main'> 
-          hola baysssssssssssssssss
-        </Box>
-      </Grid>
       <TabResiOrVisi></TabResiOrVisi>
-
       <ItemParking>
-
       </ItemParking>
     </>
   )

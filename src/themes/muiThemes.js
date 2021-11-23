@@ -15,12 +15,14 @@ export const darkTheme  = createTheme({
     mode:'dark',
     primary: {
       main: '#14FFEC',
-      light:'#BCFFFA',
       contrastText:'#e5e8ec'
     },
     secondary: {
       main: '#0D7377'
     },
+    tertiary:{
+      main:'#BCFFFA',
+    },  
     background:{
       main: '#323232'
     },

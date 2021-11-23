@@ -9,11 +9,9 @@ import './App.css';
 // importamos la acción
 // import { loguinWithEmailAction } from './redux/Ducks/authDuck'
 
-
-
 import MiniDrawer from './components/Drawer';
-
 import { Hogares } from './views/Hogares/Hogares';
+import { Residentes } from './views/Residentes/Residentes';
 
 import {
   HashRouter as Router,
@@ -70,6 +68,9 @@ function App() {
           <Switch>
             <Route path='/hogares'>
               <Hogares/>
+            </Route>
+            <Route path='/residentes'>
+              <Residentes/>
             </Route>
           </Switch>
         }></MiniDrawer>

@@ -38,11 +38,3 @@ html {
 .textfieldLabel {
     color: white !important;
 }
-
-.HomeCard{
-    font-size: 18px;
-    text-align: center;
-    width: 200px;
-    float: left;
-    padding-left: 4%;
-}

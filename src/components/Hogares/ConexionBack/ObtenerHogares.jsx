@@ -3,7 +3,6 @@ import React from 'react'
 import '../../../views/Hogares/Hogares.css';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import Popover from '@mui/material/Popover';
-import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { styled } from '@mui/system';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';

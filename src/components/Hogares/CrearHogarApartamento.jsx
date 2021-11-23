@@ -57,7 +57,7 @@ export default function CrearHogarApartamento() {
         <div>
             <Fab aria-label="add" size="small" id="boton"
                 onClick={() => cambiarEstadoModal2(!estadoModal2)}>
-                <AddIcon />
+                <AddIcon/>
             </Fab>
             <Modal1 
                 estado = {estadoModal2}

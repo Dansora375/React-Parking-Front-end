@@ -192,7 +192,7 @@ export function Hogares() {
 
     return (
 
-        contenido
+      contenido
 
         
     );

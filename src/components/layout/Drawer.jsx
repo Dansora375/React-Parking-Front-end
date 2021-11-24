@@ -18,13 +18,18 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 // importando los iconos personalizados
-import EntradasIcon from './icons/Entradas'
-import ParqueaderoIcon from './icons/Parqueadero'
-import ResidenteIcon from './icons/Residentes'
-import VehiculosIcon from './icons/Vehiculos'
-import HomeIcon from './icons/Home'
+import EntradasIcon from '../icons/Entradas'
+import ParqueaderoIcon from '../icons/Parqueadero'
+import ResidenteIcon from '../icons/Residentes'
+import VehiculosIcon from '../icons/Vehiculos'
+import HomeIcon from '../icons/Home'
 
-import { Link } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
+
+import {Hogares} from "../../views/Hogares/Hogares"
+import Usuario from '../../views/Entrada/Usuario';
+
+// import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -109,7 +114,7 @@ export default function MiniDrawer( { contenido } ) {
 
   return (
     <Box sx={{ display: 'flex' }} >
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{backgroundColor:"#323232", color:"#14ffec"}}>
           <IconButton
@@ -126,6 +131,7 @@ export default function MiniDrawer( { contenido } ) {
           <Typography variant="h6" noWrap component="div" >
             REACTPARKING
           </Typography>
+          <Usuario />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open} PaperProps={{
@@ -185,10 +191,10 @@ export default function MiniDrawer( { contenido } ) {
         </List>
         
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
+      <Box sx={{ flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
         <DrawerHeader />
         {contenido}
       </Box>
-    </Box>
+    </Box>  
   );
 }

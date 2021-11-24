@@ -27,14 +27,14 @@ export default function CrearResidente() {
                         <h3>Nombre:</h3>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
+                        <TextField id="outlined-basic" label="Nombre" variant="outlined" size="small" margin="normal"
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'right'}}>
                         <h3>C.C: </h3>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
+                        <TextField id="outlined-basic" label="C.C." variant="outlined" size="small" margin="normal"
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                     </Grid>
 
@@ -42,53 +42,24 @@ export default function CrearResidente() {
                         <h3>Telefono</h3>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
+                        <TextField id="outlined-basic" label="Telefono" variant="outlined" size="small" margin="normal"
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                     </Grid>
+                    
                     <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3>Torre:</h3>
+                        <h3>ID Apto:</h3>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
+                        <TextField id="outlined-basic" label="ID Apto" variant="outlined" size="small" margin="normal" 
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                     </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3>Apartamento:</h3>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
-                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3>Parqueadero: </h3>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
-                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3>Placa: </h3>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
-                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3>Marca: </h3>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
-                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3>Color: </h3>
-                    </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <TextField id="outlined-basic" label="Residente" variant="outlined" size="small" margin="normal"
-                        className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
-                    </Grid>
+                    
+                    
+                    
                 </Grid>
             </Modal1>
+
+            
         </div>
     )
 }

@@ -1,19 +1,15 @@
 import * as React from 'react';
 import './Residentes.css';
 import Grid from '@mui/material/Grid';
-import MiniDrawer from '../../components/Drawer';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import { styled } from '@mui/system';
+import { fontSize, styled } from '@mui/system';
 import InputUnstyled from '@mui/core/InputUnstyled';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import CrearResidente from '../../components/Residentes/CrearResidente';
-
-
+import ObtenerResidente from '../../components/Residentes/ObtenerResidente';
 const BotonNav = styled('button')`
   background-color: #0D7377;
   padding: 6px 16px;
@@ -82,14 +78,20 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
 });
 
 
-  
+
  
 export function Residentes() {
 
     
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
     
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    }
 
     const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
                             <Box sx={{ flexGrow: 1, p: 3 }}>
@@ -115,8 +117,11 @@ export function Residentes() {
                             <Grid item xs={12} className="titulo">
                                 <b><br/>RESIDENTES</b>
                             </Grid>
-                            <p id="info">En este momento no hay residentes</p>
-                        </Box>
+                            <div>
+                           <ObtenerResidente/>
+                              
+                          </div>
+                           </Box>
 
     return (
 

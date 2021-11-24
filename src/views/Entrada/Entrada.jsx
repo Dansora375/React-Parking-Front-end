@@ -1,13 +1,12 @@
 import * as React from 'react';
-import './Hogares.css';
+import './Entrada.css';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-//import { styled } from '@mui/system';
-import styled  from 'styled-components';
+import { styled } from '@mui/system';
 import InputUnstyled from '@mui/core/InputUnstyled';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,7 +15,7 @@ import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartament
 import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
 
 const BotonNav = styled('button')`
-  background-color: ${({theme})=>theme.secondary };
+  background-color: #0D7377;
   padding: 6px 16px;
   border-radius: 4px;
   color: #BCFFFA;
@@ -104,12 +103,12 @@ function NavButton(props) {
     return <ButtonUnstyled {...props} component={BotonNav} />;
   }
 
-export function Hogares() {
+export function Entrada() {
 
     //const [Torre, setTorre] = React.useState(options[0]);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    //const [selecttorre, setselecttorre] = React.useState('TORRE A');
+    const [selecttorre, setselecttorre] = React.useState('TORRE A');
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);

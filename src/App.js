@@ -4,14 +4,19 @@ import './App.css';
 // hooks react redux
 // import {useDispatch, useSelector} from 'react-redux'
 
-
-
 // importamos la acción
 // import { loguinWithEmailAction } from './redux/Ducks/authDuck'
 
-import MiniDrawer from './components/Drawer';
+import MiniDrawer from './components/layout/Drawer';
 import { Hogares } from './views/Hogares/Hogares';
 import { Residentes } from './views/Residentes/Residentes';
+import {Entrada} from './views/Entrada/Entrada';
+// import {Register} from './views/Registro/Register';
+import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles';
+import themes from './themes/themes';
+import {darkTheme} from './themes/muiThemes';
+import Parking from './views/Parking/Parking';
 
 import {
   HashRouter as Router,
@@ -59,26 +64,38 @@ function App() {
 
     //   </header>
     // </div>
-    <div>
+    <>
       {/* <ResponsiveDrawer></ResponsiveDrawer> */}
 
       <Router>
+
+        
         
         <MiniDrawer contenido={
-          <Switch>
-            <Route path='/hogares'>
-              <Hogares/>
-            </Route>
-            <Route path='/residentes'>
-              <Residentes/>
-            </Route>
-          </Switch>
+          <MuiThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={themes['dark']}>
+            <Switch>
+              <Route path='/hogares'>
+                <Hogares/>
+              </Route>
+              <Route path='/residentes'>
+                <Residentes/>
+              </Route>
+              <Route path='/entrada'>
+                <Entrada/>
+              </Route>
+              <Route path='/Parqueadero'>
+                <Parking/>
+              </Route>
+            </Switch>
+          </ThemeProvider>
+          </MuiThemeProvider>
         }></MiniDrawer>
 
         
       </Router>
       
-    </div>
+    </>
     
 
     // <Router>

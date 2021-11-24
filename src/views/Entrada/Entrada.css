@@ -1,14 +1,9 @@
 html {
     background-color: #323232;
 }
-.residente {
+.Hogares {
     background-color: #323232;
     color: #BCFFFA;
-    border: solid #BCFFFA;
-    border-radius: 10px;
-    width: max-content;
-    text-align: center;
-    float: left;
 }
 
 .texto-creacion {
@@ -42,4 +37,11 @@ html {
 
 .textfieldLabel {
     color: white !important;
+}
+
+.HomeCard{
+    font-size: 18px;
+    text-align: center;
+    width: 200px;
+    float: left;
 }

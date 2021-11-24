@@ -13,8 +13,7 @@ import { ThemeProvider } from 'styled-components'
 import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles'
 import themes from './themes/themes'
 import {darkTheme} from './themes/muiThemes'
-import MiniDrawer from './components/Drawer';
-
+import MiniDrawer from './components/layout/Drawer';
 import { Hogares } from './views/Hogares/Hogares';
 
 import {Entrada} from './views/Entrada/Entrada';

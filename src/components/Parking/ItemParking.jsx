@@ -16,10 +16,12 @@ padding-bottom: 20px;
 `
 
 
-// const marginTitle= "24%"
-// const margin= "46%"
-
 function ItemParking(props) {
+
+  const name=props.name
+  const vehicleType=props.vehicleType
+  const personType=props.personType
+  const isTaken =props.isTaken
   return (
     <>
       <Box 
@@ -32,7 +34,9 @@ function ItemParking(props) {
         alignItems="center">
         <Grid item xs={0}>
           <Box m={2}>
-            Imagen
+            {
+
+            }
           </Box>
         </Grid>      
         <Grid item xs={10}>
@@ -42,21 +46,23 @@ function ItemParking(props) {
             alignItems="center">
             <Grid item xs={6}>
               <Container>
-                <Box m={2} sx={{fontSize: 12, fontWeight: '500'}}>
+                <Box color='primary.main' m={2} sx={{fontSize: 12, fontWeight: '500'}}>
                   ESTADO PARQUEADERO
                 </Box>
                 <Box color='tertiary.main' m={0.4} sx={{fontSize: 25, fontWeight: 'Bold'}}>
-                  Vacio
+                  {
+                    isTaken? "lleno":"vacio"
+                  }
                 </Box>
               </Container>
             </Grid>           
             <Grid item xs={6}>
               <Container>
-                <Box m={2} sx={{fontSize: 12, fontWeight: '500'}}>
+                <Box color='primary.main' m={2} sx={{fontSize: 12, fontWeight: '500'}}>
                   PARQUEADERO NUMERO
                 </Box>
                 <Box color='tertiary.main' m={0.4} sx={{fontSize: 25, fontWeight: 'Bold'}}>
-                  A2
+                  {name}
                 </Box>
               </Container>
             </Grid>      

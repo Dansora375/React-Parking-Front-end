@@ -1,21 +1,20 @@
-.App-logo {
-  /* margin-top: 170px;
-  margin-left: 130px; */
+.login-logo {
+  /* position: absolute; */
+  /* background-color: beige; */
+  margin: 0 auto;
   height: 60vmin;
   pointer-events: none;
   /* position: absolute; */
 }
-.App-logo1 {
-  /* margin-top: 310px;
-  margin-left: 360px; */
+
+.login-logo1 {
+  /* position: absolute; */
+  margin: auto;
   height: 15vmin;
   pointer-events: none;
   /* position: absolute; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-  /* animation: App-logo-spin infinite 20s linear; */
-  }
-  
-} 
+.login-logo-div{
+  /* position: relative; */
+}

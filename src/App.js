@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 // import {BrowserRouter, Link, Route, Routes} from 'react-router-dom'
 
 // hooks react redux
@@ -71,15 +71,15 @@ function App() {
       {/* <ResponsiveDrawer></ResponsiveDrawer> */}
 
       <Router>
-        <MuiThemeProvider theme={darkTheme}>
-        <ThemeProvider theme={themes['dark']}>
+        {/* <MuiThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={themes['dark']}> */}
         <MiniDrawer contenido={
           <Switch>
             <Route path='/hogares'>
               {/* <Register/> */}
               <Hogares/>
             </Route>
-            <Route path='/entrada'>
+            <Route path='/entradas'>
               <Entrada/>
             </Route>
             <Route path='/Parqueadero'>
@@ -88,8 +88,8 @@ function App() {
           </Switch>
         }></MiniDrawer>
 
-        </ThemeProvider>
-        </MuiThemeProvider>
+        {/* </ThemeProvider>
+        </MuiThemeProvider> */}
       </Router>
       
     </>

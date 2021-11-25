@@ -5,7 +5,7 @@ function SvgComponent(props) {
     <svg
       width={80}
       height={80}
-      fill="#BCFFFA"
+      // fill="#BCFFFA"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

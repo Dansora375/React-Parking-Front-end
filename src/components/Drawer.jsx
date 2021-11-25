@@ -14,6 +14,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Tooltip from '@mui/material/Tooltip';
 
 
 
@@ -23,6 +24,7 @@ import ParqueaderoIcon from './icons/Parqueadero'
 import ResidenteIcon from './icons/Residentes'
 import VehiculosIcon from './icons/Vehiculos'
 import HomeIcon from './icons/Home'
+import CarLogo from './icons/car_logo.svg'
 
 import { Link, Switch, Route } from 'react-router-dom';
 
@@ -116,7 +118,7 @@ export default function MiniDrawer( { contenido } ) {
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{backgroundColor:"#323232", color:"#14ffec"}}>
+        <Toolbar sx={{display:'flex', justifyContent: 'space-between',backgroundColor:"#323232", color:"#14ffec"}}>
           <IconButton
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -128,7 +130,8 @@ export default function MiniDrawer( { contenido } ) {
           >
             <MenuIcon sx={{color:"#14ffec"}}/>
           </IconButton>
-          <Typography variant="h6" noWrap component="div" >
+          {/* <img src=CarLogo/> */}
+          <Typography  variant="h5" noWrap component="div" >
             REACTPARKING
           </Typography>
           <Usuario />
@@ -146,52 +149,56 @@ export default function MiniDrawer( { contenido } ) {
           </IconButton>
         </DrawerHeader>
         <List disablePadding>
-          <ListItem button component={Link} to={"/hogares"}>
-            <ListItemIcon>
-              <HomeIcon viewBox="0 -20 130 120" width="80" height="80"></HomeIcon>
-            </ListItemIcon>
-            <ListItemText primary={"Hogares"}/>
-          </ListItem>
-        </List>
 
-        <List disablePadding>
-          <ListItem  button component={Link} to={"/entradas"}>
-            <ListItemIcon >
-              <EntradasIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></EntradasIcon>
-            </ListItemIcon>
-            <ListItemText primary={"Entradas"}/>
-          </ListItem>
-        </List>
+          <Tooltip title='Hogares' enterDelay='300'>
+            <ListItem button component={Link} to={"/hogares"}>
+              <ListItemIcon>
+                <HomeIcon viewBox="0 -20 130 120" width="80" height="80"></HomeIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Hogares"}/>
+            </ListItem>
+          </Tooltip>
+          
+          <Tooltip title='Entradas' enterDelay='300'>
+            <ListItem  button component={Link} to={"/entradas"}>
+              <ListItemIcon >
+                <EntradasIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></EntradasIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Entradas"}/>
+            </ListItem>
+          </Tooltip>
 
-        <List disablePadding>
-          <ListItem  button component={Link} to={"/parqueadero"}>
-            <ListItemIcon >
-              <ParqueaderoIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></ParqueaderoIcon>
-            </ListItemIcon>
-            <ListItemText primary={"Parqueadero"}/>
-          </ListItem>
-        </List>
+          <Tooltip title='Parqueadero' enterDelay='300'>
+            <ListItem  button component={Link} to={"/parqueadero"}>
+              <ListItemIcon >
+                <ParqueaderoIcon fill="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></ParqueaderoIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Parqueadero"}/>
+            </ListItem>
+          </Tooltip>
 
-        <List disablePadding>
-          <ListItem  button component={Link} to={"/residentes"}>
-            <ListItemIcon >
-              <ResidenteIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></ResidenteIcon>
-            </ListItemIcon>
-            <ListItemText primary={"Residentes"}/>
-          </ListItem>
-        </List>
+          <Tooltip title='Residentes' enterDelay='300'>
+            <ListItem  button component={Link} to={"/residentes"}>
+              <ListItemIcon >
+                <ResidenteIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></ResidenteIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Residentes"}/>
+            </ListItem>
+          </Tooltip>
 
-        <List disablePadding>
-          <ListItem  button component={Link} to={"/vehiculos"}>
-            <ListItemIcon >
-              <VehiculosIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></VehiculosIcon>
-            </ListItemIcon>
-            <ListItemText primary={"Vehiculos"}/>
-          </ListItem>
+          <Tooltip title='Vehiculos' enterDelay='300'>
+            <ListItem  button component={Link} to={"/vehiculos"}>
+              <ListItemIcon >
+                <VehiculosIcon stroke="#BCFFFA"  viewBox="0 -20 130 120" width="80" height="80" ></VehiculosIcon>
+              </ListItemIcon>
+              <ListItemText primary={"Vehiculos"}/>
+            </ListItem>
+          </Tooltip>
+
         </List>
         
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
+      <Box component="main" sx={{ width: '100%',flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
         <DrawerHeader />
         {contenido}
       </Box>

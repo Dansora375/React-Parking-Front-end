@@ -33,6 +33,7 @@ export const darkTheme  = createTheme({
       dark:'#323232',
       other:'#e5e8ec'
     },
+    
   },
   
   // Por si se desean cambiar los colores de warning

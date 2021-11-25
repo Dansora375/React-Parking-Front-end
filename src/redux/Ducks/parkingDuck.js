@@ -6,6 +6,9 @@ const initialParkings={
 
   ],
   parkingsVisi:[
+    
+  ],
+  error:[
 
   ]
 }
@@ -22,11 +25,11 @@ export default function parkingReducer(state =initialParkings, action){
     case GET_RESI_PARKINGS_TO_ITEM_SUCCESS:
       return {...state, parkingsResi:action.payload }
     case GET_RESI_PARKINGS_TO_ITEM_ERROR:
-      return {...state, parkingsResi:{error:action.payload} }
+      return {...state, error:action.payload }
     case GET_VISI_PARKINGS_TO_ITEM_SUCCESS:
       return {...state, parkingsVisi:action.payload }
     case GET_VISI_PARKINGS_TO_ITEM_ERROR:
-      return {...state, parkingsVisi:{error:action.payload} }
+      return {...state, error:action.payload }
     default:
       return state
   }

@@ -23,6 +23,7 @@ function SearchAndAdd(props) {
             <CancelButton text={TextCreatePkngButtonCan} />
             <ConfirmButton text={TextCreatePkngButtonConf} />
           </CreateParkingDialog>
+          
         </Grid>
         <Grid item xs={2}>
           <Box className='input-container'> 

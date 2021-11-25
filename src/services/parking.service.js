@@ -14,12 +14,12 @@ export async function parkingsResident(info) {
 
 // para llamar los parqueaderos de VISITANTES y colocar los
 // datos en los items
-export async function parkingsVisitant () {
+export async function parkingsVisitant (info) {
   try {
-    const listR = await api.get('/viewParqueadero/Visitant')
+    const Parkings = await api.get('/Parking/Visitant/'+info.IdNeighborhood)
     // console.log(list_R.data);
-    return listR.data
-  } catch (e) {
-    return console.log(e.response)
+    return {data:Parkings, completed:true}
+  } catch (error) {
+    return { error: `${error}`, completed: false }
   }
 }

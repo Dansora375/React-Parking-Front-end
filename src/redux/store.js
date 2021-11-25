@@ -9,7 +9,7 @@ import parkingReducer from './Ducks/parkingDuck'
 const rootReducer = combineReducers({
     // Agregando los modulos al store
     authentication: authReducer,
-    resiParkings:parkingReducer
+    Parkings:parkingReducer
 
 })
 

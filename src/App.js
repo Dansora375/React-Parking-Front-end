@@ -25,6 +25,7 @@ import {
   Route
 } from "react-router-dom";
 import Parking from './views/Parking/Parking';
+// import BreakPoints from './themes/breakPoints'
 
 function App() {
 
@@ -86,6 +87,7 @@ function App() {
             </Route>
           </Switch>
         }></MiniDrawer>
+        
 
         </ThemeProvider>
         </MuiThemeProvider>

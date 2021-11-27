@@ -2,7 +2,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 
 //const Swal = require('sweetalert2')
-
+// Fase de prueba
 export function submitApto (numeroApto, torre) {
 
     const newApto = {
@@ -12,7 +12,7 @@ export function submitApto (numeroApto, torre) {
     
     try {
 
-        axios.post('http://localhost:4000/api/Home/61959890772790f8d28c7026', newApto)
+        axios.post('http://localhost:4000/api/Home/619cc7d78011c2969719fedd', newApto)
         .then(res => console.log(res.data));
 
         Swal.fire({

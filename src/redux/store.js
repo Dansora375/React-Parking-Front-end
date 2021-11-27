@@ -6,12 +6,14 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import authReducer from './Ducks/authDuck'
 import resReducer from './Ducks/residenteDuck'
 import parkingReducer from './Ducks/parkingDuck'
+import groupReducer from './Ducks/groupDuck'
 
 const rootReducer = combineReducers({
     // Agregando los modulos al store
     authentication: authReducer,
     residentes: resReducer,
-    resiParkings:parkingReducer
+    resiParkings:parkingReducer,
+    groups: groupReducer
 
 })
 

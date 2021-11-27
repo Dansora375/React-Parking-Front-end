@@ -45,3 +45,17 @@ html {
     width: 200px;
     float: left;
 }
+
+.requerimientos-resi {
+    padding-top: 4px;
+}
+
+.requerimientos-vis {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.opciones-selection {
+    overflow-y: auto;
+    max-height: 0px;
+}

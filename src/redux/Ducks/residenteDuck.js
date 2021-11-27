@@ -1,20 +1,31 @@
-import axios from 'axios'
+import * as services from '../../services/residente.service';
 
 // constantes
 const dataRes={
-    residentes:[]
+    residentes: [],
+    residenteswithparking: []
 
 }
+
 const OBTENER_RESIDENTES_EXITO="OBTENER_RESIDENTES_EXITO"
+const OBTENER_RESIDENTES_ERROR="OBTENER_RESIDENTES_ERROR"
+
+const GET_RES_WITH_PARKING_SUCCESS = 'GET_RES_WITH_PARKING_SUCCESS';
+const GET_RES_WITH_PARKING_ERROR = 'GET_RES_WITH_PARKING_ERROR';
+
 //Reducer
 
 export default function resReducer(state=dataRes,action) {
     switch (action.type) {
+
         case OBTENER_RESIDENTES_EXITO:
-            return {...state,residentes:action.payload}
-            
-            
-    
+            return {...state, residentes:action.payload}
+        case OBTENER_RESIDENTES_ERROR:
+            return {...state, error:action.payload}
+        case GET_RES_WITH_PARKING_SUCCESS:
+            return {...state, residenteswithparking:action.payload}
+        case GET_RES_WITH_PARKING_ERROR:
+            return {...state, error:action.payload}
         default:
             return state
     }
@@ -22,19 +33,34 @@ export default function resReducer(state=dataRes,action) {
 
 //Acciones
 
-export const obtenerResAction=() =>async(dispatch,getState)=>{
+export const GetResiwhitparkingAction=(info) =>async(dispatch,getState)=>{
     try{
-    const res= await axios.get("")
+    const res= await services.ResidentwithParking(info)
 
-    dispatch({
-        type:  OBTENER_RESIDENTES_EXITO,
-        payload:res.data.residentes
+    if (res.completed) {
 
+        dispatch({
+            type: GET_RES_WITH_PARKING_SUCCESS,
+            payload:res.data.data
+    
+        })
 
-    })
+    } else if (res.complete===false) {
 
-    } catch (error){
-        console.log(error)
+        dispatch({
+            type: GET_RES_WITH_PARKING_ERROR,
+            payload:res.error
+    
+        })
+
+    }
+
+    } catch (error) {
+
+        dispatch({
+        type: GET_RES_WITH_PARKING_ERROR,
+        payload: `ha ocurrido un error ${error}` 
+      })
 
     }
 }

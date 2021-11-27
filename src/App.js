@@ -81,10 +81,13 @@ function App() {
               <Route path='/residentes'>
                 <Residentes/>
               </Route>
-              <Route path='/entrada'>
+              <Route path='/entradas'>
                 <Entrada/>
               </Route>
               <Route path='/Parqueadero'>
+                <Parking/>
+              </Route>
+              <Route path='/entrada'>
                 <Parking/>
               </Route>
             </Switch>

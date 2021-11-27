@@ -2,12 +2,13 @@ import  React from 'react';
 import ItemParking from '../../components/Parking/ItemParking'
 import SearchAndAdd from '../../components/common/SearchAndAdd/SearchAndAdd'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch, useSelector, useMemo} from 'react-redux'
 import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
 import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
 
 function Parking() {
   
+  const dispatch= useDispatch()
   const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
 
    // se podria implementar que la accion se realice con alguna
@@ -18,13 +19,13 @@ function Parking() {
     dispatch(getParkingsVisiAction(info))
   },[])
 
-  const dispatch= useDispatch()
 
   // probablemente haya que usar useMemo como computed
   // para que se actuaice cada vez que se cambie algo
   const resiParkings=useSelector(store=>store.Parkings.parkingsResi)
   const visiParkings=useSelector(store=>store.Parkings.parkingsVisi)
-  
+  console.log(resiParkings)
+
   // el id del nieghborhood se obtendra del sessionStorage
   // por ahora sera id estatico
   const info ={
@@ -40,15 +41,18 @@ function Parking() {
       <SearchAndAdd></SearchAndAdd>
       <TabResiOrVisi typePerson={(value)=>kindOfPerson(value)}></TabResiOrVisi>
       <div>
-        {
+        { 
           personTypeFromTab===0?
+          resiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
           resiParkings.map(item=>(
-
-          <ItemParking key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
-          )):
-          visiParkings.map(item=>(
             
-          <ItemParking key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+            
+            <ItemParking key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+          )):
+          visiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
+          visiParkings.map(item=>(
+            item=== 'error'?'mostrar error con el cosito ed abajo':
+            <ItemParking key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
           ))
         }
       </div>

@@ -7,7 +7,6 @@ import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ParkingCarTaken from '../icons/ParkingCarTaken'
 import ParkingMotoTaken from '../icons/ParkingMotoTaken'
 import EmptyParking from '../icons/EmptyParking'
-import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
@@ -46,8 +45,8 @@ function ItemParking(props) {
   // conditions
   
   const typeParkignTaken= ()=>{ 
-    console.log(isTaken)
-    console.log(vehicleType)
+    // console.log(isTaken)
+    // console.log(vehicleType)
     if(vehicleType=== "Carro" && isTaken ){
       return "Pkg car taken"
     }else if(vehicleType=== "Moto" && isTaken){

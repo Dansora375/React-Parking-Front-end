@@ -94,17 +94,14 @@ export function Residentes() {
     }
 
     const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
-                            <Box sx={{ flexGrow: 1, p: 3 }}>
-                                <Grid container spacing={2}>
+                            <Box sx={{ flexGrow: 1, p: 2 }}>
+                                <Grid container justifyContent="flex-end"alignItems="flex-end"spacing={0}>
                                     
-                                    <Grid item xs={1} className="plus">
+                                    <Grid item xs={8.8} className="">
                                         <CrearResidente/>
                                     </Grid>
-                                    <Grid item xs={5}>
-                                        <b className="texto-creacion">Crear Residente</b>
-                                    </Grid>
-                                    <Grid item xs={5} sx={{textAlign: "right"}}>
-                                    <CustomInput aria-label="Demo input" placeholder="Buscar Residente..." />
+                                    <Grid item xs={2} sx={{textAlign: "right"}}>
+                                    <CustomInput id="standard-basic" aria-label="Demo input" variant ="standard" placeholder="Buscar Residente..." />
                                 </Grid>
                                 <Grid item xs={1}>
                                     <SearchIcon fontSize="large" sx={{color: "#14FFEC"}}/>

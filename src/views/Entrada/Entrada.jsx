@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import CrearTorre from '../../components/Hogares/CrearTorre';
 import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartamento';
 import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
+import InformacionEntrada from '../../components/Entradas/InformacionEntrada';
 
 const BotonNav = styled('button')`
   background-color: #0D7377;
@@ -130,7 +131,7 @@ export function Entrada() {
                   <b className="texto-creacion">Crear Torre</b>
               </Grid>
               <Grid item xs={1} className="plus">
-                  <CrearHogarApartamento/>
+                  <InformacionEntrada/>
               </Grid>
               <Grid item xs={5}>
                   <b className="texto-creacion">Crear Hogar</b>

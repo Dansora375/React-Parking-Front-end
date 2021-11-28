@@ -2,32 +2,47 @@ import  React from 'react';
 import ItemParking from '../../components/Parking/ItemParking'
 import SearchAndAdd from '../../components/common/SearchAndAdd/SearchAndAdd'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
-import {useDispatch, useSelector, useMemo} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
 import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
+// import watch from 'redux-watch'
+// import  store from '../../redux/createdStore'
 
 function Parking() {
   
   const dispatch= useDispatch()
   const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
+  // const [resiParkings, setResiParkings]= React.useState(useSelector(store=>store.Parkings.parkingsResi))
+  // const [visiParkings, setVisiParkings]= React.useState(useSelector(store=>store.Parkings.parkingsVisi))
 
-   // se podria implementar que la accion se realice con alguna
-  // funcion del ciclo de vide de react, u otra coasa que
-  // haga que si no se a modificado nada no se haga la peticion, como el useMemo
   React.useEffect(()=>{
     dispatch(getParkingsResiAction(info))
     dispatch(getParkingsVisiAction(info))
   },[])
 
-
+  
+  
   // probablemente haya que usar useMemo como computed
-  // para que se actuaice cada vez que se cambie algo
-  const resiParkings=useSelector(store=>store.Parkings.parkingsResi)
-  const visiParkings=useSelector(store=>store.Parkings.parkingsVisi)
-  console.log(resiParkings)
+  // para que se actuaice cada vez que se 
+  const resiParkings= useSelector(store=>store.Parkings.parkingsResi)
+  const visiParkings= useSelector(store=>store.Parkings.parkingsVisi)
 
-  // el id del nieghborhood se obtendra del sessionStorage
-  // por ahora sera id estatico
+ 
+
+  // let wR = watch(store.getState, 'Parkings.parkingsResi')
+
+  // store.subscribe(wR((newVal, oldVal, objectPath)=>{
+  //   setResiParkings(newVal)
+  //   console.log('se a cambiado el valor del estore resi')
+    
+  // }))
+  // let wV = watch(store.getState, 'Parkings.parkingsVisi')
+  // store.subscribe(wV ((newVal, oldVal, objectPath)=>{
+  //   setVisiParkings(newVal)
+  //   console.log('se a cambiado el valor del estore visi')
+    
+  // }))
+
   const info ={
     IdNeighborhood:"619cc7d78011c2969719fedd"
   }

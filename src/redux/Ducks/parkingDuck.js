@@ -46,7 +46,13 @@ export default function parkingReducer(state =initialParkings, action){
       return {...state, parkingsVisi:action.payload.error, errors:ErrorVisi}
 
     case CRAETE_NEW_PARKING_SUCCESS:
-      return state
+      if(action.payload.type==='Residente'){
+        return {...state, parkingsResi:action.payload.data}
+      }else if(action.payload.type==='Visitante'){
+        return {...state, parkingsVisi:action.payload.data}
+      }else{
+        break
+      }
     case CRAETE_NEW_PARKING_ERROR:
       return {...state.errors, newParkingError:action.payload, }
     default:
@@ -130,22 +136,29 @@ export const CreateParking=(info)=> async (dispatch, getState)=>{
     if (res.completed) {
       console.log('paso')
       if(res.data.data.personType==='Residente'){
-        getState().Parkings.parkingsResi.push(res.data.data)
-        console.log(getState().Parkings.parkingsResi
-            )
+        const newState=JSON.parse(JSON.stringify(getState().Parkings.parkingsResi))
+        newState.push(res.data.data)  
+        // console.log(getState())
+        // console.log(newState)
         dispatch({
           type:CRAETE_NEW_PARKING_SUCCESS,
-          payload:getState().Parkings.parkingsResi
+          payload:{
+            data:newState,
+            type:'Residente'
+          }
             
         })
-      }
-      if(res.data.data.personType==='Visitante'){
-        getState().Parkings.parkingsVisi.push(res.data.data)
-        console.log(getState().Parkings.parkingsVisi
-            )
+      }else if(res.data.data.personType==='Visitante'){
+        const newState=JSON.parse(JSON.stringify(getState().Parkings.parkingsVisi))
+        newState.push(res.data.data) 
+         // console.log(getState())
+        // console.log(newState)
         dispatch({
           type:CRAETE_NEW_PARKING_SUCCESS,
-          payload:getState().Parkings.parkingsVisi
+          payload:{
+            data:newState,
+            type:'Visitante'
+          }
           
         })
       }

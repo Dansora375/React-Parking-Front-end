@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import {Grid, Box, IconButton} from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {Grid, Box, IconButton, FontAwesomeIcon} from '@mui/material';
 import styled  from 'styled-components';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ParkingCarTaken from '../icons/ParkingCarTaken'
 import ParkingMotoTaken from '../icons/ParkingMotoTaken'
 import EmptyParking from '../icons/EmptyParking'
 import useMediaQuery from '@mui/material/useMediaQuery';
+import ItemOptions from './ItemOptions'
 
 
 const Container = styled.div`
@@ -93,7 +93,7 @@ function ItemParking(props) {
             alignItems="center">
             <Grid item xs={6}>
               <Container>
-                <Box color='primary.main' m={2} sx={{fontSize: 12, fontWeight: '500',textAlign:"center"}}>
+                <Box color='primary.main' m={2} sx={{fontSize: 12, fontWeight: '500',}}>
                   ESTADO PARQUEADERO 
                 </Box>
                 <Box color='tertiary.main' m={0.4} sx={{fontSize: 25, fontWeight: 'Bold'}}>
@@ -116,9 +116,7 @@ function ItemParking(props) {
           </Grid> 
         </Grid>      
         <Grid item xs={0}>
-          <IconButton aria-label="Example" size='large'>
-            <FontAwesomeIcon icon={faEllipsisV} color='#14FFEC' />
-          </IconButton>
+          <ItemOptions></ItemOptions>
         </Grid>      
       </Grid> 
       </Box> 

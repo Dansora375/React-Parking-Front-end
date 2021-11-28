@@ -18,7 +18,8 @@ import {
 
 import generateStore from './redux/store'
 
-const store = generateStore()
+// const store = generateStore()
+import  store from './redux/createdStore'
 
 ReactDOM.render(
 

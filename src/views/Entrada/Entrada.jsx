@@ -1,210 +1,59 @@
-import * as React from 'react';
-import './Entrada.css';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import SearchIcon from '@mui/icons-material/Search';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import { styled } from '@mui/system';
-import InputUnstyled from '@mui/core/InputUnstyled';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import CrearTorre from '../../components/Hogares/CrearTorre';
-import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartamento';
-import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
+import  React from 'react';//importacion de react-router-dom
+import ItemEntrada from '../../components/Entrada/ItemEntrada'
+import AddEntrada from '../../components/common/SearchAndAdd/AddEntrada'
+import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
+import {useDispatch, useSelector} from 'react-redux'
+import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
+import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
 
-const BotonNav = styled('button')`
-  background-color: #0D7377;
-  padding: 6px 16px;
-  border-radius: 4px;
-  color: #BCFFFA;
-  font-weight: 600;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  transition: all 200ms ease;
-  cursor: pointer;
-  box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
-  border: none;
-  line-height: 1.5;
+function Entrada() {
+  
+  const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
 
-  &:hover {
-    background-color: #14FFEC;
-    color: #323232;
+   // se podria implementar que la accion se realice con alguna
+  // funcion del ciclo de vide de react, u otra coasa que
+  // haga que si no se a modificado nada no se haga la peticion, como el useMemo
+  React.useEffect(()=>{//se ejecuta cuando se monta el componente
+    dispatch(getParkingsResiAction(info))//se ejecuta la accion
+    dispatch(getParkingsVisiAction(info))
+  },[])
+
+  const dispatch= useDispatch()
+
+  // probablemente haya que usar useMemo como computed
+  // para que se actuaice cada vez que se cambie algo
+  const resiParkings=useSelector(store=>store.Parkings.parkingsResi)//seleccionamos el estado del store para obtener el estado de los parkings
+  const visiParkings=useSelector(store=>store.Parkings.parkingsVisi)
+  
+  // el id del nieghborhood se obtendra del sessionStorage
+  // por ahora sera id estatico
+  const info ={
+    IdNeighborhood:"619cc7d78011c2969719fedd"
+  }
+ 
+  const  kindOfPerson=(value)=>{
+    setPersonTypeFromTab(value)
   }
 
-  &.${buttonUnstyledClasses.active} {
-    background-color: #0D7377;
-    color: #BCFFFA;
-  }
-
-  &.${buttonUnstyledClasses.focusVisible} {
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
-    outline: none;
-  }
-
-  &.${buttonUnstyledClasses.disabled} {
-    opacity: 0.5;
-    cursor: not-allowed;
-    box-shadow: 0 0 0 0 rgba(0, 127, 255, 0);
-  }
-`;
-
-const StyledInputElement = styled('input')`
-  width: 55%;
-  font-size: 1rem;
-  font-family: IBM Plex Sans, sans-serif;
-  font-weight: 400;
-  line-height: 1.4375em;
-  background: #BCFFFA;
-  border: 1px solid #e5e8ec;
-  border-radius: 10px;
-  padding: 6px 10px;
-  color: #20262d;
-  transition: width 300ms ease;
-
-  &:hover {
-    opacity: 80%;
-    border-color: #e5e8ec;
-  }
-
-  &:focus {
-    outline: none;
-    width: 60%;
-    transition: width 200ms ease-out;
-  }
-`;
-
-const CustomInput = React.forwardRef(function CustomInput(props, ref) {
   return (
-    <InputUnstyled components={{ Input: StyledInputElement }} {...props} ref={ref} />
-  );
-});
-
-const options = [
-    'TORRE A',
-    'TORRE B',
-    'TORRE C',
-    'TORRE D',
-    'TORRE E',
-    'TORRE F',
-    'TORRE G',
-    'TORRE H',
-    'TORRE I',
-    'TORRE J',
-    'TORRE K'
-  ];
-  
-  const ITEM_HEIGHT = 48;
-
-  
-
-function NavButton(props) {
-    return <ButtonUnstyled {...props} component={BotonNav} />;
-  }
-
-export function Entrada() {
-
-    //const [Torre, setTorre] = React.useState(options[0]);
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [selecttorre, setselecttorre] = React.useState('TORRE A');
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    return (
-
-      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
-      <Box sx={{ flexGrow: 1, p: 3 }}>
-          <Grid container spacing={2}>
-              
-              <Grid item xs={1} className="plus">
-                  <CrearTorre/>
-              </Grid>
-              <Grid item xs={5}>
-                  <b className="texto-creacion">Crear Torre</b>
-              </Grid>
-              <Grid item xs={1} className="plus">
-                  <CrearHogarApartamento/>
-              </Grid>
-              <Grid item xs={5}>
-                  <b className="texto-creacion">Crear Hogar</b>
-              </Grid>
-              
-          </Grid>
-      </Box>
-          
-      {/* Barra de opciones */}
-      <Box sx={{ flexGrow: 1, p: 1, border:'1px solid #14FFEC'}}>
-      <Grid container spacing={2} >
-          <Grid item xs={3}>
-              <NavButton>Asignar Parqueadero</NavButton>
-          </Grid>
-          <Grid item xs={3}>
-              <NavButton aria-label="more"
-                  id="long-button"
-                  aria-controls="long-menu"
-                  aria-expanded={open ? 'true' : undefined}
-                  aria-haspopup="true"
-                  onClick={handleClick}>
-                      TORRE A &nbsp;&nbsp;
-                  <FontAwesomeIcon icon={faEllipsisV} />
-                  </NavButton>
-                  <Menu
-                      id="long-menu"
-                      MenuListProps={{
-                      'aria-labelledby': 'long-button',
-                      }}
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      PaperProps={{
-                      style: {
-                          maxHeight: ITEM_HEIGHT * 4.5,
-                          width: '15ch',
-                          backgroundColor: '#0D7377',
-                          color: '#BCFFFA',
-                      },
-                      }}
-                  >
-                      {options.map((option) => (
-                      <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                          {option}
-                      </MenuItem>
-                      ))}
-                  </Menu>
-          </Grid>
-          <Grid item xs={5} sx={{textAlign: "right"}}>
-              <CustomInput aria-label="Demo input" placeholder="Buscar apartamento..." />
-          </Grid>
-          <Grid item xs={1}>
-              <SearchIcon fontSize="large" sx={{color: "#14FFEC"}}/>
-          </Grid>
-      </Grid>
-      </Box>
-      <Grid item xs={12} className="titulo">
-          <b><br/>TORRE A</b>
-      </Grid>
+    <>  
+      <AddEntrada></AddEntrada>
+      <TabResiOrVisi typePerson={(value)=>kindOfPerson(value)}></TabResiOrVisi>
       <div>
-        <br/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
+        {
+          personTypeFromTab===0?
+          resiParkings.map(item=>(
+
+          <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />//se puede usar el id como key
+          )):
+          visiParkings.map(item=>(
+            
+          <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+          ))
+        }
       </div>
-  </Box>
-
-        
-    );
-
+    </>
+  )
 }
+
+export default Entrada

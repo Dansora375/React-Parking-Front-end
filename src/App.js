@@ -16,7 +16,6 @@ import {darkTheme} from './themes/muiThemes'
 import MiniDrawer from './components/layout/Drawer';
 import { Hogares } from './views/Hogares/Hogares';
 
-import {Entrada} from './views/Entrada/Entrada';
 // import {Register} from './views/Registro/Register';
 
 import {
@@ -25,6 +24,7 @@ import {
   Route
 } from "react-router-dom";
 import Parking from './views/Parking/Parking';
+import Entrada from './views/Entrada/Entrada';
 // import BreakPoints from './themes/breakPoints'
 
 function App() {
@@ -79,7 +79,7 @@ function App() {
               {/* <Register/> */}
               <Hogares/>
             </Route>
-            <Route path='/entrada'>
+            <Route path='/entradas'>
               <Entrada/>
             </Route>
             <Route path='/Parqueadero'>

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import api from '../../../api/api';
 
 // Fase de prueba
 export function submitTorre (towerName, capacity) {
@@ -11,7 +11,7 @@ export function submitTorre (towerName, capacity) {
 
     try {
 
-        axios.post('http://localhost:4000/api/Group/619cc7d78011c2969719fedd', newTower)
+        api.post('/Group/619cc7d78011c2969719fedd', newTower)
         .then(res => console.log(res.data));
 
         Swal.fire({

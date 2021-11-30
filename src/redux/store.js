@@ -7,13 +7,17 @@ import authReducer from './Ducks/authDuck'
 import resReducer from './Ducks/residenteDuck'
 import parkingReducer from './Ducks/parkingDuck'
 import groupReducer from './Ducks/groupDuck'
+import homeReducer from './Ducks/homeDuck'
+import entradasReducer from './Ducks/entradaDuck'
 
 const rootReducer = combineReducers({
     // Agregando los modulos al store
     authentication: authReducer,
     residentes: resReducer,
     resiParkings:parkingReducer,
-    groups: groupReducer
+    groups: groupReducer,
+    homes: homeReducer,
+    entradas: entradasReducer
 
 })
 

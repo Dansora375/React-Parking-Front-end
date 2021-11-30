@@ -14,6 +14,7 @@ import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartament
 import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
 import {useDispatch, useSelector} from 'react-redux';
 import { getTowersAction } from '../../redux/Ducks/groupDuck';
+import { getApartmentByTowerAction } from '../../redux/Ducks/homeDuck';
 
 
 const BotonNav = styled('button')`
@@ -91,19 +92,30 @@ export function Hogares() {
 
     const dispatch = useDispatch();
     const torres = useSelector(store => store.groups.towers);
-    const [Torre, setTorre] = React.useState('Seleccione una torre');
-
-    const CambiarTorre = (event) => {
-      setTorre(event.target.value);
-  };
-
-    const info = {
-      IdNeighborhood:"619cc7d78011c2969719fedd"
-  }
+    const [Torre, setTorre] = React.useState('');
+    const [nameTower, setnameTower] = React.useState('Seleccione una torre');
+    const apartamentos = useSelector(store => store.homes.apartmentByTower);
+    const [info, setinfo] = React.useState( { IdNeighborhood:"619cc7d78011c2969719fedd",
+                                      IdGroup:""});
 
     React.useEffect (() => {
       dispatch(getTowersAction(info))
-    },[])
+      dispatch(getApartmentByTowerAction(info))
+    },[info])
+
+    const CambiarTorre = (event) => {
+      setTorre(event.target.value);
+      info.IdGroup = event.target.value;
+      setinfo({IdNeighborhood:"619cc7d78011c2969719fedd",
+              IdGroup: info.IdGroup});
+
+      for (let i=0; i<torres.length; i++){
+        if (torres[i]._id===event.target.value){
+          setnameTower(torres[i].name);
+          return
+        }
+      }
+    };  
 
     return (
 
@@ -136,18 +148,17 @@ export function Hogares() {
           <Grid item xs={1}>
               <h3 className="indicador-hogar">TORRE</h3>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={3}>
             <TextField
                 id="outlined-select-currency"
                 select
                 value={Torre}
-                placeholder={Torre}
                 onChange={CambiarTorre}
                 size="small"
                 sx={{width: '50%', backgroundColor: '#0D7377'}}
                 >
                 {torres.map((option) => (
-                    <MenuItem key={option._id} value={option.name} >
+                    <MenuItem key={option._id} value={option._id} >
                         {option.name}
                     </MenuItem>
                 ))}
@@ -162,20 +173,17 @@ export function Hogares() {
       </Grid>
       </Box>
       <Grid item xs={12} className="titulo-hogares">
-          <b><br/>{Torre}</b>
+          <b><br/>{nameTower}</b>
       </Grid>
-      <div>
+      {nameTower !== "Seleccione una torre" && <div>
         <br/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-        <ObtenerHogares/>
-      </div>
+
+        {apartamentos.map((apto) => (
+
+          <ObtenerHogares nameApto={apto.name}/>
+
+        ))}
+      </div>}
   </Box>
 
         

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../../api/api';
 import Swal from 'sweetalert2'
 
 //const Swal = require('sweetalert2')
@@ -7,12 +7,12 @@ export function submitApto (numeroApto, torre) {
 
     const newApto = {
         name: numeroApto,
-        group: torre,
+        IdGroup: torre,
     }
     
     try {
 
-        axios.post('http://localhost:4000/api/Home/619cc7d78011c2969719fedd', newApto)
+        api.post('/Home/619cc7d78011c2969719fedd', newApto)
         .then(res => console.log(res.data));
 
         Swal.fire({

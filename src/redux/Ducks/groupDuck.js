@@ -44,8 +44,8 @@ export const getTowersAction=(info)=> async (dispatch, getState)=>{
     } catch (error) {
       dispatch({
           type:GET_TOWERS_ERROR,
-          payload: `ha ocurrido un error al obtener los 
-          parquederos de residentes: ${error}` 
+          payload: `ha ocurrido un error al obtener las 
+          torres del conjunto: ${error}` 
         })
     }
   

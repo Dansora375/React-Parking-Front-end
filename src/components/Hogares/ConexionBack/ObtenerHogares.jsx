@@ -54,7 +54,7 @@ const buttons = [
     <CustomButton key="editar">Modificar representante</CustomButton>,
   ];
 
-export default function ObtenerHogares() {
+export default function ObtenerHogares({nameApto}) {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -72,7 +72,7 @@ export default function ObtenerHogares() {
     return (
         <div className="HomeCard">
             <ApartmentIcon sx={{ fontSize: 100, "&:hover":{color: "#14FFEC"}}} onClick={handleClick}/>
-            <p>101</p>
+            <p>{nameApto}</p>
             <Popover
                 id={id}
                 open={open}

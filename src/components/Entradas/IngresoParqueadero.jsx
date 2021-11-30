@@ -7,9 +7,12 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import '../../views/Entrada/Entrada.css';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GetResiwhitparkingAction } from '../../redux/Ducks/residenteDuck';
 import { getTowersAction } from '../../redux/Ducks/groupDuck';
+import { getApartmentByTowerAction } from '../../redux/Ducks/homeDuck';
+import { getEmptyVisParkingAction } from '../../redux/Ducks/entradaDuck';
+import { NewEntryVisit } from '../../redux/Ducks/entradaDuck';
 
 
 const TipoIngreso = [
@@ -32,26 +35,12 @@ const Tipovehiculo = [
       value: 'Moto',
       label: 'Moto',
     },
+    {
+      value: 'Bicicleta',
+      label: 'Bicicleta',
+    },
   ];
 
-const Apartamentos = [
-    {
-      value: '101',
-      label: '101',
-    },
-    {
-      value: '102',
-      label: '102',
-    },
-    {
-      value: '103',
-      label: '103',
-    },
-    {
-      value: '104',
-      label: '104',
-    },
-  ];
 const Residentes = [
     {
       value: 'Tatiana',
@@ -79,31 +68,39 @@ export default function IngresoParqueadero() {
     const dispatch = useDispatch();
     const residentes = useSelector(store => store.residentes.residenteswithparking);
     const torres = useSelector(store => store.groups.towers);
+    const apartamentos = useSelector(store => store.homes.apartmentByTower);
+    const parqueaderosvisdb = useSelector(store => store.entradas.emptyviparkings);
+    const [parqueaderosvis, setparqueaderosvis] = React.useState([]);
 
-    const info = {
-        IdNeighborhood:"619cc7d78011c2969719fedd"
-    }
+    const [info, setinfo] = useState( { IdNeighborhood:"619cc7d78011c2969719fedd",
+                                       IdGroup:""});
 
     React.useEffect (() => {
         dispatch(GetResiwhitparkingAction(info))
         dispatch(getTowersAction(info))
-      },[])
+        dispatch(getApartmentByTowerAction(info))
+        dispatch(getEmptyVisParkingAction(info))
+      },[info])
 
-    const [estadoModal, setEstadoModal] = useState(false);
+    const [estadoModal, setEstadoModal] = React.useState(false);
     const [Ingreso, setIngreso] = React.useState('Visitante');
-    const [Residente, setResidente] = useState('');
-    const [Parqueadero, setParqueadero] = useState('');
-    const [verParking, setverParking] = useState(false);
-    const [Vehiculo, setVehiculo] = useState('Carro');
+    const [Residente, setResidente] = React.useState('');
+    const [Parqueadero, setParqueadero] = React.useState('');
+    const [verParking, setverParking] = React.useState(false);
+    const [Vehiculo, setVehiculo] = React.useState('');
     const [Torre, setTorre] = React.useState('');
+    const [nameTower, setnameTower] = React.useState('');
     const [Apartamento, setApartamento] = React.useState('');
+    const [Name, setName] = React.useState('');
+    const [Cedula, setCedula] = React.useState('');
+    const [Placa, setPlaca] = React.useState('');
 
     const CambiarIngreso = (event) => {
         setIngreso(event.target.value);
         setResidente('');
         setParqueadero('');
         setverParking(false);
-        setVehiculo('carro');
+        setVehiculo('');
         setTorre('');
         setApartamento('');
     };
@@ -119,6 +116,13 @@ export default function IngresoParqueadero() {
 
     const CambiarVehiculo = (event) => {
         setVehiculo(event.target.value);
+        const provparkings = [];
+        for (let i=0; i<parqueaderosvisdb.length; i++){
+            if (parqueaderosvisdb[i].vehicleType === event.target.value){
+                provparkings.push(parqueaderosvisdb[i]);
+            }
+        }
+        setparqueaderosvis(provparkings);
     };
 
     const CambiarParqueadero = (event) => {
@@ -127,6 +131,15 @@ export default function IngresoParqueadero() {
 
     const CambiarTorre = (event) => {
         setTorre(event.target.value);
+        info.IdGroup = event.target.value;
+        setinfo({IdNeighborhood:"619cc7d78011c2969719fedd",
+                 IdGroup: info.IdGroup});
+        for (let i=0; i<torres.length; i++){
+        if (torres[i]._id===event.target.value){
+            setnameTower(torres[i].name);
+            return
+        }
+        }
     };
 
     const CambiarApartamento = (event) => {
@@ -139,6 +152,23 @@ export default function IngresoParqueadero() {
         setResidente('');
         setParqueadero('');
         setverParking(false);
+        setVehiculo('');
+        setTorre('');
+        setApartamento('');
+    }
+
+    const nuevoIngreso = () => {
+        dispatch(NewEntryVisit({
+            IdNeighborhood: info.IdNeighborhood,
+            ParkingId: Parqueadero,
+            name: Name,
+            identification: Cedula,
+            group: nameTower,
+            homeName: Apartamento,
+            plate: Placa,
+            vehicleType: Vehiculo
+        }))
+        cambiarEstadoModal()
     }
 
     return (
@@ -150,7 +180,7 @@ export default function IngresoParqueadero() {
             <Modal1 
                 estado = {estadoModal}
                 cambiarEstado = {cambiarEstadoModal}
-                funcion = {cambiarEstadoModal}>
+                funcion = {nuevoIngreso}>
                 <h1>Ingreso Parqueadero<br/>{Ingreso}</h1>
                 <TextField
                     id="outlined-select-currency"
@@ -226,7 +256,7 @@ export default function IngresoParqueadero() {
                             sx={{width: '100%'}}
                             >
                             {torres.map((option) => (
-                                <MenuItem key={option._id} value={option.name}>
+                                <MenuItem key={option._id} value={option._id}>
                                     {option.name}
                                 </MenuItem>
                             ))}
@@ -240,17 +270,20 @@ export default function IngresoParqueadero() {
                             margin='dense'
                             sx={{width: '100%'}}
                             >
-                            {Apartamentos.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
+                            {apartamentos.map((option) => (
+                                <MenuItem key={option._id} value={option.name}>
+                                    {option.name}
                                 </MenuItem>
                             ))}
                         </TextField>
                         <TextField id="outlined-basic" label="Nombre" variant="outlined" size="small" margin='dense'
+                        onChange={event => setName(event.target.value)}
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                         <TextField id="outlined-basic" label="Cedula" variant="outlined" size="small" margin='dense'
+                        onChange={event => setCedula(event.target.value)}
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                         <TextField id="outlined-basic" label="Placa" variant="outlined" size="small" margin='dense'
+                        onChange={event => setPlaca(event.target.value)}
                         className="textfield" InputLabelProps={{className: 'textfieldLabel'}}/>
                         <TextField
                             id="outlined-select-currency"
@@ -276,9 +309,9 @@ export default function IngresoParqueadero() {
                             margin='dense'
                             sx={{width: '100%'}}
                             >
-                            {Parqueaderos.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
+                            {parqueaderosvis.map((option) => (
+                                <MenuItem key={option._id} value={option._id}>
+                                    {option.name}
                                 </MenuItem>
                             ))}
                         </TextField>

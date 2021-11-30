@@ -18,11 +18,14 @@ import themes from './themes/themes';
 import {darkTheme} from './themes/muiThemes';
 import Parking from './views/Parking/Parking';
 
+// import {Register} from './views/Registro/Register';
+
 import {
   HashRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+// import BreakPoints from './themes/breakPoints'
 
 function App() {
 
@@ -94,7 +97,6 @@ function App() {
           </ThemeProvider>
           </MuiThemeProvider>
         }></MiniDrawer>
-
         
       </Router>
       

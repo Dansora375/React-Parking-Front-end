@@ -27,14 +27,55 @@ export const darkTheme  = createTheme({
       main: '#323232'
     },
     text:{
-    primary:'#14FFEC',
-    secondary:'#BCFFFA',
-    tertiary:'#0D7377',
-    dark:'#323232',
-    other:'#e5e8ec'
+      primary:'#14FFEC',
+      secondary:'#BCFFFA',
+      tertiary:'#0D7377',
+      dark:'#323232',
+      other:'#e5e8ec'
+    },
+    
+    
   },
+  components: {
+    MuiMenuItem: {
+      variants: [
+        {
+          props: { variant: 'initialOption'},
+          style: {
+            border: '2px solid #BCFFFA',
+            'border-top-left-radius':'10px',
+            'border-top-right-radius':'10px',
+            'border-top': '4px solid #BCFFFA',
+            color:'#BCFFFA', 
+            background: '#0D7377'
+          },
+        },
+        {
+          props: { variant: 'intermedialOptions' },
+          style: {
+            'border-left':'2px solid #BCFFFA',
+            'border-right':'2px solid #BCFFFA',
+            color: '#BCFFFA',
+            background: '#0D7377'
+
+          },
+        },
+        {
+          props: { variant: 'finalOption' },
+          style: {
+            border: '2px solid #BCFFFA',
+            'border-bottom-left-radius':'10px ',
+            'border-bottom-right-radius':'10px',
+            color:'#BCFFFA' ,
+            background: '#0D7377'
+
+          },
+        }
+        
+      ],
+    },
+    
   },
-  
   // Por si se desean cambiar los colores de warning
   // y otros
 
@@ -50,19 +91,7 @@ export const darkTheme  = createTheme({
   //  success:{
   //     main:''
   //   },
-  overrides:{
-    MuiAppBar:{
-      root:{
-        // cuando se utilice cambair por el color 
-        // correspondiente
-        background:'white',
-        boxShadow:'none'
-      },
-      colorPrimary:{
-        background:'red',
-      }
-    }
-  }
+  
 })
 
 // export const lightTheme  = createTheme({

@@ -1,23 +1,29 @@
 import React from 'react'
-import {Grid, Box, Fab, Menu, TextField} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import {Grid, Box, Fab, TextField} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import CreateParkingDialog from '../../Parking/CreateParking'
+import ConfirmButton  from '../ConfirmButton'; 
+import CancelButton  from '../CancelButton'; 
 
 
 
+function SearchAndAdd(props) {
 
-function SearchAndAdd() {
+  const TextCreatePkngButtonConf='Confirmar'
+  const TextCreatePkngButtonCan='Cancelar'
   return (
     <>
       <Grid container 
       justifyContent="flex-end"
       alignItems="flex-end"
       spacing={0} >
-        <Grid item xs={8.8}>
-          <Fab aria-label="add" size="small" id="boton">
-                <AddIcon   />
-            </Fab>
+        <Grid item xs={8.8}>      
+          <CreateParkingDialog>
+            <CancelButton text={TextCreatePkngButtonCan} />
+            <ConfirmButton text={TextCreatePkngButtonConf} />
+          </CreateParkingDialog>
+          
         </Grid>
         <Grid item xs={2}>
           <Box className='input-container'> 

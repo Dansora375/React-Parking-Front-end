@@ -137,7 +137,7 @@ export default function MiniDrawer( { contenido } ) {
       <Drawer variant="permanent" open={open} PaperProps={{
           sx: {
           backgroundColor: "#323232",
-          color:"#14ffec",
+          color:"tertiary.main",
           } 
         }}>
         <DrawerHeader >

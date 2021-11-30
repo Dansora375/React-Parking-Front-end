@@ -31,6 +31,7 @@ export default function CrearHogarApartamento() {
 
     const handleChange2 = (event) => {
         setCurrency2(event.target.value);
+        console.log(tower)
     };
 
     const [checked, setChecked] = React.useState(false);

@@ -2,7 +2,6 @@ import React from 'react'
 import styled  from 'styled-components';
 
 
-
 const ButtonCancel = styled.button`
   background-color: #323232;
   padding: 6px 16px;

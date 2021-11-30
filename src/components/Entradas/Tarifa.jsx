@@ -5,8 +5,9 @@ import {TextField}from '@mui/material/TextField';
 import {useState} from 'react'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 
-export default function InformacionEntrada() {
+export default function Tarifa() {
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
     
     return (
@@ -21,12 +22,12 @@ export default function InformacionEntrada() {
                 
                 <Grid item xs={12} sx={{textAlign:'center',background:'#14FFEC',color: '#323232', borderRadius:'5px'}}>
                   
-                <h2 sx={{textAlign:'cnter'}}>Información </h2>
+                <h2 sx={{textAlign:'cnter'}}>Tarifa Parqueo </h2>
                 </Grid>
                  <br />
                 <Grid container spacing={2}sx={{backgroundColor:'#BCFFFA', color:'#323232',borderRadius:'5px'}}>  
                     <Grid item xs={5} sx={{textAlign: 'left'}}>
-                        <h3>Nombre:</h3>
+                        <h3>Propietario:</h3>
                         
                     </Grid>
                     <Grid item xs={5} sx={{textAlign: 'center'}}>
@@ -47,18 +48,18 @@ export default function InformacionEntrada() {
                         <b>18:52 23/10/2021</b>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
-                        <h3>Apartamento:</h3>
+                        <h3>Hora de salida:</h3>
                         
                     </Grid>
                     <Grid item xs={3} sx={{textAlign: 'center'}}>
-                        <b>C102</b>
+                        <b>20:52 23/10/2021</b>
                     </Grid>
-                    <Grid item xs={5} sx={{textAlign: 'left'}}>
-                        <h3>Datos Extra:</h3>
+                    <Grid item xs={12} sx={{textAlign: 'left'}}>
+                    <Button variant="contained">Calcular tarifa</Button>
                         
                     </Grid>
-                    <Grid item xs={5} sx={{textAlign: 'center'}}>
-                        <b>Sin rayones</b>
+                    <Grid item xs={12} sx={{textAlign: 'center'}}>
+                        <TextField sx={{backgroundColor:'#14FFEC'}}>$ 3000</TextField>
                     </Grid>
                     </Grid>
                  </Modal1>

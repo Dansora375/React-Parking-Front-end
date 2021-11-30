@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import IngresoParqueadero from '../../components/Entradas/IngresoParqueadero';
 import InformacionEntrada from '../../components/Entradas/InformacionEntrada';
+import Tarifa from '../../components/Entradas/Tarifa';
 
 export function Entrada() {
 
@@ -23,6 +24,9 @@ export function Entrada() {
               </Grid>
               <Grid item xs={5}>
                   <b className="texto-creacion">Informacion</b>
+              </Grid>
+              <Grid item xs={1} className="plus">
+                  <Tarifa/>
               </Grid>
               
           </Grid>

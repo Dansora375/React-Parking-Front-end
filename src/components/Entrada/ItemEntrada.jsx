@@ -1,15 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import {Grid, Box, IconButton} from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled  from 'styled-components';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ParkingCarTaken from '../icons/ParkingCarTaken'
 import ParkingMotoTaken from '../icons/ParkingMotoTaken'
 import EmptyParking from '../icons/EmptyParking'
-import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import HoraEntrada from './HoraEntrada';
+// import HoraEntrada from './HoraEntrada';
+import ItemOptionEntrada from './ItemOptionsEntrada';
 
 
 const Container = styled.div`
@@ -33,7 +31,7 @@ function ItemEntrada(props) {
   const [ParkignTaken, setParkignTaken]= React.useState("")
 
   React.useEffect(()=>{
-     setParkignTaken(typeParkignTaken()) 
+    setParkignTaken(typeParkignTaken()) 
   },[])
   
   const matchesLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
@@ -86,7 +84,6 @@ function ItemEntrada(props) {
                 <EmptyParking fill='#14FFEC' width={83} />
               }
             </ContainerImg>
-            {/* {console.log(ParkignTaken)} */}
         </Grid>      
         <Grid item xs={matchesLG?7.5:7.4}>
           <Grid 
@@ -99,7 +96,7 @@ function ItemEntrada(props) {
                   <b>Hora de entrada</b> 
                 </Box>
                 <Box color='tertiary.main' m={0.4} sx={{fontSize: 25, fontWeight: 'Bold'}}>
-                  <HoraEntrada />
+                  2pm
                 </Box>
               </Container>
             </Grid>           
@@ -116,9 +113,7 @@ function ItemEntrada(props) {
           </Grid> 
         </Grid>      
         <Grid item xs={0}>
-          <IconButton aria-label="Example" size='large'>
-            <FontAwesomeIcon icon={faEllipsisV} color='#14FFEC' />
-          </IconButton>
+          <ItemOptionEntrada />
         </Grid>      
       </Grid> 
       </Box> 

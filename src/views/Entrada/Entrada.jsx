@@ -7,7 +7,7 @@ import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
 import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
 
 function Entrada() {
-  
+  const dispatch= useDispatch()
   const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
 
    // se podria implementar que la accion se realice con alguna
@@ -18,7 +18,7 @@ function Entrada() {
     dispatch(getParkingsVisiAction(info))
   },[])
 
-  const dispatch= useDispatch()
+  
 
   // probablemente haya que usar useMemo como computed
   // para que se actuaice cada vez que se cambie algo
@@ -42,13 +42,15 @@ function Entrada() {
       <div>
         {
           personTypeFromTab===0?
+          resiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
           resiParkings.map(item=>(
 
           <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />//se puede usar el id como key
           )):
+          visiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
           visiParkings.map(item=>(
-            
-          <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+            item=== 'error'?'mostrar error con el cosito ed abajo':
+            <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
           ))
         }
       </div>

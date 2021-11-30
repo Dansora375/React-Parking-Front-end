@@ -7,6 +7,8 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Button'
+import { ClassNames } from '@emotion/react';
+import '../../views/Entrada/Entrada.css';
 
 export default function Tarifa() {
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
@@ -60,7 +62,7 @@ export default function Tarifa() {
                         
                     </Grid>
                     <Grid item xs={12} sx={{textAlign: 'center'}}>
-                        <TextField sx={{backgroundColor:'#BCFFFA', color:'#323232', float:'center'}} value="$ 3000"></TextField>
+                        <TextField sx={{backgroundColor:'#BCFFFA', color:'#323232', float:'center',textAlign:'center'}} value="$ 3000" InputTexFieldProps={{className: 'texTarifa'}}></TextField>
                     </Grid>
                     </Grid>
                  </Modal1>

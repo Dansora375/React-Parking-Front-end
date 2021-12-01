@@ -9,3 +9,13 @@ export async function apartmentofTower(info) {
       return { error: `${error}`, completed: false }
     }
   }
+
+// Mostrar los hogares con parqueaderos, propietrio, group y estado vacio
+export async function homeToEntryResident(info) {
+    try {
+      const homestoentry = await api.get('/Home/Select/Entry/Resident/' + info.IdNeighborhood)
+      return {data:homestoentry, completed:true}
+    } catch (error) {
+      return { error: `${error}`, completed: false }
+    }
+  }

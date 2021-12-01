@@ -28,7 +28,8 @@ export async function IngresoVisitante (info) {
       group: info.group,
       homeName: info.homeName,
       plate: info.plate,
-      vehicleType: info.vehicleType
+      vehicleType: info.vehicleType,
+      extra: info.extra
     })
     return {data:ingresovis, completed:true}
   } catch (error) {
@@ -36,6 +37,7 @@ export async function IngresoVisitante (info) {
   }
 }
 
+<<<<<<< HEAD
 export async function IngresoResidente (info) {
   try {
     const ingresores = await api.post('/new-entry-resident/:IdNeighborhood/:HomeId' + info.IdNeighborhood + '/' + info.ParkingId , {
@@ -46,6 +48,12 @@ export async function IngresoResidente (info) {
       vehicleType: info.vehicleType,
       home: info.home,
     })
+=======
+// Registrar el ingreso de un residente
+export async function IngresoResidente (info) {
+  try {
+    const ingresores = await api.post('/entries/new-entry-resident/' + info.IdNeighborhood + '/' + info.HomeId)
+>>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
     return {data:ingresores, completed:true}
   } catch (error) {
     return { error: `${error}`, completed: false }

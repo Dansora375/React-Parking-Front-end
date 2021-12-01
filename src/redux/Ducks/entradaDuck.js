@@ -5,11 +5,16 @@ const entradas = {
 
 
     entradasvis: [],
+<<<<<<< HEAD
     entradasresi: [],
     errors: {
       entradasvis:"",
       entradasresi:""
     }
+=======
+
+    entradares: []
+>>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
 
 }
 
@@ -23,6 +28,9 @@ const NEW_ENTRY_VISIT_SUCCESS='NEW_ENTRY_VISIT_SUCCESS';
 const NEW_ENTRY_VISIT_ERROR='NEW_ENTRY_VISIT_ERROR';
 const NEW_ENTRY_RESIT_SUCCESS='NEW_ENTRY_RESIT_SUCCESS';
 const NEW_ENTRY_RESIT_ERROR='NEW_ENTRY_RESIT_ERROR';
+
+const NEW_ENTRY_RESIDENT_SUCCESS='NEW_ENTRY_RESIDENT_SUCCESS';
+const NEW_ENTRY_RESIDENT_ERROR='NEW_ENTRY_RESIDENT_ERROR';
 
 // Reducer
 export default function entradasReducer(state = entradas, action) {
@@ -40,9 +48,15 @@ export default function entradasReducer(state = entradas, action) {
             return {...state, entradasvis:action.payload.data}
         case NEW_ENTRY_VISIT_ERROR:
             return {...state.errors, error:action.payload, }
+<<<<<<< HEAD
         case NEW_ENTRY_RESIT_SUCCESS:
             return {...state, entradasresi:action.payload.data}
         case NEW_ENTRY_RESIT_ERROR:
+=======
+        case NEW_ENTRY_RESIDENT_SUCCESS:
+            return {...state, entradasvis:action.payload.data}
+        case NEW_ENTRY_RESIDENT_ERROR:
+>>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
             return {...state.errors, error:action.payload, }
         default:
             return state
@@ -182,6 +196,20 @@ export const getVisitEntryAction=(info)=> async (dispatch, getState)=>{
         dispatch({
           type:NEW_ENTRY_RESIT_ERROR,
           payload: `ha ocurrido un error al crear entrada de residente : ${error}`
+          
+        })
+    }
+  }
+
+export const NewEntryResident=(info)=> async (dispatch, getState)=>{
+
+    try {
+      await services.IngresoResidente(info)
+      
+    } catch (error) {
+        dispatch({
+          type:NEW_ENTRY_RESIDENT_ERROR,
+          payload: `ha ocurrido un error al ingresar un residente a un parqueadero : ${error}`
           
         })
     }

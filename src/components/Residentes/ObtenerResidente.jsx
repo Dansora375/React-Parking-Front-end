@@ -1,11 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import '../../views/Residentes/Residentes.css'
-import Grid from '@mui/material/Grid';
 import PersonOutline from '@mui/icons-material/PersonOutline'
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
 import { styled } from '@mui/system';
 import { Popover } from '@mui/material';
@@ -55,7 +50,7 @@ const buttons = [
   <CustomButton key="eliminar">Eliminar Residente</CustomButton>
 ];
 
-export default function ObtenerResidente  () {
+export default function ObtenerResidente  ({name}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -70,10 +65,10 @@ export default function ObtenerResidente  () {
   const id = open ? 'simple-popover' : undefined;
   return (
 
-        <div className="residente"   >
+        <div className="residentCard"   >
           
          <PersonOutline sx={{ fontSize: 100, "&:hover":{color: "#14FFEC"}}} onClick={handleClick}/>                    
-        <div>Ricardo</div>
+        <div>{name}</div>
         <Popover
                 id={id}
                 open={open}

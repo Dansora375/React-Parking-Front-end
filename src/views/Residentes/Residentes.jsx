@@ -3,48 +3,13 @@ import './Residentes.css';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
-import { fontSize, styled } from '@mui/system';
+import { styled } from '@mui/system';
 import InputUnstyled from '@mui/core/InputUnstyled';
 import CrearResidente from '../../components/Residentes/CrearResidente';
 import ObtenerResidente from '../../components/Residentes/ObtenerResidente';
-const BotonNav = styled('button')`
-  background-color: #0D7377;
-  padding: 6px 16px;
-  border-radius: 4px;
-  color: #BCFFFA;
-  font-weight: 600;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-  transition: all 200ms ease;
-  cursor: pointer;
-  box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 0 rgba(0, 127, 255, 0);
-  border: none;
-  line-height: 1.5;
+import {useDispatch, useSelector} from 'react-redux';
+import { GetResidentsAction } from '../../redux/Ducks/residenteDuck';
 
-  &:hover {
-    background-color: #14FFEC;
-    color: #323232;
-  }
-
-  &.${buttonUnstyledClasses.active} {
-    background-color: #0D7377;
-    color: #BCFFFA;
-  }
-
-  &.${buttonUnstyledClasses.focusVisible} {
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1), 0 0 0 5px rgba(0, 127, 255, 0.5);
-    outline: none;
-  }
-
-  &.${buttonUnstyledClasses.disabled} {
-    opacity: 0.5;
-    cursor: not-allowed;
-    box-shadow: 0 0 0 0 rgba(0, 127, 255, 0);
-  }
-`;
 
 const StyledInputElement = styled('input')`
   width: 55%;
@@ -82,16 +47,16 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
  
 export function Residentes() {
 
-    
-    
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
+    const dispatch = useDispatch();
+    Residentes = useSelector(store => store.residentes.residentes);
+
+    const info = {
+      IdNeighborhood:"619cc7d78011c2969719fedd"
     }
+
+    React.useEffect (() => {
+      dispatch(GetResidentsAction(info))
+    },[])
 
     const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
                             <Box sx={{ flexGrow: 1, p: 2 }}>
@@ -114,9 +79,13 @@ export function Residentes() {
                             <Grid item xs={12} className="titulo">
                                 <b><br/>RESIDENTES</b>
                             </Grid>
-                            <div>
-                           <ObtenerResidente/>
-                              
+                          <div>
+
+                            {Residentes.map((res) => (
+
+                              <ObtenerResidente name={res.name}/>
+
+                            ))}
                           </div>
                            </Box>
 

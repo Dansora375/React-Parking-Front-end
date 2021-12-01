@@ -64,3 +64,35 @@ export const GetResiwhitparkingAction=(info) =>async(dispatch,getState)=>{
 
     }
 }
+
+export const GetResidentsAction=(info) =>async(dispatch,getState)=>{
+    try{
+    const res= await services.Residents(info)
+
+    if (res.completed) {
+
+        dispatch({
+            type: OBTENER_RESIDENTES_EXITO,
+            payload:res.data.data
+    
+        })
+
+    } else if (res.complete===false) {
+
+        dispatch({
+            type: OBTENER_RESIDENTES_ERROR,
+            payload:res.error
+    
+        })
+
+    }
+
+    } catch (error) {
+
+        dispatch({
+        type: OBTENER_RESIDENTES_ERROR,
+        payload: `ha ocurrido un error ${error}` 
+      })
+
+    }
+}

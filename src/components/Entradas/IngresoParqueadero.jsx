@@ -8,12 +8,18 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import '../../views/Entrada/Entrada.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetResiwhitparkingAction } from '../../redux/Ducks/residenteDuck';
+import { getHomestoEntryAction } from '../../redux/Ducks/homeDuck';
 import { getTowersAction } from '../../redux/Ducks/groupDuck';
 import { getApartmentByTowerAction } from '../../redux/Ducks/homeDuck';
+<<<<<<< HEAD
 import { getVisitEntryActionn } from '../../redux/Ducks/entradaDuck';
 import { CreateEntryVis} from '../../redux/Ducks/entradaDuck';
 import { getResiEntryAction} from '../../redux/Ducks/entradaDuck';
+=======
+import { getEmptyVisParkingAction } from '../../redux/Ducks/entradaDuck';
+import { NewEntryVisit } from '../../redux/Ducks/entradaDuck';
+import { NewEntryResident } from '../../redux/Ducks/entradaDuck';
+>>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
 
 
 const TipoIngreso = [
@@ -67,7 +73,7 @@ const Parqueaderos = [
 export default function IngresoParqueadero() {
 
     const dispatch = useDispatch();
-    const residentes = useSelector(store => store.residentes.residenteswithparking);
+    const hogares = useSelector(store => store.homes.homesEntry);
     const torres = useSelector(store => store.groups.towers);
     const apartamentos = useSelector(store => store.homes.apartmentByTower);
     const parqueaderosvisdb = useSelector(store => store.entradas.emptyviparkings);
@@ -77,7 +83,7 @@ export default function IngresoParqueadero() {
                                        IdGroup:""});
 
     React.useEffect (() => {
-        dispatch(GetResiwhitparkingAction(info))
+        dispatch(getHomestoEntryAction(info))
         dispatch(getTowersAction(info))
         dispatch(getApartmentByTowerAction(info))
         dispatch(getResiEntryAction(info))
@@ -85,7 +91,7 @@ export default function IngresoParqueadero() {
 
     const [estadoModal, setEstadoModal] = React.useState(false);
     const [Ingreso, setIngreso] = React.useState('Visitante');
-    const [Residente, setResidente] = React.useState('');
+    const [Hogar, setHogar] = React.useState('');
     const [Parqueadero, setParqueadero] = React.useState('');
     const [verParking, setverParking] = React.useState(false);
     const [Vehiculo, setVehiculo] = React.useState('');
@@ -95,10 +101,11 @@ export default function IngresoParqueadero() {
     const [Name, setName] = React.useState('');
     const [Cedula, setCedula] = React.useState('');
     const [Placa, setPlaca] = React.useState('');
+    const [extra, setextra] = React.useState('');
 
     const CambiarIngreso = (event) => {
         setIngreso(event.target.value);
-        setResidente('');
+        setHogar('');
         setParqueadero('');
         setverParking(false);
         setVehiculo('');
@@ -106,8 +113,8 @@ export default function IngresoParqueadero() {
         setApartamento('');
     };
 
-    const CambiarResidente = (event) => {
-        setResidente(event.target.value);
+    const CambiarHogar = (event) => {
+        setHogar(event.target.value);
         setParqueadero('');
         if (verParking) {
             return
@@ -150,7 +157,7 @@ export default function IngresoParqueadero() {
     const cambiarEstadoModal = (event) => {
         setEstadoModal(!estadoModal);
         setIngreso('Visitante');
-        setResidente('');
+        setHogar('');
         setParqueadero('');
         setverParking(false);
         setVehiculo('');
@@ -158,6 +165,7 @@ export default function IngresoParqueadero() {
         setApartamento('');
     }
 
+<<<<<<< HEAD
     const CreateEntryVist = () => {
         dispatch(({
             IdNeighborhood: info.IdNeighborhood,
@@ -169,6 +177,29 @@ export default function IngresoParqueadero() {
             plate: Placa,
             vehicleType: Vehiculo
         }))
+=======
+    const nuevoIngreso = () => {
+
+        if (Ingreso === "Visitante") {
+            dispatch(NewEntryVisit({
+                IdNeighborhood: info.IdNeighborhood,
+                ParkingId: Parqueadero,
+                name: Name,
+                identification: Cedula,
+                group: nameTower,
+                homeName: Apartamento,
+                plate: Placa,
+                vehicleType: Vehiculo,
+                extra: extra
+            }))
+        } else if (Ingreso === "Residente") {
+            dispatch(NewEntryResident({
+                IdNeighborhood: info.IdNeighborhood,
+                HomeId: ""
+            }))
+        }
+
+>>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
         cambiarEstadoModal()
     }
 
@@ -207,15 +238,15 @@ export default function IngresoParqueadero() {
                         <TextField
                             id="outlined-select-currency"
                             select
-                            value={Residente}
-                            onChange={CambiarResidente}
+                            value={Hogar}
+                            onChange={CambiarHogar}
                             size="small"
                             margin='normal'
                             sx={{width: '100%'}}
                             >
-                            {Residentes.map((option) => (
-                                <MenuItem key={option.value} value={option.value} >
-                                    {option.value}
+                            {hogares.map((option) => (
+                                <MenuItem key={option._id} value={option.name} >
+                                    {option.name}
                                 </MenuItem>
                             ))}
                         </TextField>
@@ -245,6 +276,7 @@ export default function IngresoParqueadero() {
                         <h3 className="requerimientos-vis">Placa</h3>
                         <h3 className="requerimientos-vis">Tipo de vehiculo</h3>
                         <h3 className="requerimientos-vis">Parqueadero</h3>
+                        <h3 className="requerimientos-vis">Informacion adicional</h3>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
                         <TextField
@@ -316,6 +348,14 @@ export default function IngresoParqueadero() {
                                 </MenuItem>
                             ))}
                         </TextField>
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Info. Adicional"
+                            multiline
+                            maxRows={3}
+                            value={extra}
+                            onChange={event => setextra(event.target.value)}
+                            />
                         
                     </Grid>
                 </Grid>}

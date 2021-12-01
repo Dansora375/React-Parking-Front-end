@@ -2,6 +2,13 @@ import api from '../api/api'
 
 export default {
   listNeighborhoods: async () => {
-    api.get('')
+    try {
+      const conjuntos = await api.get('/Neighborhood/list');
+      return { conjuntos, completed: true}
+    } catch (error) {
+      return { error }
+    }
+    
+
   }
 }

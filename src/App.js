@@ -1,13 +1,11 @@
 // import './App.css';
 // import {BrowserRouter, Link, Route, Routes} from 'react-router-dom'
 
-// hooks react redux
-// import {useDispatch, useSelector} from 'react-redux'
+// hooks react redux y su manejo
+import {useDispatch, useSelector} from 'react-redux'
+import watch from 'redux-watch'
+import store from './redux/createdStore'
 
-
-
-// importamos la acción
-// import { loguinWithEmailAction } from './redux/Ducks/authDuck'
 
 import { ThemeProvider } from 'styled-components'
 import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles'
@@ -16,23 +14,48 @@ import {darkTheme} from './themes/muiThemes'
 import MiniDrawer from './components/Drawer';
 
 import { Hogares } from './views/Hogares/Hogares';
-
 import {Entrada} from './views/Entrada/Entrada';
 // import {Register} from './views/Registro/Register';
 
 import {
   HashRouter as Router,
   Switch,
-  Route
+  Route,
+  useHistory,
+  useLocation
 } from "react-router-dom";
+
+import { useEffect } from 'react'
 import Parking from './views/Parking/Parking';
 
 function App() {
+  // iniciando las variables de history y location para navegacion programatica
+  const location = useLocation()
+  const history = useHistory()
+  const userData = useSelector(state => state.authentication.userData)
+  useEffect(()=>{
+    // validando que el usuario esta logueado
+    if(!userData){
+      history.push('/login')
+    }
+    console.log('hola')
+  },[location])
+
+  
+  const watchUserData = watch(store.getState,'authentication.userData')
+
+  store.subscribe(watchUserData((newVal, oldVal, pathObject)=>{
+    if(newVal){
+      // si entro un nuevo valor, al userData, se procedera al login
+      history.push('/')
+    }
+  }))
 
   // const dispatch = useDispatch()
 
   // const authentication = useSelector(store=>store.authentication.userData)
   return (
+    
     // <div className="App">
     //   <header className="App-header">
     //     <img src={logo} className="App-logo" alt="logo" />

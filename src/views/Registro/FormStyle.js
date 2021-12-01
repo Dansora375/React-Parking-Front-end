@@ -9,8 +9,12 @@ const colores = {
 
 const Formulario = styled.form`
 
-	display: grid;
-	gap: 20px;
+	display: flex;
+	// gap: 20px;
+	// flexDirection: column;
+	flex-direction: column;
+	
+	justify-content: space-evenly
 
 	@media (max-width: 800px){
 		grid-template-columns: 1fr;

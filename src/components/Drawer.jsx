@@ -31,6 +31,8 @@ import { Link, Switch, Route } from 'react-router-dom';
 import {Hogares} from "../views/Hogares/Hogares"
 import Usuario from '../views/Entrada/Usuario';
 
+import { useSelector } from 'react-redux';
+
 // import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -105,6 +107,8 @@ export default function MiniDrawer( { contenido } ) {
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const userData = useSelector(state => state.authentication.userData)
+  // console.log(userData)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -134,7 +138,7 @@ export default function MiniDrawer( { contenido } ) {
           <Typography  variant="h5" noWrap component="div" >
             REACTPARKING
           </Typography>
-          <Usuario />
+          <Usuario userData ={userData}/>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open} PaperProps={{

@@ -20,5 +20,14 @@ export default {
     } catch (error) {
       return { message: 'Ha ocurrido un error en la ejecucion de la consulta', error}
     }
+  },
+  register: async (data) => {
+    try{
+      const registerConsulta = await api.post('/authentication/signup',data)
+      // console.log(registerConsulta.data)
+      return registerConsulta.data
+    } catch(error) {
+      return {message: 'Ha ocurrido un error en la ejecucion de la consulta', error}
+    }
   }
 }

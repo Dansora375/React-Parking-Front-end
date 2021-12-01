@@ -1,18 +1,23 @@
 import React from 'react';
-import {Input, Label, GrupoInput, LeyendaError, IconoValidacion} from '././../../views/Registro/FormStyle';
+import {Input, Label, GrupoInput, LeyendaError, IconoValidacion} from './FormStyle';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
-const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular, funcion}) => {
+import { useFormContext } from 'react-hook-form';
+
+const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name, leyendaError, expresionRegular, funcion, validaciones}) => {
+	const { register } = useFormContext();
+	// console.log(register)
+
 	const onChange = (e) => {
 		cambiarEstado({...estado, campo: e.target.value});
 	}
 
-	const validacion = () => {
+	const validacion = ( ) => {
 		if(expresionRegular){
 			if(expresionRegular.test(estado.campo)){
-				cambiarEstado({...estado, valido: 'true'});
+				// cambiarEstado({...estado, valido: 'true'});
 			} else {
-				cambiarEstado({...estado, valido: 'false'});
+				// cambiarEstado({...estado, valido: 'false'});
 			}
 		}
 
@@ -29,11 +34,14 @@ const ComponenteInput = ({estado, cambiarEstado, tipo, label, placeholder, name,
 					type={tipo}
 					placeholder={placeholder} 
 					id={name}
-					value={estado.campo}
-					onChange={onChange}
+					// value={estado.campo}
+					// onChange={onChange}
+					
 					onKeyUp={validacion}
-					onBlur={validacion}
-					valido={estado.valido}
+					// onBlur={validacion}
+					// valido={estado.valido}
+					// {...context.register}
+					{...register(name, validaciones)}
 				/>
 				<IconoValidacion 
 					icon={estado.valido === 'true' ? faCheckCircle : faTimesCircle}

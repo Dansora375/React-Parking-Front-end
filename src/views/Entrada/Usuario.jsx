@@ -3,7 +3,10 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import { 
+    ListItemIcon,
+    ListItemButton
+} from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -11,7 +14,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
-export default function AccountMenu() {
+export default function AccountMenu( { userData } ) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -20,12 +23,25 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    console.log(userData)
+    let firstLetter ='/'
+    if(userData){
+        firstLetter= userData.username.charAt(0)
+    }
+
+    const logout = () =>{
+        console.log('')
+    }
+    // const firstLetter = userData.name.charAt(0)
     return (
         <React.Fragment>
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
             <Tooltip title="Account settings">
             <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}>
+                    {firstLetter}
+                </Avatar>
             </IconButton>
             </Tooltip>
         </Box>
@@ -71,22 +87,22 @@ export default function AccountMenu() {
             </MenuItem>
             <Divider />
             <MenuItem>
-            <ListItemIcon>
-                <PersonAdd fontSize="small" />
-            </ListItemIcon>
-            Add another account
-            </MenuItem>
+                <ListItemIcon>
+                    <PersonAdd fontSize="small" />
+                </ListItemIcon>
+                Add another account
+                </MenuItem>
             <MenuItem>
-            <ListItemIcon>
-                <Settings fontSize="small" />
-            </ListItemIcon>
-            Settings
+                <ListItemIcon>
+                    <Settings fontSize="small" />
+                </ListItemIcon>
+                Settings
             </MenuItem>
-            <MenuItem>
-            <ListItemIcon>
-                <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
+            <MenuItem onClick={()=>{logout()}}>
+                <ListItemIcon>
+                    <Logout fontSize="small" />
+                </ListItemIcon>
+                Logout
             </MenuItem>
         </Menu>
         </React.Fragment>

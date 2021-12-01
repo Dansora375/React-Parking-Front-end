@@ -12,14 +12,19 @@ const LOGUIN_WITH_EMAIL_FAIL = 'LOGUIN_WITH_EMAIL_FAIL'
 const LOGIN_WITH_USER_SUCCESS = 'LOGIN_WITH_USER_SUCCESS'
 const LOGIN_WITH_USER_FAIL = 'LOGIN_WITH_USER_FAIL'
 
+const REGISTER_SUCCES = 'REGISTER_SUCCES'
+const REGISTER_FAIL = 'REGISTER_FAIL'
+
 
 // reducer, encargado de interactuar con los datos del reduc
 export default function authReducer(state = data, action){
+  console.log(action)
   switch (action.type) {
     case LOGUIN_WITH_EMAIL_SUCCESS:
       // console.log(action)
       return {...state,userData: {message: action.payload}}
     case LOGIN_WITH_USER_SUCCESS:
+      console.log(action.payload)
       return {
         ...state,
         userData: action.payload // cargando los resultados al state
@@ -30,6 +35,17 @@ export default function authReducer(state = data, action){
         loginFailM: action.message,
         error: action.error // si no se envia error, sera un valor undefined por lo que no existira
       }
+    case REGISTER_FAIL:
+      return{
+        ...state,
+        registerFail: action.payload,
+      }
+    case REGISTER_SUCCES:
+      return {
+        ...state,
+        userData: action.payload
+      }
+
     default:
       return state
   }
@@ -50,9 +66,9 @@ export const loginWithUserAction = (data) => async (dispatch, getState) => {
         objectDispatch.error = dataResult.error
     }else {
       objectDispatch.type = LOGIN_WITH_USER_SUCCESS;
-      objectDispatch.payload = dataResult.data; // en data se guarda el resultado de la consulta
+      objectDispatch.payload = dataResult.data.data.userData; // en data se guarda el resultado de la consulta
     }
-    console.log(dataResult)
+    
 
     // pasando el objeto al dispatch para que lo procese en el reducer
     dispatch(objectDispatch)
@@ -77,5 +93,37 @@ export const loguinWithEmailAction = (data) => async (dispatch, getState) => {
     })
   } catch (error) {
     console.error(`${error}`)
+  }
+}
+
+export const registerAction = (data) => async (dispatch, getState) => {
+  try {
+    const datos = {
+      username: data.username,
+      password: data.password,
+      name: data.name,
+      email: data.correo,
+      identification: data.cedula,
+      neighborhood: data.neighborhood
+    }
+    const result = await authService.register(datos)
+
+    console.log('no error', !result.auth, result)
+    if(result.auth== false|| result.message){
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: result.message
+      })
+    }else{
+      dispatch({
+        type: REGISTER_SUCCES,
+        payload: result.user
+      })
+    }
+  } catch (error) {
+    dispatch({
+      type: REGISTER_FAIL,
+      payload: error
+    })
   }
 }

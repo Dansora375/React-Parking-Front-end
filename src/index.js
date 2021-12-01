@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Login from './views/authentication/login';
 import Register from './views/Registro/Register'
+import NoMatch from './views/NoMatch/NoMatch';
 // import {Hogares} from './views/Hogares/Hogares'
 import { ThemeProvider } from 'styled-components'
 import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles'
@@ -22,9 +23,10 @@ import {
 } from "react-router-dom";
 // import { createStore } from 'redux';
 
-import generateStore from './redux/store'
+// import generateStore from './redux/store'
+import store from './redux/createdStore'
 
-const store = generateStore()
+// const store = generateStore()
 
 ReactDOM.render(
   <MuiThemeProvider theme={darkTheme}>
@@ -35,11 +37,14 @@ ReactDOM.render(
           <Route exact path="/">
             <App />
           </Route>
-          <Route path="/signin">
+          <Route path={["/signin","/login"]}>
             <Login />
           </Route>
-          <Route path="/signup">
+          <Route path={["/signup", "/register"]}>
             <Register/>
+          </Route>
+          <Route path='*'>
+            <NoMatch/>
           </Route>
         </Switch>
       </Router> 

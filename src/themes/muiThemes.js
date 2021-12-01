@@ -4,7 +4,15 @@ const typography ={
   // si se desea cambiar la fuente de la letra  
   // ahcerlo aqui
   fontFamily:'PT Sans Caption, sans-serif',
-  
+  h1: {
+    fontSize: '2rem',
+    '@media (min-width:600px)': {
+      fontSize: '4rem',
+    },
+    [createTheme().breakpoints.up('md')]: {
+      fontSize: '5rem',
+    },
+  }
 }
 
 

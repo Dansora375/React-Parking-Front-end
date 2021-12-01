@@ -37,11 +37,8 @@ function ItemParking(props) {
   const matchesLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
   
   // console.log(matchesMD)
-  const name=props.name
-  const vehicleType=props.vehicleType
-  const isTaken =props.isTaken
-  // const personType=props.personType
-
+  const {name, vehicleType, isTaken, personType, idParking } =props
+  
   // conditions
   
   const typeParkignTaken= ()=>{ 
@@ -116,7 +113,7 @@ function ItemParking(props) {
           </Grid> 
         </Grid>      
         <Grid item xs={0}>
-          <ItemOptions></ItemOptions>
+          <ItemOptions ParkingType={personType} idParking={idParking} />
         </Grid>      
       </Grid> 
       </Box> 

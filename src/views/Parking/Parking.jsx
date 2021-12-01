@@ -61,13 +61,12 @@ function Parking() {
           resiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
           resiParkings.map(item=>(
             
-            
-            <ItemParking key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+            <ItemParking key={item._id}  idParking={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
           )):
           visiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
           visiParkings.map(item=>(
             item=== 'error'?'mostrar error con el cosito ed abajo':
-            <ItemParking key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+            <ItemParking key={item._id} idParking={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
           ))
         }
       </div>

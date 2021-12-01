@@ -7,9 +7,10 @@ import CancelButton  from '../common/CancelButton';
 
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 
-function ItemOptions() {
+function ItemOptions(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const {ParkingType, idParking}=props
+  
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -18,7 +19,8 @@ function ItemOptions() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const TextCreatePkngButtonConf='Confirmar'
+
+ 
   const TextCreatePkngButtonCan='Cancelar'
   return (
     <>
@@ -38,10 +40,9 @@ function ItemOptions() {
           vertical: 'top',
           horizontal: 'right',
         }}>
-        <MenuItem  variant='initialOption'>
-          <MoreInfo>
+        <MenuItem  variant='initialOption' >
+          <MoreInfo ParkingType={ParkingType} idParking={idParking} >
             <CancelButton text={TextCreatePkngButtonCan} />
-            <ConfirmButton text={TextCreatePkngButtonConf} />
           </MoreInfo>
         </MenuItem>
         <MenuItem onClick={handleClose} variant='intermedialOptions'>

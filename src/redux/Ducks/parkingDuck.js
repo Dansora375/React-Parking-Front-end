@@ -8,6 +8,12 @@ const initialParkings={
   parkingsVisi:[
 
   ],
+  parkingsResiMoreInfo:{
+
+  },
+  parkingsVisiMoreInfo:{
+
+  },
   errors: {
     parkingsResi:"",
     parkingsVisi:""
@@ -18,13 +24,16 @@ const initialParkings={
 // types
 
 // Obterner datos parkigns
-const GET_RESI_PARKINGS_TO_ITEM_SUCCESS='GET_PARKINGS_TO_ITEM_SUCCESS'
-const GET_RESI_PARKINGS_TO_ITEM_ERROR='GET_PARKINGS_TO_ITEM_ERROR'
+const GET_RESI_PARKINGS_TO_ITEM_SUCCESS='GET_RESI_PARKINGS_TO_ITEM_SUCCESS'
 const GET_VISI_PARKINGS_TO_ITEM_SUCCESS='GET_VISI_PARKINGS_TO_ITEM_SUCCESS'
-const GET_VISI_PARKINGS_TO_ITEM_ERROR='GET_VISI_PARKINGS_TO_ITEM_ERROR'
+const GET_RESI_PARKING_PARKINGS_ERROR='GET_RESI_PARKING_PARKINGS_ERROR'
+const GET_VISI_PARKING_PARKINGS_ERROR='GET_VISI_PARKING_PARKINGS_ERROR'
 // Crear parking
 const CRAETE_NEW_PARKING_SUCCESS='CRAETE_NEW_PARKING_SUCCESS'
 const CRAETE_NEW_PARKING_ERROR='CRAETE_NEW_PARKING_ERROR'
+// Obterner mas info parkings
+const GET_MORE_INF_PARKING_RESI_SUCCESS='GET_MORE_INF_PARKING_RESI_SUCCESS'
+const GET_MORE_INF_PARKING_VISI_SUCCESS='GET_MORE_INF_PARKING_VISI_SUCCESS'
 
 
 // reducer
@@ -34,14 +43,14 @@ export default function parkingReducer(state =initialParkings, action){
     case GET_RESI_PARKINGS_TO_ITEM_SUCCESS:
       return {...state, parkingsResi:action.payload }
 
-    case GET_RESI_PARKINGS_TO_ITEM_ERROR:
+    case GET_RESI_PARKING_PARKINGS_ERROR:
        const ErrorrResi = {...state.errors, parkingsResi:action.payload.message}
       return {...state, parkingsResi:action.payload.error, errors:ErrorrResi}
 
     case GET_VISI_PARKINGS_TO_ITEM_SUCCESS:
       return {...state, parkingsVisi:action.payload }
 
-    case GET_VISI_PARKINGS_TO_ITEM_ERROR:
+    case GET_VISI_PARKING_PARKINGS_ERROR:
       const ErrorVisi = {...state.errors, parkingsVisi:action.payload.message}
       return {...state, parkingsVisi:action.payload.error, errors:ErrorVisi}
 
@@ -53,8 +62,15 @@ export default function parkingReducer(state =initialParkings, action){
       }else{
         break
       }
-    case CRAETE_NEW_PARKING_ERROR:
-      return {...state.errors, newParkingError:action.payload, }
+      case CRAETE_NEW_PARKING_ERROR:
+        return {...state.errors, newParkingError:action.payload, }
+        
+      case GET_MORE_INF_PARKING_RESI_SUCCESS:
+        return {...state, parkingsResiMoreInfo:action.payload }
+        
+      case GET_MORE_INF_PARKING_VISI_SUCCESS:
+        return {...state, parkingsVisiMoreInfo:action.payload }
+
     default:
       return state
   }
@@ -72,7 +88,7 @@ export const getParkingsResiAction=(info)=> async (dispatch, getState)=>{
       })
     }else if(res.completed===false) {
       dispatch({
-        type:GET_RESI_PARKINGS_TO_ITEM_ERROR,
+        type:GET_RESI_PARKING_PARKINGS_ERROR,
         payload:{
           error:"error",
           message:res.error
@@ -81,7 +97,7 @@ export const getParkingsResiAction=(info)=> async (dispatch, getState)=>{
     } 
   } catch (error) {
     dispatch({
-        type:GET_RESI_PARKINGS_TO_ITEM_ERROR,
+        type:GET_RESI_PARKING_PARKINGS_ERROR,
         payload:{
           error:"error",
           message: `ha ocurrido un error al obtener los 
@@ -103,7 +119,7 @@ export const getParkingsVisiAction=(info)=> async (dispatch, getState)=>{
       })
     }else if(res.completed===false) {
       dispatch({
-        type:GET_VISI_PARKINGS_TO_ITEM_ERROR,
+        type:GET_VISI_PARKING_PARKINGS_ERROR,
         payload:{
           error:"error",
           message:res.error
@@ -112,7 +128,7 @@ export const getParkingsVisiAction=(info)=> async (dispatch, getState)=>{
     } 
   } catch (error) {
     dispatch({
-        type:GET_VISI_PARKINGS_TO_ITEM_ERROR,
+        type:GET_VISI_PARKING_PARKINGS_ERROR,
         payload: {
           error:"error",
           message: `ha ocurrido un error al obtener los 
@@ -128,13 +144,8 @@ export const CreateParking=(info)=> async (dispatch, getState)=>{
 
   try {
     const res = await services.NewParking(info)
-
-    // const newData = getState().Parkings.parkingsResi.push(res.data.data)
-    // console.log(newData)
-    // console.log(getState())
-    
     if (res.completed) {
-      console.log('paso')
+      // console.log('paso')
       if(res.data.data.personType==='Residente'){
         const newState=JSON.parse(JSON.stringify(getState().Parkings.parkingsResi))
         newState.push(res.data.data)  
@@ -146,7 +157,6 @@ export const CreateParking=(info)=> async (dispatch, getState)=>{
             data:newState,
             type:'Residente'
           }
-            
         })
       }else if(res.data.data.personType==='Visitante'){
         const newState=JSON.parse(JSON.stringify(getState().Parkings.parkingsVisi))
@@ -159,17 +169,14 @@ export const CreateParking=(info)=> async (dispatch, getState)=>{
             data:newState,
             type:'Visitante'
           }
-          
         })
       }
     }else if(res.completed===false) {
       dispatch({
         type:CRAETE_NEW_PARKING_ERROR,
-        payload:res.error
-        
+        payload:res.error  
       })
     } 
-    
   } catch (error) {
       dispatch({
         type:CRAETE_NEW_PARKING_ERROR,
@@ -177,4 +184,67 @@ export const CreateParking=(info)=> async (dispatch, getState)=>{
         
       })
   }
+}
+
+// Obterner more info
+export const getMoreInfoPkngResiAction=(info)=> async (dispatch, getState)=>{
+  try {
+    const res = await services.getMoreInfoParking(info)
+    if (res.completed) {
+      dispatch({
+        type:GET_MORE_INF_PARKING_RESI_SUCCESS,
+        payload:res.data.data
+      })
+    }else if(res.completed===false) {
+      dispatch({
+        type:GET_RESI_PARKING_PARKINGS_ERROR,
+        payload:{
+          error:"error",
+          message:res.error
+        }
+      })
+    } 
+  } catch (error) {
+    dispatch({
+        type:GET_RESI_PARKING_PARKINGS_ERROR,
+        payload:{
+          error:"error",
+          message: `ha ocurrido un error al obtener el
+          parquedero de residente: ${error}` 
+        }
+      })
+  }
+
+}
+
+
+
+export const getMoreInfoPkngVisiAction=(info)=> async (dispatch, getState)=>{
+  try {
+    const res = await services.getMoreInfoParking(info)
+    if (res.completed) {
+      dispatch({
+        type:GET_MORE_INF_PARKING_VISI_SUCCESS,
+        payload:res.data.data
+      })
+    }else if(res.completed===false) {
+      dispatch({
+        type:GET_RESI_PARKING_PARKINGS_ERROR,
+        payload:{
+          error:"error",
+          message:res.error
+        }
+      })
+    } 
+  } catch (error) {
+    dispatch({
+        type:GET_RESI_PARKING_PARKINGS_ERROR,
+        payload:{
+          error:"error",
+          message: `ha ocurrido un error al obtener el
+          parquedero de visitante: ${error}` 
+        }
+      })
+  }
+
 }

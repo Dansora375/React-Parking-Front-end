@@ -1,9 +1,10 @@
 import React from 'react'
 import {Grid, Box, IconButton, MenuItem, Menu} from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MoreInfoEntrada from './MoreInfoEntrada';
 import ConfirmButton  from '../common/CancelButton'; 
-import CancelButton  from '../common/CancelButton'; 
+import CancelButton  from '../common/CancelButton';
+import InformacionEntrada from './InformacionEntrada';
+import Tarifa from './Tarifa';
 
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 
@@ -39,13 +40,10 @@ function ItemOptionsEntrada() {
           horizontal: 'right',
         }}>
         <MenuItem  variant='initialOption'>
-          <MoreInfoEntrada>
-            <CancelButton text={TextCreatePkngButtonCan} />
-            <ConfirmButton text={TextCreatePkngButtonConf} />
-          </MoreInfoEntrada>
+          <InformacionEntrada/>
         </MenuItem>
-        <MenuItem onClick={handleClose} variant='finalOption'>
-          Terminar parqueadero
+        <MenuItem variant='finalOption'>
+          <Tarifa/>
         </MenuItem>
       </Menu>
     </>

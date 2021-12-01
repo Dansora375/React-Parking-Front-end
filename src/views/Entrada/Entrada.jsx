@@ -5,6 +5,9 @@ import Grid from '@mui/material/Grid';
 import IngresoParqueadero from '../../components/Entradas/IngresoParqueadero';
 import InformacionEntrada from '../../components/Entradas/InformacionEntrada';
 import Tarifa from '../../components/Entradas/Tarifa';
+import {TextField} from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 import ItemEntrada from '../../components/Entradas/ItemEntrada'
 import AddEntrada from '../../components/common/SearchAndAdd/AddEntrada'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
@@ -16,9 +19,6 @@ export function Entrada() {
   const dispatch= useDispatch()
   const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
 
-   // se podria implementar que la accion se realice con alguna
-  // funcion del ciclo de vide de react, u otra coasa que
-  // haga que si no se a modificado nada no se haga la peticion, como el useMemo
   React.useEffect(()=>{//se ejecuta cuando se monta el componente
     dispatch(getParkingsResiAction(info))//se ejecuta la accion
     dispatch(getParkingsVisiAction(info))
@@ -43,29 +43,30 @@ export function Entrada() {
 
     return (
       <>
+      <Grid container 
+      justifyContent="flex-end"
+      alignItems="flex-end"
+      spacing={0} >
+        <Grid item xs={0.5} className="plus">
+          <IngresoParqueadero/>
+        </Grid>
+        <Grid item xs={8.5}>
+          <b className="texto-creacion">&nbsp;&nbsp;&nbsp;
+          Agregar ingreso</b>
+        </Grid>
+        <Grid item xs={2}>
+          <Box className='input-container'> 
+            <TextField id="standard-basic" label="Filtrar..." variant="standard" 
+            size="large"/>
+          </Box>               
+            </Grid>
+             <Grid item xs={1}>
+              <IconButton aria-label="search"> 
+              <SearchIcon fontSize="large" sx={{ color:'primary.main'}}/>  
+              </IconButton>
+            </Grid>
+        </Grid>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
-        <Grid container spacing={2}>
-              
-              <Grid item xs={1} className="plus">
-                <IngresoParqueadero/>
-              </Grid>
-              <Grid item xs={5}>
-                  <b className="texto-creacion">Agregar ingreso</b>
-              </Grid>
-              <Grid item xs={1} className="plus">
-                  <InformacionEntrada/>
-              </Grid>
-              <Grid item xs={5}>
-                  <b className="texto-creacion">Informacion</b>
-              </Grid>
-              <Grid item xs={1} className="plus">
-                  <Tarifa/>
-              </Grid>
-              
-          </Grid>
-      </Box>
-      <AddEntrada></AddEntrada>
       <TabResiOrVisi typePerson={(value)=>kindOfPerson(value)}></TabResiOrVisi>
       <div>
         {

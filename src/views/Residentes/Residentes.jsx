@@ -48,7 +48,7 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
 export function Residentes() {
 
     const dispatch = useDispatch();
-    Residentes = useSelector(store => store.residentes.residentes);
+    const Residentes = useSelector(store => store.residentes.residentes);
 
     const info = {
       IdNeighborhood:"619cc7d78011c2969719fedd"

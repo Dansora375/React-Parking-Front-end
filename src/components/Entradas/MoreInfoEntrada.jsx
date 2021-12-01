@@ -2,7 +2,8 @@ import React from 'react'
 import {Grid, Box, DialogContent, Dialog, DialogTitle, TextField, DialogActions, Button} from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import {useDispatch, useSelector} from 'react-redux'
+import InformacionEntrada from './InformacionEntrada';
+
 
 
 
@@ -36,7 +37,8 @@ function MoreInfoEntrada(props) {
     <Box onClick={handleClickOpen}>
       Mas informacion
     </Box>
-    <Dialog
+    <InformacionEntrada/>
+    {/* <Dialog
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
@@ -107,7 +109,7 @@ function MoreInfoEntrada(props) {
           </Button>
         </DialogActions>
       </Box>
-      </Dialog>
+      </Dialog> */}
     </>
   )
 }

@@ -15,10 +15,10 @@ export default function Tarifa() {
     
     return (
         <div>
-            <Fab aria-label="add" size="small" id="boton"
+            <div
                 onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                <AddIcon />
-            </Fab>
+                    Terminar parqueadero
+            </div>
        
     <Modal1 estado = {estadoModal1} cambiarEstado = {cambiarEstadoModal1} >
         

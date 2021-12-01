@@ -13,6 +13,8 @@ const OBTENER_RESIDENTES_ERROR="OBTENER_RESIDENTES_ERROR"
 const GET_RES_WITH_PARKING_SUCCESS = 'GET_RES_WITH_PARKING_SUCCESS';
 const GET_RES_WITH_PARKING_ERROR = 'GET_RES_WITH_PARKING_ERROR';
 
+const NEW_OWNER_SUCCESS = 'NEW_OWNER_SUCCESS';
+const NEW_OWNER_ERROR = 'NEW_OWNER_ERROR';
 //Reducer
 
 export default function resReducer(state=dataRes,action) {
@@ -25,6 +27,10 @@ export default function resReducer(state=dataRes,action) {
         case GET_RES_WITH_PARKING_SUCCESS:
             return {...state, residenteswithparking:action.payload}
         case GET_RES_WITH_PARKING_ERROR:
+            return {...state, error:action.payload}
+        case NEW_OWNER_SUCCESS:
+            return {...state, residentes:action.payload}
+        case NEW_OWNER_ERROR:
             return {...state, error:action.payload}
         default:
             return state
@@ -96,3 +102,19 @@ export const GetResidentsAction=(info) =>async(dispatch,getState)=>{
 
     }
 }
+
+
+export const NewOwner=(info) => async (dispatch, getState)=>{
+
+      
+    try {
+        await services.NewOwner(info)
+        
+      } catch (error) {
+          dispatch({
+            type:NEW_OWNER_ERROR,
+            payload: `ha ocurrido un error al ingresar un residente a un parqueadero : ${error}`
+            
+          })
+      }
+  }

@@ -42,28 +42,6 @@ const Tipovehiculo = [
     },
   ];
 
-const Residentes = [
-    {
-      value: 'Tatiana',
-      label: 'Tatiana',
-    },
-    {
-      value: 'Freddy',
-      label: 'Freddy',
-    },
-  ];
-
-const Parqueaderos = [
-    {
-      value: 'A-1',
-      label: 'A-1',
-    },
-    {
-      value: 'A-2',
-      label: 'A-2',
-    },
-  ];
-
 export default function IngresoParqueadero() {
 
     const dispatch = useDispatch();
@@ -87,7 +65,6 @@ export default function IngresoParqueadero() {
     const [Ingreso, setIngreso] = React.useState('Visitante');
     const [Hogar, setHogar] = React.useState('');
     const [Parqueadero, setParqueadero] = React.useState('');
-    const [verParking, setverParking] = React.useState(false);
     const [Vehiculo, setVehiculo] = React.useState('');
     const [Torre, setTorre] = React.useState('');
     const [nameTower, setnameTower] = React.useState('');
@@ -101,19 +78,15 @@ export default function IngresoParqueadero() {
         setIngreso(event.target.value);
         setHogar('');
         setParqueadero('');
-        setverParking(false);
         setVehiculo('');
         setTorre('');
         setApartamento('');
+        setinfo({IdNeighborhood:"619cc7d78011c2969719fedd",
+                 IdGroup: info.IdGroup});
     };
 
     const CambiarHogar = (event) => {
         setHogar(event.target.value);
-        setParqueadero('');
-        if (verParking) {
-            return
-        }
-        setverParking(!verParking);
     };
 
     const CambiarVehiculo = (event) => {
@@ -153,7 +126,6 @@ export default function IngresoParqueadero() {
         setIngreso('Visitante');
         setHogar('');
         setParqueadero('');
-        setverParking(false);
         setVehiculo('');
         setTorre('');
         setApartamento('');
@@ -176,9 +148,12 @@ export default function IngresoParqueadero() {
         } else if (Ingreso === "Residente") {
             dispatch(NewEntryResident({
                 IdNeighborhood: info.IdNeighborhood,
-                HomeId: ""
+                HomeId: Hogar
             }))
         }
+
+        setinfo({IdNeighborhood:"619cc7d78011c2969719fedd",
+                 IdGroup: info.IdGroup});
 
         cambiarEstadoModal()
     }
@@ -211,10 +186,9 @@ export default function IngresoParqueadero() {
                 <br/><br/>
                 {Ingreso === "Residente" && <Grid container spacing={2}>
                     <Grid item xs={6} sx={{textAlign: 'right'}}>
-                        <h3 className="requerimientos-resi">Lista de residentes</h3>
-                        { verParking && <h3 className="requerimientos-resi">Parqueaderos</h3>}
+                        <h3 className="requerimientos-resi">Lista de hogares</h3>
                     </Grid>
-                    <Grid item xs={6} sx={{textAlign: 'left'}}>
+                    <Grid item xs={6} sx={{textAlign: 'left'}}> 
                         <TextField
                             id="outlined-select-currency"
                             select
@@ -225,25 +199,11 @@ export default function IngresoParqueadero() {
                             sx={{width: '100%'}}
                             >
                             {hogares.map((option) => (
-                                <MenuItem key={option._id} value={option.name} >
+                                <MenuItem key={option._id} value={option._id} >
                                     {option.name}
                                 </MenuItem>
                             ))}
                         </TextField>
-                        { verParking && <TextField
-                            id="outlined-select-currency"
-                            select
-                            value={Parqueadero}
-                            onChange={CambiarParqueadero}
-                            size="small"
-                            sx={{width: '100%'}}
-                            >
-                            {Parqueaderos.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField> }
                     </Grid>
                 </Grid>}
 

@@ -21,3 +21,18 @@ export async function Residents(info) {
     return { error: `${error}`, completed: false }
   }
 }
+
+// Crear un nuevo residente
+export async function NewOwner (info) {
+  try {
+    const Owner = await api.post('/Owner/' + info.IdNeighborhood  , {
+      name: info.name,
+      identification: info.identification,
+      telephone: info.telephone,
+      homeId: info.homeId
+    })
+    return {data:Owner, completed:true}
+  } catch (error) {
+    return { error: `${error}`, completed: false }
+  }
+}

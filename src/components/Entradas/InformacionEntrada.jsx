@@ -1,22 +1,19 @@
 import React from 'react'
 import Modal1 from '../Hogares/Modal1'
 import Grid from '@mui/material/Grid';
-import {TextField}from '@mui/material/TextField';
-import {useState} from 'react'
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import {useState} from 'react';
 
 export default function InformacionEntrada() {
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
     
     return (
         <div>
-            <Fab aria-label="add" size="small" id="boton"
+            <div
                 onClick={() => cambiarEstadoModal1(!estadoModal1)}>
-                <AddIcon />
-            </Fab>
+                    Mas informacion 
+            </div>
        
-    <Modal1 estado = {estadoModal1} cambiarEstado = {cambiarEstadoModal1} >
+    <Modal1 estado = {estadoModal1} cambiarEstado = {cambiarEstadoModal1} funcion= {cambiarEstadoModal1}>
         
                 
                 <Grid item xs={12} sx={{textAlign:'center',background:'#14FFEC',color: '#323232', borderRadius:'5px'}}>

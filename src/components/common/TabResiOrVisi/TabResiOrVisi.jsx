@@ -19,9 +19,6 @@ function TabResiOrVisi(props) {
         <Tab label="Visitantes" sx={{color:"tertiary.main",  px:tabWidth,fontWeight: 'Bold' }} />
 
       </Tabs>
-      { 
-        value
-      }
     </Box>
   )
 }

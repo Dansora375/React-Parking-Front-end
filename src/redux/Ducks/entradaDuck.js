@@ -5,7 +5,9 @@ const entradas = {
 
     emptyviparkings: [],
 
-    entradasvis: []
+    entradasvis: [],
+
+    entradares: []
 
 }
 
@@ -15,6 +17,9 @@ const GET_EMPTYVISP_ERROR = 'GET_EMPTYVISP_ERROR';
 
 const NEW_ENTRY_VISIT_SUCCESS='NEW_ENTRY_VISIT_SUCCESS';
 const NEW_ENTRY_VISIT_ERROR='NEW_ENTRY_VISIT_ERROR';
+
+const NEW_ENTRY_RESIDENT_SUCCESS='NEW_ENTRY_RESIDENT_SUCCESS';
+const NEW_ENTRY_RESIDENT_ERROR='NEW_ENTRY_RESIDENT_ERROR';
 
 // Reducer
 export default function entradasReducer(state = entradas, action) {
@@ -27,6 +32,10 @@ export default function entradasReducer(state = entradas, action) {
         case NEW_ENTRY_VISIT_SUCCESS:
             return {...state, entradasvis:action.payload.data}
         case NEW_ENTRY_VISIT_ERROR:
+            return {...state.errors, error:action.payload, }
+        case NEW_ENTRY_RESIDENT_SUCCESS:
+            return {...state, entradasvis:action.payload.data}
+        case NEW_ENTRY_RESIDENT_ERROR:
             return {...state.errors, error:action.payload, }
         default:
             return state
@@ -70,6 +79,20 @@ export const NewEntryVisit=(info)=> async (dispatch, getState)=>{
         dispatch({
           type:NEW_ENTRY_VISIT_ERROR,
           payload: `ha ocurrido un error al ingresar un visitante a un parqueadero : ${error}`
+          
+        })
+    }
+  }
+
+export const NewEntryResident=(info)=> async (dispatch, getState)=>{
+
+    try {
+      await services.IngresoResidente(info)
+      
+    } catch (error) {
+        dispatch({
+          type:NEW_ENTRY_RESIDENT_ERROR,
+          payload: `ha ocurrido un error al ingresar un residente a un parqueadero : ${error}`
           
         })
     }

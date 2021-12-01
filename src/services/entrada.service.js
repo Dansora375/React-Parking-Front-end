@@ -1,14 +1,23 @@
 import api from '../api/api';
 
 // Mostrar los parqueaderos de visitantes que no estan en uso
-export async function EmptyVisitParking (info) {
+export async function GetEntryVisit(info) {
     try {
-      const Emptyviparkings = await api.get('/Parking/Entry/Visitant/' + info.IdNeighborhood)
-      return {data:Emptyviparkings, completed:true}
+      const EntryVisit = await api.get('/list-entry-visitant/:IdNeighborhood' + info.IdNeighborhood+'/'+info.ParkingId)
+      return {data:EntryVisit, completed:true}
     } catch (error) {
       return { error: `${error}`, completed: false }
     }
   }
+  export async function GetEntryResit(info) {
+    try {
+      const EntryResit = await api.get('/list-entry-resident/:IdNeighborhood' + info.IdNeighborhood+'/'+info.ParkingId)
+      return {data:EntryResit, completed:true}
+    } catch (error) {
+      return { error: `${error}`, completed: false }
+    }
+  }
+
 
 // Registrar el ingreso de un visitante
 export async function IngresoVisitante (info) {
@@ -22,6 +31,22 @@ export async function IngresoVisitante (info) {
       vehicleType: info.vehicleType
     })
     return {data:ingresovis, completed:true}
+  } catch (error) {
+    return { error: `${error}`, completed: false }
+  }
+}
+
+export async function IngresoResidente (info) {
+  try {
+    const ingresores = await api.post('/new-entry-resident/:IdNeighborhood/:HomeId' + info.IdNeighborhood + '/' + info.ParkingId , {
+      active: info.active,
+      entryTime: info.entryTime,
+      exitTime: info.exitTime,
+      plate: info.plate,
+      vehicleType: info.vehicleType,
+      home: info.home,
+    })
+    return {data:ingresores, completed:true}
   } catch (error) {
     return { error: `${error}`, completed: false }
   }

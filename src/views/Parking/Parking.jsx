@@ -3,7 +3,7 @@ import ItemParking from '../../components/Parking/ItemParking'
 import SearchAndAdd from '../../components/common/SearchAndAdd/SearchAndAdd'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
 import {useDispatch, useSelector} from 'react-redux'
-import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
+import {getVisitEntryAction} from '../../redux/Ducks/entradaDuck'
 import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
 // import watch from 'redux-watch'
 // import  store from '../../redux/createdStore'
@@ -16,7 +16,7 @@ function Parking() {
   // const [visiParkings, setVisiParkings]= React.useState(useSelector(store=>store.Parkings.parkingsVisi))
 
   React.useEffect(()=>{
-    dispatch(getParkingsResiAction(info))
+    dispatch(getVisitEntryAction(info))
     dispatch(getParkingsVisiAction(info))
   },[])
 

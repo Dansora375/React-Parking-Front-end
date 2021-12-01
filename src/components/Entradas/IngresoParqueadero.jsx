@@ -11,8 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetResiwhitparkingAction } from '../../redux/Ducks/residenteDuck';
 import { getTowersAction } from '../../redux/Ducks/groupDuck';
 import { getApartmentByTowerAction } from '../../redux/Ducks/homeDuck';
-import { getEmptyVisParkingAction } from '../../redux/Ducks/entradaDuck';
-import { NewEntryVisit } from '../../redux/Ducks/entradaDuck';
+import { getVisitEntryActionn } from '../../redux/Ducks/entradaDuck';
+import { CreateEntryVis} from '../../redux/Ducks/entradaDuck';
+import { getResiEntryAction} from '../../redux/Ducks/entradaDuck';
 
 
 const TipoIngreso = [
@@ -79,7 +80,7 @@ export default function IngresoParqueadero() {
         dispatch(GetResiwhitparkingAction(info))
         dispatch(getTowersAction(info))
         dispatch(getApartmentByTowerAction(info))
-        dispatch(getEmptyVisParkingAction(info))
+        dispatch(getResiEntryAction(info))
       },[info])
 
     const [estadoModal, setEstadoModal] = React.useState(false);
@@ -157,8 +158,8 @@ export default function IngresoParqueadero() {
         setApartamento('');
     }
 
-    const nuevoIngreso = () => {
-        dispatch(NewEntryVisit({
+    const CreateEntryVist = () => {
+        dispatch(({
             IdNeighborhood: info.IdNeighborhood,
             ParkingId: Parqueadero,
             name: Name,
@@ -180,7 +181,7 @@ export default function IngresoParqueadero() {
             <Modal1 
                 estado = {estadoModal}
                 cambiarEstado = {cambiarEstadoModal}
-                funcion = {nuevoIngreso}>
+                funcion = {CreateEntryVist}>
                 <h1>Ingreso Parqueadero<br/>{Ingreso}</h1>
                 <TextField
                     id="outlined-select-currency"

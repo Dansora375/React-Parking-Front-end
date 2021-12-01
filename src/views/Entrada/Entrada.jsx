@@ -10,7 +10,7 @@ import AddEntrada from '../../components/common/SearchAndAdd/AddEntrada'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
 import {useDispatch, useSelector} from 'react-redux'
 import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
-import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
+import {getResiEntryAction} from '../../redux/Ducks/entradaDuck'
 
 export function Entrada() {
   const dispatch= useDispatch()
@@ -21,15 +21,15 @@ export function Entrada() {
   // haga que si no se a modificado nada no se haga la peticion, como el useMemo
   React.useEffect(()=>{//se ejecuta cuando se monta el componente
     dispatch(getParkingsResiAction(info))//se ejecuta la accion
-    dispatch(getParkingsVisiAction(info))
+    dispatch(getResiEntryAction(info))
   },[])
 
   
 
   // probablemente haya que usar useMemo como computed
   // para que se actuaice cada vez que se cambie algo
-  const resiParkings=useSelector(store=>store.Parkings.parkingsResi)//seleccionamos el estado del store para obtener el estado de los parkings
-  const visiParkings=useSelector(store=>store.Parkings.parkingsVisi)
+  const resiEntry=useSelector(store=>store.entradas.entradasresi)//seleccionamos el estado del store para obtener el estado de los parkings
+  const visiEntry=useSelector(store=>store.entradas.entradasvis)
   
   // el id del nieghborhood se obtendra del sessionStorage
   // por ahora sera id estatico
@@ -53,8 +53,11 @@ export function Entrada() {
               <Grid item xs={5}>
                   <b className="texto-creacion">Agregar ingreso</b>
               </Grid>
-              <Grid item xs={1} className="plus">
-                  <InformacionEntrada/>
+              <Grid item xs={1} className="plus">{
+              resiEntry.map(item=>(
+                  <InformacionEntrada key={item._id} name={item.name} plate={item.plate} home={item.home} />
+              ))
+}
               </Grid>
               <Grid item xs={5}>
                   <b className="texto-creacion">Informacion</b>
@@ -70,13 +73,13 @@ export function Entrada() {
       <div>
         {
           personTypeFromTab===0?
-          resiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
-          resiParkings.map(item=>(
+          resiEntry==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
+          resiEntry.map(item=>(
 
           <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />//se puede usar el id como key
           )):
-          visiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
-          visiParkings.map(item=>(
+          visiEntry==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
+          visiEntry.map(item=>(
             item=== 'error'?'mostrar error con el cosito ed abajo':
             <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
           ))

@@ -3,13 +3,10 @@ import './Entrada.css';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import IngresoParqueadero from '../../components/Entradas/IngresoParqueadero';
-import InformacionEntrada from '../../components/Entradas/InformacionEntrada';
-import Tarifa from '../../components/Entradas/Tarifa';
 import {TextField} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import ItemEntrada from '../../components/Entradas/ItemEntrada'
-import AddEntrada from '../../components/common/SearchAndAdd/AddEntrada'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
 import {useDispatch, useSelector} from 'react-redux'
 import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'

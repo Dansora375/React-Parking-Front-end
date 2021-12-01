@@ -5,17 +5,13 @@ const entradas = {
 
 
     entradasvis: [],
-<<<<<<< HEAD
-    entradasresi: [],
+
+    entradares: [],
     errors: {
-      entradasvis:"",
-      entradasresi:""
+      entradasres:"",
+      entradasvis:""
     }
-=======
-
-    entradares: []
->>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
-
+    
 }
 
 // types
@@ -26,8 +22,7 @@ const GET_ENTRY_RESIT_ERROR = 'GET_ENTRY_RESI_ERROR';
 
 const NEW_ENTRY_VISIT_SUCCESS='NEW_ENTRY_VISIT_SUCCESS';
 const NEW_ENTRY_VISIT_ERROR='NEW_ENTRY_VISIT_ERROR';
-const NEW_ENTRY_RESIT_SUCCESS='NEW_ENTRY_RESIT_SUCCESS';
-const NEW_ENTRY_RESIT_ERROR='NEW_ENTRY_RESIT_ERROR';
+
 
 const NEW_ENTRY_RESIDENT_SUCCESS='NEW_ENTRY_RESIDENT_SUCCESS';
 const NEW_ENTRY_RESIDENT_ERROR='NEW_ENTRY_RESIDENT_ERROR';
@@ -41,22 +36,16 @@ export default function entradasReducer(state = entradas, action) {
         case GET_ENTRY_VISIT_ERROR:
             return {...state, errors:action.payload}
         case GET_ENTRY_RESIT_SUCCESS:
-            return {...state, entradasresi:action.payload.data}
+            return {...state, entradasres:action.payload.data}
         case GET_ENTRY_RESIT_ERROR:
            return {...state, errors:action.payload.data}
         case NEW_ENTRY_VISIT_SUCCESS:
             return {...state, entradasvis:action.payload.data}
         case NEW_ENTRY_VISIT_ERROR:
             return {...state.errors, error:action.payload, }
-<<<<<<< HEAD
-        case NEW_ENTRY_RESIT_SUCCESS:
-            return {...state, entradasresi:action.payload.data}
-        case NEW_ENTRY_RESIT_ERROR:
-=======
         case NEW_ENTRY_RESIDENT_SUCCESS:
-            return {...state, entradasvis:action.payload.data}
+            return {...state, entradasres:action.payload.data}
         case NEW_ENTRY_RESIDENT_ERROR:
->>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
             return {...state.errors, error:action.payload, }
         default:
             return state
@@ -176,7 +165,7 @@ export const getVisitEntryAction=(info)=> async (dispatch, getState)=>{
           // console.log(getState())
           // console.log(newState)
           dispatch({
-            type: NEW_ENTRY_RESIT_SUCCESS,
+            type: NEW_ENTRY_RESIDENT_SUCCESS,
             payload:{
               data:newState,
               type:'Residente'
@@ -186,7 +175,7 @@ export const getVisitEntryAction=(info)=> async (dispatch, getState)=>{
         
       }else if(res.completed===false) {
         dispatch({
-          type:NEW_ENTRY_RESIT_ERROR,
+          type:NEW_ENTRY_RESIDENT_ERROR,
           payload:res.error
           
         })
@@ -194,23 +183,10 @@ export const getVisitEntryAction=(info)=> async (dispatch, getState)=>{
       
     } catch (error) {
         dispatch({
-          type:NEW_ENTRY_RESIT_ERROR,
+          type:NEW_ENTRY_RESIDENT_ERROR,
           payload: `ha ocurrido un error al crear entrada de residente : ${error}`
           
         })
     }
   }
 
-export const NewEntryResident=(info)=> async (dispatch, getState)=>{
-
-    try {
-      await services.IngresoResidente(info)
-      
-    } catch (error) {
-        dispatch({
-          type:NEW_ENTRY_RESIDENT_ERROR,
-          payload: `ha ocurrido un error al ingresar un residente a un parqueadero : ${error}`
-          
-        })
-    }
-  }

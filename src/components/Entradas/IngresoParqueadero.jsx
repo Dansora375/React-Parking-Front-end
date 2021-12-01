@@ -11,15 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getHomestoEntryAction } from '../../redux/Ducks/homeDuck';
 import { getTowersAction } from '../../redux/Ducks/groupDuck';
 import { getApartmentByTowerAction } from '../../redux/Ducks/homeDuck';
-<<<<<<< HEAD
-import { getVisitEntryActionn } from '../../redux/Ducks/entradaDuck';
-import { CreateEntryVis} from '../../redux/Ducks/entradaDuck';
-import { getResiEntryAction} from '../../redux/Ducks/entradaDuck';
-=======
 import { getEmptyVisParkingAction } from '../../redux/Ducks/entradaDuck';
-import { NewEntryVisit } from '../../redux/Ducks/entradaDuck';
+//import { NewEntryVisit } from '../../redux/Ducks/entradaDuck';
 import { NewEntryResident } from '../../redux/Ducks/entradaDuck';
->>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
 
 
 const TipoIngreso = [
@@ -86,7 +80,7 @@ export default function IngresoParqueadero() {
         dispatch(getHomestoEntryAction(info))
         dispatch(getTowersAction(info))
         dispatch(getApartmentByTowerAction(info))
-        dispatch(getResiEntryAction(info))
+        
       },[info])
 
     const [estadoModal, setEstadoModal] = React.useState(false);
@@ -165,23 +159,10 @@ export default function IngresoParqueadero() {
         setApartamento('');
     }
 
-<<<<<<< HEAD
-    const CreateEntryVist = () => {
-        dispatch(({
-            IdNeighborhood: info.IdNeighborhood,
-            ParkingId: Parqueadero,
-            name: Name,
-            identification: Cedula,
-            group: nameTower,
-            homeName: Apartamento,
-            plate: Placa,
-            vehicleType: Vehiculo
-        }))
-=======
     const nuevoIngreso = () => {
 
         if (Ingreso === "Visitante") {
-            dispatch(NewEntryVisit({
+            dispatch( NewEntryResident({
                 IdNeighborhood: info.IdNeighborhood,
                 ParkingId: Parqueadero,
                 name: Name,
@@ -199,7 +180,6 @@ export default function IngresoParqueadero() {
             }))
         }
 
->>>>>>> 93b13886f64a5055e9fa9a411159fde6cc0cd25f
         cambiarEstadoModal()
     }
 
@@ -212,7 +192,7 @@ export default function IngresoParqueadero() {
             <Modal1 
                 estado = {estadoModal}
                 cambiarEstado = {cambiarEstadoModal}
-                funcion = {CreateEntryVist}>
+                funcion = {cambiarEstadoModal}>
                 <h1>Ingreso Parqueadero<br/>{Ingreso}</h1>
                 <TextField
                     id="outlined-select-currency"

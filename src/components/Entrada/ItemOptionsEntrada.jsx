@@ -44,6 +44,9 @@ function ItemOptionsEntrada() {
             <ConfirmButton text={TextCreatePkngButtonConf} />
           </MoreInfoEntrada>
         </MenuItem>
+        <MenuItem onClick={handleClose} variant='intermedialOptions'>
+          Vaciar parqueadero
+        </MenuItem>
         <MenuItem onClick={handleClose} variant='finalOption'>
           Terminar parqueadero
         </MenuItem>

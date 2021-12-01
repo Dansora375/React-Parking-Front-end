@@ -3,8 +3,8 @@ import ItemEntrada from '../../components/Entrada/ItemEntrada'
 import AddEntrada from '../../components/common/SearchAndAdd/AddEntrada'
 import TabResiOrVisi from '../../components/common/TabResiOrVisi/TabResiOrVisi'
 import {useDispatch, useSelector} from 'react-redux'
-import {getParkingsResiAction} from '../../redux/Ducks/parkingDuck'
-import {getParkingsVisiAction} from '../../redux/Ducks/parkingDuck'
+import {getEntradasResiAction} from '../../redux/Ducks/EntradaDuck'
+import {getEntradasVisiAction} from '../../redux/Ducks/EntradaDuck'
 
 function Entrada() {
   const dispatch= useDispatch()
@@ -14,16 +14,17 @@ function Entrada() {
   // funcion del ciclo de vide de react, u otra coasa que
   // haga que si no se a modificado nada no se haga la peticion, como el useMemo
   React.useEffect(()=>{//se ejecuta cuando se monta el componente
-    dispatch(getParkingsResiAction(info))//se ejecuta la accion
-    dispatch(getParkingsVisiAction(info))
+    dispatch(getEntradasResiAction(info))//se ejecuta la accion
+    dispatch(getEntradasVisiAction(info))
   },[])
 
   
 
   // probablemente haya que usar useMemo como computed
   // para que se actuaice cada vez que se cambie algo
-  const resiParkings=useSelector(store=>store.Parkings.parkingsResi)//seleccionamos el estado del store para obtener el estado de los parkings
-  const visiParkings=useSelector(store=>store.Parkings.parkingsVisi)
+  //seleccionamos el estado del store para obtener el estado de los entradas
+  const resiEntradas=useSelector(store=>store.Entradas.entradasResi);
+  const visiEntradas=useSelector(store=>store.Entradas.entradasVisi)
   
   // el id del nieghborhood se obtendra del sessionStorage
   // por ahora sera id estatico
@@ -42,15 +43,14 @@ function Entrada() {
       <div>
         {
           personTypeFromTab===0?
-          resiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
-          resiParkings.map(item=>(
-
-          <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />//se puede usar el id como key
+          resiEntradas==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
+          resiEntradas.map(item=>(
+          <ItemEntrada key={item._id} entryTime={item.entryTime} plate={item.plate} vehicleType={item.vehicleType} isTaken={item.isTaken} />//se puede usar el id como key
           )):
-          visiParkings==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
-          visiParkings.map(item=>(
+          visiEntradas==="error"?'mostrar error con el cosito ed abajo con el tipo de error':
+          visiEntradas.map(item=>(
             item=== 'error'?'mostrar error con el cosito ed abajo':
-            <ItemEntrada key={item._id} name={item.name} vehicleType={item.vehicleType} personType={item.personType} isTaken={item.isTaken} />
+            <ItemEntrada key={item._id} entryTime={item.entryTime} plate={item.plate} vehicleType={item.vehicleType} isTaken={item.isTaken} />
           ))
         }
       </div>

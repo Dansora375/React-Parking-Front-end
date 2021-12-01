@@ -5,11 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 // importacion de los distintos modulos Reduce del store redux
 import authReducer from './Ducks/authDuck'
 import parkingReducer from './Ducks/parkingDuck'
+import entradaReducer from './Ducks/EntradaDuck'
 
 const rootReducer = combineReducers({
     // Agregando los modulos al store
     authentication: authReducer,
-    Parkings:parkingReducer
+    Parkings:parkingReducer,
+    Entradas:entradaReducer
 
 })
 

@@ -1,10 +1,6 @@
 html {
     background-color: #323232;
 }
-.Hogares {
-    background-color: #323232;
-    color: #BCFFFA;
-}
 
 .texto-creacion {
     font-size: 24px;
@@ -39,28 +35,14 @@ html {
     color: white !important;
 }
 
-.HomeCard{
+.residentCard {
     font-size: 18px;
     text-align: center;
-    width: 200px;
+    width: 115px;
     float: left;
-}
-
-.requerimientos-resi {
-    padding-top: 4px;
-}
-
-.requerimientos-vis {
-    padding-top: 4px;
-    padding-bottom: 4px;
-}
-
-.opciones-selection {
-    overflow-y: auto;
-    max-height: 0px;
-}
-
-.texTarifa{
-    color: #323232 !important;
-    text-align: center !important;
+    margin-left: 4%;
+    margin-top: 4%;
+    height: 156px;
+    border: solid #BCFFFA;
+    border-radius: 10px;
 }

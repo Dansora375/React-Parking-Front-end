@@ -3,16 +3,19 @@ import './Hogares.css';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
 import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/core/ButtonUnstyled';
+//import { styled } from '@mui/system';
 import styled  from 'styled-components';
 import InputUnstyled from '@mui/core/InputUnstyled';
-import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
 import CrearTorre from '../../components/Hogares/CrearTorre';
 import CrearHogarApartamento from '../../components/Hogares/CrearHogarApartamento';
 import ObtenerHogares from '../../components/Hogares/ConexionBack/ObtenerHogares';
+import {useDispatch, useSelector} from 'react-redux';
+import { getTowersAction } from '../../redux/Ducks/groupDuck';
+import { getApartmentByTowerAction } from '../../redux/Ducks/homeDuck';
+
 
 const BotonNav = styled('button')`
   background-color: ${({theme})=>theme.secondary };
@@ -81,118 +84,107 @@ const CustomInput = React.forwardRef(function CustomInput(props, ref) {
   );
 });
 
-const options = [
-    'TORRE A',
-    'TORRE B',
-    'TORRE C',
-    'TORRE D',
-    'TORRE E',
-    'TORRE F',
-    'TORRE G',
-    'TORRE H',
-    'TORRE I',
-    'TORRE J',
-    'TORRE K'
-  ];
-  
-  const ITEM_HEIGHT = 48;
-
-  
-
 function NavButton(props) {
     return <ButtonUnstyled {...props} component={BotonNav} />;
   }
 
 export function Hogares() {
 
-    //const [Torre, setTorre] = React.useState(options[0]);
+    const dispatch = useDispatch();
+    const torres = useSelector(store => store.groups.towers);
+    const [Torre, setTorre] = React.useState('');
+    const [nameTower, setnameTower] = React.useState('Seleccione una torre');
+    const apartamentos = useSelector(store => store.homes.apartmentByTower);
+    const [info, setinfo] = React.useState( { IdNeighborhood:"619cc7d78011c2969719fedd",
+                                      IdGroup:""});
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [selecttorre, setselecttorre] = React.useState('TORRE A');
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
-                            <Box sx={{ flexGrow: 1, p: 3 }}>
-                                <Grid container spacing={2}>
-                                    
-                                    <Grid item xs={1} className="plus">
-                                        <CrearTorre/>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <b className="texto-creacion">Crear Torre</b>
-                                    </Grid>
-                                    <Grid item xs={1} className="plus">
-                                        <CrearHogarApartamento/>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <b className="texto-creacion">Crear Hogar</b>
-                                    </Grid>
-                                    
-                                </Grid>
-                            </Box>
-                                
-                            {/* Barra de opciones */}
-                            <Box sx={{ flexGrow: 1, p: 1, border:'1px solid #14FFEC'}}>
-                            <Grid container spacing={2} >
-                                <Grid item xs={3}>
-                                    <NavButton>Asignar Parqueadero</NavButton>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <NavButton aria-label="more"
-                                        id="long-button"
-                                        aria-controls="long-menu"
-                                        aria-expanded={open ? 'true' : undefined}
-                                        aria-haspopup="true"
-                                        onClick={handleClick}>
-                                            TORRE A &nbsp;&nbsp;
-                                        <FontAwesomeIcon icon={faEllipsisV} />
-                                        </NavButton>
-                                        <Menu
-                                            id="long-menu"
-                                            MenuListProps={{
-                                            'aria-labelledby': 'long-button',
-                                            }}
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            onClose={handleClose}
-                                            PaperProps={{
-                                            style: {
-                                                maxHeight: ITEM_HEIGHT * 4.5,
-                                                width: '15ch',
-                                                backgroundColor: '#0D7377',
-                                                color: '#BCFFFA',
-                                            },
-                                            }}
-                                        >
-                                            {options.map((option) => (
-                                            <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                                                {option}
-                                            </MenuItem>
-                                            ))}
-                                        </Menu>
-                                </Grid>
-                                <Grid item xs={5} sx={{textAlign: "right"}}>
-                                    <CustomInput aria-label="Demo input" placeholder="Buscar apartamento..." />
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <SearchIcon fontSize="large" sx={{color: "#14FFEC"}}/>
-                                </Grid>
-                            </Grid>
-                            </Box>
-                            <Grid item xs={12} className="titulo">
-                                <b><br/>TORRE A</b>
-                            </Grid>
-                            <p id="info">En este momento no hay apartamentos</p>
-                        </Box>
+    React.useEffect (() => {
+      dispatch(getTowersAction(info))
+      dispatch(getApartmentByTowerAction(info))
+    },[info])
+
+    const CambiarTorre = (event) => {
+      setTorre(event.target.value);
+      info.IdGroup = event.target.value;
+      setinfo({IdNeighborhood:"619cc7d78011c2969719fedd",
+              IdGroup: info.IdGroup});
+
+      for (let i=0; i<torres.length; i++){
+        if (torres[i]._id===event.target.value){
+          setnameTower(torres[i].name);
+          return
+        }
+      }
+    };  
 
     return (
 
-      contenido
+      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
+      <Box sx={{ flexGrow: 1, p: 3 }}>
+          <Grid container spacing={2}>
+              
+              <Grid item xs={1} className="plus">
+                  <CrearTorre/>
+              </Grid>
+              <Grid item xs={5}>
+                  <b className="texto-creacion">Crear Torre</b>
+              </Grid>
+              <Grid item xs={1} className="plus">
+                  <CrearHogarApartamento/>
+              </Grid>
+              <Grid item xs={5}>
+                  <b className="texto-creacion">Crear Hogar</b>
+              </Grid>
+              
+          </Grid>
+      </Box>
+          
+      {/* Barra de opciones */}
+      <Box sx={{ flexGrow: 1, p: 1, border:'1px solid #14FFEC'}}>
+      <Grid container spacing={2} >
+          <Grid item xs={3}>
+              <NavButton>Asignar Parqueadero</NavButton>
+          </Grid>
+          <Grid item xs={1}>
+              <h3 className="indicador-hogar">TORRE</h3>
+          </Grid>
+          <Grid item xs={3}>
+            <TextField
+                id="outlined-select-currency"
+                select
+                value={Torre}
+                onChange={CambiarTorre}
+                size="small"
+                sx={{width: '50%', backgroundColor: '#0D7377'}}
+                >
+                {torres.map((option) => (
+                    <MenuItem key={option._id} value={option._id} >
+                        {option.name}
+                    </MenuItem>
+                ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={4} sx={{textAlign: "right"}}>
+              <CustomInput aria-label="Demo input" placeholder="Buscar apartamento..." />
+          </Grid>
+          <Grid item xs={1}>
+              <SearchIcon fontSize="large" sx={{color: "#14FFEC"}}/>
+          </Grid>
+      </Grid>
+      </Box>
+      <Grid item xs={12} className="titulo-hogares">
+          <b><br/>{nameTower}</b>
+      </Grid>
+      {nameTower !== "Seleccione una torre" && <div>
+        <br/>
+
+        {apartamentos.map((apto) => (
+
+          <ObtenerHogares nameApto={apto.name}/>
+
+        ))}
+      </div>}
+  </Box>
 
         
     );

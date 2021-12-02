@@ -28,8 +28,8 @@ import CarLogo from './icons/car_logo.svg'
 
 import { Link, Switch, Route } from 'react-router-dom';
 
-import {Hogares} from "../views/Hogares/Hogares"
-import Usuario from '../views/Entrada/Usuario';
+import {Hogares} from "../../views/Hogares/Hogares"
+import Usuario from '../../views/Entrada/Usuario';
 
 import { useSelector } from 'react-redux';
 
@@ -120,7 +120,7 @@ export default function MiniDrawer( { contenido } ) {
 
   return (
     <Box sx={{ display: 'flex' }} >
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{display:'flex', justifyContent: 'space-between',backgroundColor:"#323232", color:"#14ffec"}}>
           <IconButton
@@ -202,10 +202,10 @@ export default function MiniDrawer( { contenido } ) {
         </List>
         
       </Drawer>
-      <Box component="main" sx={{ width: '100%',flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
+      <Box sx={{ flexGrow: 1, p: 3, backgroundColor: "#323232", color: "#BCFFFA" }}>
         <DrawerHeader />
         {contenido}
       </Box>
-    </Box>
+    </Box>  
   );
 }

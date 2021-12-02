@@ -2,16 +2,17 @@ import React from 'react'
 import {Grid, Box, Fab, TextField} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import CreateParkingDialog from '../../Parking/CreateParking'
+// import CreateParkingDialog from '../../Parking/CreateParking'
 import ConfirmButton  from '../ConfirmButton'; 
 import CancelButton  from '../CancelButton'; 
+import CreateEntradaDialog from '../../Entradas/CrearEntrada';
 
 
 
-function SearchAndAdd(props) {
+function AddEntrada(props) {
 
-  const TextCreatePkngButtonConf='Confirmar'
-  const TextCreatePkngButtonCan='Cancelar'
+  const TextButtonConf='Confirmar'
+  const TextButtonCan='Cancelar'
   return (
     <>
       <Grid container 
@@ -19,10 +20,14 @@ function SearchAndAdd(props) {
       alignItems="flex-end"
       spacing={0} >
         <Grid item xs={8.8}>      
-          <CreateParkingDialog>
-            <CancelButton text={TextCreatePkngButtonCan} />
-            <ConfirmButton text={TextCreatePkngButtonConf} />
-          </CreateParkingDialog>
+          {/* <CreateParkingDialog>
+            <CancelButton text={TextButtonCan} />
+            <ConfirmButton text={TextButtonConf} />
+          </CreateParkingDialog> */}
+          <CreateEntradaDialog>
+            <CancelButton text={TextButtonCan} />
+            <ConfirmButton text={TextButtonConf} />
+          </CreateEntradaDialog>
           
         </Grid>
         <Grid item xs={2}>
@@ -42,4 +47,4 @@ function SearchAndAdd(props) {
   )
 }
 
-export default SearchAndAdd
+export default AddEntrada

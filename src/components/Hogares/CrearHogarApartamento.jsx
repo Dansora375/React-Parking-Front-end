@@ -9,27 +9,21 @@ import MenuItem from '@mui/material/MenuItem';
 import '../../views/Hogares/Hogares.css'
 import Checkbox from '@mui/material/Checkbox';
 import { submitApto } from './ConexionBack/FormCrearApto';
-
-const currencies2 = [
-    {
-      value: 'Torre A',
-      label: 'Torre A',
-    },
-    {
-      value: 'Torre B',
-      label: 'Torre B',
-    },
-    {
-      value: 'Torre C',
-      label: 'Torre C',
-    },
-    {
-      value: 'Torre D',
-      label: 'Torre D',
-    },
-  ];
+import {useDispatch, useSelector} from 'react-redux';
+import { getTowersAction } from '../../redux/Ducks/groupDuck';
 
 export default function CrearHogarApartamento() {
+
+    const dispatch = useDispatch();
+    const torres = useSelector(store => store.groups.towers);
+
+    const info ={
+        IdNeighborhood:"619cc7d78011c2969719fedd"
+      }
+
+    React.useEffect (() => {
+        dispatch(getTowersAction(info))
+    },[])
 
     const [estadoModal2, cambiarEstadoModal2] = useState(false);
  
@@ -37,6 +31,7 @@ export default function CrearHogarApartamento() {
 
     const handleChange2 = (event) => {
         setCurrency2(event.target.value);
+        console.log(tower)
     };
 
     const [checked, setChecked] = React.useState(false);
@@ -57,7 +52,7 @@ export default function CrearHogarApartamento() {
         <div>
             <Fab aria-label="add" size="small" id="boton"
                 onClick={() => cambiarEstadoModal2(!estadoModal2)}>
-                <AddIcon />
+                <AddIcon/>
             </Fab>
             <Modal1 
                 estado = {estadoModal2}
@@ -79,9 +74,9 @@ export default function CrearHogarApartamento() {
                             size="small"
                             sx={{width: '100%'}}
                             >
-                            {currencies2.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                {option.label}
+                            {torres.map((option) => (
+                                <MenuItem key={option._id} value={option._id}>
+                                    {option.name}
                                 </MenuItem>
                             ))}
                         </TextField>

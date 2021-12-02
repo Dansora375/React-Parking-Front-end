@@ -5,8 +5,6 @@
 import {useDispatch, useSelector} from 'react-redux'
 import watch from 'redux-watch'
 import store from './redux/createdStore'
-
-
 import { ThemeProvider } from 'styled-components'
 import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles'
 import themes from './themes/themes'
@@ -14,7 +12,20 @@ import {darkTheme} from './themes/muiThemes'
 import MiniDrawer from './components/Drawer';
 
 import { Hogares } from './views/Hogares/Hogares';
+// importamos la acción
+// import { loguinWithEmailAction } from './redux/Ducks/authDuck'
+
+import MiniDrawer from './components/layout/Drawer';
+import { Hogares } from './views/Hogares/Hogares';
+import { Residentes } from './views/Residentes/Residentes';
 import {Entrada} from './views/Entrada/Entrada';
+// import {Register} from './views/Registro/Register';
+import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles';
+import themes from './themes/themes';
+import {darkTheme} from './themes/muiThemes';
+import Parking from './views/Parking/Parking';
+
 // import {Register} from './views/Registro/Register';
 
 import {
@@ -94,25 +105,33 @@ function App() {
       {/* <ResponsiveDrawer></ResponsiveDrawer> */}
 
       <Router>
-        {/* <MuiThemeProvider theme={darkTheme}>
-        <ThemeProvider theme={themes['dark']}> */}
-        <MiniDrawer contenido={
-          <Switch>
-            <Route path='/hogares'>
-              {/* <Register/> */}
-              <Hogares/>
-            </Route>
-            <Route path='/entradas'>
-              <Entrada/>
-            </Route>
-            <Route path='/Parqueadero'>
-              <Parking/>
-            </Route>
-          </Switch>
-        }></MiniDrawer>
 
-        {/* </ThemeProvider>
-        </MuiThemeProvider> */}
+        
+        
+        <MiniDrawer contenido={
+          <MuiThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={themes['dark']}>
+            <Switch>
+              <Route path='/hogares'>
+                <Hogares/>
+              </Route>
+              <Route path='/residentes'>
+                <Residentes/>
+              </Route>
+              <Route path='/entradas'>
+                <Entrada/>
+              </Route>
+              <Route path='/Parqueadero'>
+                <Parking/>
+              </Route>
+              <Route path='/entrada'>
+                <Parking/>
+              </Route>
+            </Switch>
+          </ThemeProvider>
+          </MuiThemeProvider>
+        }></MiniDrawer>
+        
       </Router>
       
     </>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Entrada.css';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import IngresoParqueadero from '../../components/Entradas/IngresoParqueadero';
+import IngresoParqueadero from '../../components/Entrada/IngresoParqueadero';
 import {TextField} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';

@@ -10,8 +10,10 @@ import Box from '@mui/material/Button'
 import { ClassNames } from '@emotion/react';
 import '../../views/Entrada/Entrada.css';
 
-export default function Tarifa() {
+export default function Tarifa(props) {
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
+
+    const plate = props.plate;
     
     return (
         <div>
@@ -41,7 +43,7 @@ export default function Tarifa() {
                         
                     </Grid>
                     <Grid item xs={3} sx={{textAlign: 'center'}}>
-                        <b>HGX-234</b>
+                        <b>p</b>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
                         <h3>Hora de Ingreso:</h3>

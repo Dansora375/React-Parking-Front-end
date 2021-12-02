@@ -74,3 +74,14 @@ export async function entradasVisitant (info) {
     return new Error(`${error}`, false) 
   }
 }
+// para EL MODAL mas info del un entrada
+// residente o visitante  
+export async function getMoreInfoEntrada(info) {
+  try {
+    const Entrada = await api.get('/Entries/more-info-entry-visitant/'+info)
+    
+    return new Success(Entrada, true)
+  } catch (error) {
+    return new Error(`${error}`, false) 
+  }
+}

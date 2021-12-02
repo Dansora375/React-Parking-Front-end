@@ -3,8 +3,16 @@ import Modal1 from '../Hogares/Modal1'
 import Grid from '@mui/material/Grid';
 import {useState} from 'react';
 
-export default function InformacionEntrada() {
+export default function InformacionEntrada(props) {
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
+
+    const name = props.name
+    const plate = props.plate
+    const entryTime = props.entryTime
+    const group = props.group
+    const homename = props.homename
+    const extra = props.extra
+
     
     return (
         <div>
@@ -27,35 +35,35 @@ export default function InformacionEntrada() {
                         
                     </Grid>
                     <Grid item xs={5} sx={{textAlign: 'center'}}>
-                        <b>Ricardo</b>
+                        <b>{name}</b>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
                         <h3>Placa:</h3>
                         
                     </Grid>
                     <Grid item xs={3} sx={{textAlign: 'center'}}>
-                        <b>HGX-234</b>
+                        <b>{plate}</b>
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
                         <h3>Hora de Ingreso:</h3>
                         
                     </Grid>
                     <Grid item xs={3} sx={{textAlign: 'center'}}>
-                        <b>18:52 23/10/2021</b>
+                        {entryTime}
                     </Grid>
                     <Grid item xs={6} sx={{textAlign: 'left'}}>
                         <h3>Apartamento:</h3>
                         
                     </Grid>
                     <Grid item xs={3} sx={{textAlign: 'center'}}>
-                        <b>C102</b>
+                        <b>{group}<br/>{homename}</b>
                     </Grid>
                     <Grid item xs={5} sx={{textAlign: 'left'}}>
                         <h3>Datos Extra:</h3>
                         
                     </Grid>
                     <Grid item xs={5} sx={{textAlign: 'center'}}>
-                        <b>Sin rayones</b>
+                        <b>{extra}</b>
                     </Grid>
                     </Grid>
                  </Modal1>

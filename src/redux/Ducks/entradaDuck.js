@@ -9,7 +9,16 @@ const entradas = {
 
     entradasVisi:[],
 
-    error:[]
+    entradasResiMoreInfo:{
+
+    },
+    entradasVisiMoreInfo:{
+  
+    },
+    errors: {
+      entradasResi:"",
+      entradasVisi:""
+    }
 
 }
 
@@ -27,7 +36,12 @@ const GET_RESI_ENTRADAS_TO_ITEM_SUCCESS='GET_ENTRADAS_TO_ITEM_SUCCESS'
 const GET_RESI_ENTRADAS_TO_ITEM_ERROR='GET_ENTRADAS_TO_ITEM_ERROR'
 const GET_VISI_ENTRADAS_TO_ITEM_SUCCESS='GET_VISI_ENTRADAS_TO_ITEM_SUCCESS'
 const GET_VISI_ENTRADAS_TO_ITEM_ERROR='GET_VISI_ENTRADAS_TO_ITEM_ERROR'
+const GET_RESI_ENTRADA_ENTRADAS_ERROR='GET_RESI_ENTRADA_ENTRADAS_ERROR'
+const GET_VISI_ENTRADA_ENTRADAS_ERROR='GET_VISI_ENTRADA_ENTRADAS_ERROR'
 
+// Obterner mas info entradas
+const GET_MORE_INF_ENTRADA_RESI_SUCCESS='GET_MORE_INF_ENTRADA_RESI_SUCCESS'
+const GET_MORE_INF_ENTRADA_VISI_SUCCESS='GET_MORE_INF_ENTRADA_VISI_SUCCESS'
 // Reducer
 export default function entradasReducer(state = entradas, action) {
     switch (action.type) {
@@ -52,6 +66,10 @@ export default function entradasReducer(state = entradas, action) {
           return {...state, entradasVisi:action.payload }
         case GET_VISI_ENTRADAS_TO_ITEM_ERROR:
           return {...state, error:action.payload }
+        case GET_MORE_INF_ENTRADA_RESI_SUCCESS:
+          return {...state, entradasResiMoreInfo:action.payload }
+        case GET_MORE_INF_ENTRADA_VISI_SUCCESS:
+          return {...state, entradasVisiMoreInfo:action.payload }
         default:
             return state
     }
@@ -163,3 +181,66 @@ export const getEntradasVisiAction=(info)=> async (dispatch, getState)=>{
     }
   
   }
+
+// Obterner more info
+export const getMoreInfoEntradaResiAction=(info)=> async (dispatch, getState)=>{
+  try {
+    const res = await services.getMoreInfoEntrada(info)
+    if (res.completed) {
+      dispatch({
+        type:GET_MORE_INF_ENTRADA_RESI_SUCCESS,
+        payload:res.data.data
+      })
+    }else if(res.completed===false) {
+      dispatch({
+        type:GET_RESI_ENTRADA_ENTRADAS_ERROR,
+        payload:{
+          error:"error",
+          message:res.error
+        }
+      })
+    } 
+  } catch (error) {
+    dispatch({
+        type:GET_RESI_ENTRADA_ENTRADAS_ERROR,
+        payload:{
+          error:"error",
+          message: `ha ocurrido un error al obtener el
+          parquedero de residente: ${error}` 
+        }
+      })
+  }
+
+}
+
+
+
+export const getMoreInfoEntradaVisiAction=(info)=> async (dispatch, getState)=>{
+  try {
+    const res = await services.getMoreInfoEntrada(info)
+    if (res.completed) {
+      dispatch({
+        type:GET_MORE_INF_ENTRADA_VISI_SUCCESS,
+        payload:res.data.data
+      })
+    }else if(res.completed===false) {
+      dispatch({
+        type:GET_RESI_ENTRADA_ENTRADAS_ERROR,
+        payload:{
+          error:"error",
+          message:res.error
+        }
+      })
+    } 
+  } catch (error) {
+    dispatch({
+        type:GET_RESI_ENTRADA_ENTRADAS_ERROR,
+        payload:{
+          error:"error",
+          message: `ha ocurrido un error al obtener el
+          parquedero de visitante: ${error}` 
+        }
+      })
+  }
+
+}

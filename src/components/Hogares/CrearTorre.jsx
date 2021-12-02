@@ -8,6 +8,8 @@ import TextField from '@mui/material/TextField';
 import '../../views/Hogares/Hogares.css';
 import { submitTorre } from './ConexionBack/FormCrearTorre';
 
+import { useSelector } from 'react-redux'
+
 
 export default function CrearTorre() {
 
@@ -15,9 +17,11 @@ export default function CrearTorre() {
     const [towerName, setTowerName] = useState('');
     const [capacidad, setcapacidad] = useState(0);
     
+
+    const userData = useSelector(state => state.authentication.userData)
     const SubTower = (event) => {
 
-        submitTorre(towerName, capacidad);
+        submitTorre(towerName, capacidad, userData.neighborhood);
         cambiarEstadoModal1();
     }
 

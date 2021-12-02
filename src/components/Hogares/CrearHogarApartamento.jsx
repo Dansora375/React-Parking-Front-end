@@ -16,13 +16,11 @@ export default function CrearHogarApartamento() {
 
     const dispatch = useDispatch();
     const torres = useSelector(store => store.groups.towers);
-
-    const info ={
-        IdNeighborhood:"619cc7d78011c2969719fedd"
-      }
-
+    const userData = useSelector(state => state.authentication.userData)
+    
     React.useEffect (() => {
-        dispatch(getTowersAction(info))
+        if(userData)
+            dispatch(getTowersAction({IdNeighborhood: userData.neighborhood}))
     },[])
 
     const [estadoModal2, cambiarEstadoModal2] = useState(false);
@@ -40,7 +38,7 @@ export default function CrearHogarApartamento() {
 
     const SubApto = (event) => {
 
-        submitApto(aptoName, tower);
+        submitApto(aptoName, tower, userData.neighborhood);
         cambiarEstadoModal2();
     }
 

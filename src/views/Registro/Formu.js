@@ -303,7 +303,7 @@ const Formu = () => {
 				</Formulario>
 				<div>
 					Ya tienes una cuenta?  
-					<Link to={"/register"}  component={link} sx={{maxWidth: '100%'}}>{' Ingresa aqui'}</Link>
+					<Link to={"/login"}  component={link} sx={{maxWidth: '100%'}}>{' Ingresa aqui'}</Link>
 				</div>
 			</FormProvider>
 		</main>

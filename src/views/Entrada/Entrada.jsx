@@ -16,9 +16,14 @@ export function Entrada() {
   const dispatch= useDispatch()
   const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
 
+  // datos del usuario
+  const userData = useSelector(state => state.authentication.userData)
+
   React.useEffect(()=>{//se ejecuta cuando se monta el componente
-    dispatch(getEntradasResiAction(info))//se ejecuta la accion
-    dispatch(getEntradasVisiAction(info))
+    if(userData){
+      dispatch(getEntradasResiAction({IdNeighborhood: userData.neighborhood}))//se ejecuta la accion
+      dispatch(getEntradasVisiAction({IdNeighborhood: userData.neighborhood}))
+    }
   },[])
 
   

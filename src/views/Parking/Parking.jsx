@@ -12,12 +12,16 @@ function Parking() {
   
   const dispatch= useDispatch()
   const [personTypeFromTab, setPersonTypeFromTab]= React.useState(0)
+
+  const userData = useSelector(state => state.authentication.userData)
   // const [resiParkings, setResiParkings]= React.useState(useSelector(store=>store.Parkings.parkingsResi))
   // const [visiParkings, setVisiParkings]= React.useState(useSelector(store=>store.Parkings.parkingsVisi))
 
   React.useEffect(()=>{
-    dispatch(getParkingsResiAction(info))
-    dispatch(getParkingsVisiAction(info))
+    if(userData){
+      dispatch(getParkingsResiAction({IdNeighborhood: userData.neighborhood}))
+      dispatch(getParkingsVisiAction({IdNeighborhood: userData.neighborhood}))
+    }
   },[])
 
   

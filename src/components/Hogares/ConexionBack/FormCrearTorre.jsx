@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import api from '../../../api/api';
 
 // Fase de prueba
-export function submitTorre (towerName, capacity) {
+export function submitTorre (towerName, capacity, neighborhood) {
 
     const newTower = {
         name: towerName,
@@ -11,7 +11,7 @@ export function submitTorre (towerName, capacity) {
 
     try {
 
-        api.post('/Group/619cc7d78011c2969719fedd', newTower)
+        api.post(`/Group/${neighborhood}`, newTower)
         .then(res => console.log(res.data));
 
         Swal.fire({

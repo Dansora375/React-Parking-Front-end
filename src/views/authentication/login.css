@@ -1,8 +1,9 @@
 .login-logo {
   /* position: absolute; */
   /* background-color: beige; */
-  margin: 0 auto;
-  height: 60vmin;
+  margin-left: 180% ;
+  height: 50vmin;
+  width: 30vmin;
   pointer-events: none;
   /* position: absolute; */
 }

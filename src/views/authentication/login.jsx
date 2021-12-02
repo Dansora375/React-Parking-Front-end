@@ -2,7 +2,7 @@ import React from 'react'
 
 import LogoIcon from '../../components/icons/LogoIcon.svg'
 
-import { Box } from '@mui/system';
+import { Box, fontSize } from '@mui/system';
 import { TextField, Typography, Button, Link } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 
@@ -57,7 +57,7 @@ const Login = () => {
   }
   return (
     <Box sx={{display:  'block', padding: 0}}>
-      <Typography variant='h1' align='center' color='primary'>
+      <Typography variant='h1' align='center' color='primary' marginTop='10%'fontSize='1em'>
         REACTPARKING SYSTEM
       </Typography>
       {/* <h1 >REACTPARKING SYSTEM</h1> */}
@@ -67,7 +67,7 @@ const Login = () => {
           {/* <img src={Logo} className="login-logo1" alt="logo" /> */}
         </div>
 
-        <Formulario onSubmit={handleSubmit(loginSubmit)}>
+        <Formulario onSubmit={handleSubmit(loginSubmit)} sx={{width:'30%'}}>
           <TextField 
               label= 'Nombre de usuario'
               variant='standard'

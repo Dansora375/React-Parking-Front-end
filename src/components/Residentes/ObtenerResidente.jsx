@@ -6,6 +6,11 @@ import { styled } from '@mui/system';
 import { Popover } from '@mui/material';
 import { ButtonGroup } from '@mui/material';
 
+import { useDispatch } from 'react-redux';
+import { deleteOwner } from '../../redux/Ducks/residenteDuck';
+
+import Swal from 'sweetalert2'
+
 const BotonCustom = styled('button')`
   background-color: #0D7377;
   padding: 6px 16px;
@@ -44,14 +49,13 @@ function CustomButton(props) {
 }
 
 
-const buttons = [
-  <CustomButton key="info">Mas informacion</CustomButton>,
-  <CustomButton key="editar">Modificar Residente</CustomButton>,
-  <CustomButton key="eliminar">Eliminar Residente</CustomButton>
-];
 
-export default function ObtenerResidente  ({name}) {
+
+
+export default function ObtenerResidente  ({name, residentData}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const dispatch = useDispatch()
 
   const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -61,35 +65,51 @@ export default function ObtenerResidente  ({name}) {
       setAnchorEl(null);
   };
 
+  const eliminarResident = () => {
+    console.log(residentData._id)
+    dispatch(deleteOwner(residentData._id))
+    Swal.fire({
+      icon: 'success',
+      title: 'El Residente fue Eliminado',
+  })
+  }
+  
+  const buttons = [
+    <CustomButton key="info">Mas informacion</CustomButton>,
+    <CustomButton key="editar">Modificar Residente</CustomButton>,
+    <CustomButton key="eliminar" onClick={eliminarResident}>Eliminar Residente</CustomButton>
+  ];
+
+  
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   return (
 
-        <div className="residentCard"   >
-          
-         <PersonOutline sx={{ fontSize: 100, "&:hover":{color: "#14FFEC"}}} onClick={handleClick}/>                    
-        <div>{name}</div>
-        <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-                }}
-            >
-                <ButtonGroup
-                    orientation="vertical"
-                    aria-label="vertical contained button group"
-                    variant="contained"
-                    sx={{border: "solid 1px", borderColor:"#BCFFFA"}}
-                >
-                    {buttons}
-                </ButtonGroup>
-            </Popover>
+    <div className="residentCard"   >
+        
+      <PersonOutline sx={{ fontSize: 100, "&:hover":{color: "#14FFEC"}}} onClick={handleClick}/>                    
+      <div>{name}</div>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'left',
+        }}
+      >
+        <ButtonGroup
+          orientation="vertical"
+          aria-label="vertical contained button group"
+          variant="contained"
+          sx={{border: "solid 1px", borderColor:"#BCFFFA"}}>
+          {buttons}
+        </ButtonGroup>
+      </Popover>
 
-      </div>
+    </div>
     )
 }
 

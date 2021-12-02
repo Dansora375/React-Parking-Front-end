@@ -8,6 +8,8 @@ import TextField from '@mui/material/TextField';
 import '../../views/Residentes/Residentes.css';
 import submitOwner from './conexionBack/FormCrearResidente';
 
+import { useSelector } from 'react-redux';
+
 export default function CrearResidente() {
   
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
@@ -16,6 +18,8 @@ export default function CrearResidente() {
     const [Cedula, setCedula] = React.useState('');
     const [telefono, settelefono] = React.useState('');
     const [Home, setHome] = React.useState('');
+
+    const userData = useSelector(state => state.authentication.userData)
 
     const cambiarEstadoModal = (event) => {
         cambiarEstadoModal1(!estadoModal1);
@@ -31,7 +35,8 @@ export default function CrearResidente() {
         submitOwner(Name,
           Cedula,
           telefono,
-          Home
+          Home,
+          userData.neighborhood
         )
 
       cambiarEstadoModal()

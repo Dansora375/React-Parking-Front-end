@@ -11,6 +11,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import { GetResidentsAction } from '../../redux/Ducks/residenteDuck';
 
 
+
+
 const StyledInputElement = styled('input')`
   width: 55%;
   font-size: 1rem;
@@ -50,12 +52,13 @@ export function Residentes() {
     const dispatch = useDispatch();
     const Residentes = useSelector(store => store.residentes.residentes);
 
-    const info = {
-      IdNeighborhood:"619cc7d78011c2969719fedd"
-    }
-
+    // const info = {
+    //   IdNeighborhood:"619cc7d78011c2969719fedd"
+    // }
+    const userData = useSelector(state => state.authentication.userData)
     React.useEffect (() => {
-      dispatch(GetResidentsAction(info))
+      if(userData)
+        dispatch(GetResidentsAction({IdNeighborhood: userData.neighborhood}))
     },[])
 
     const contenido =   <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
@@ -83,7 +86,7 @@ export function Residentes() {
 
                             {Residentes.map((res) => (
 
-                              <ObtenerResidente name={res.name}/>
+                              <ObtenerResidente name={res.  name} residentData={res}/>
 
                             ))}
                           </div>

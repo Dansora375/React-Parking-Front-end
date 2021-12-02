@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 
 //const Swal = require('sweetalert2')
 // Fase de prueba
-export default function submitOwner (Name, Cedula, telefono, Home) {
+export default function submitOwner (Name, Cedula, telefono, Home, neighborhood) {
 
     const newApto = {
         name: Name,
@@ -14,8 +14,11 @@ export default function submitOwner (Name, Cedula, telefono, Home) {
     
     try {
 
-        api.post('/Owner/619cc7d78011c2969719fedd', newApto)
-        .then(res => console.log(res.data));
+        api.post(`/Owner/${neighborhood}`, newApto)
+        .then(res => console.log(res.data))
+        .catch(
+            reason => console.log(reason)
+        );
 
         Swal.fire({
             icon: 'success',

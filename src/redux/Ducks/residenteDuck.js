@@ -15,6 +15,9 @@ const GET_RES_WITH_PARKING_ERROR = 'GET_RES_WITH_PARKING_ERROR';
 
 const NEW_OWNER_SUCCESS = 'NEW_OWNER_SUCCESS';
 const NEW_OWNER_ERROR = 'NEW_OWNER_ERROR';
+
+const DELETE_OWNER_SUCCESS =  'DELETE_OWNER_SUCCESS'
+const DELETE_OWNER_FAIL =  'DELETE_OWNER_FAIL'
 //Reducer
 
 export default function resReducer(state=dataRes,action) {
@@ -32,6 +35,10 @@ export default function resReducer(state=dataRes,action) {
             return state
         case NEW_OWNER_ERROR:
             return {...state, error:action.payload}
+        case DELETE_OWNER_SUCCESS:
+            return state
+        case DELETE_OWNER_FAIL:
+            return state
         default:
             return state
     }
@@ -119,3 +126,24 @@ export const NewOwner=(info) => async (dispatch, getState)=>{
           })
       }
   }
+
+export const deleteOwner = (idOwner) => async (dispatch, getSate) => {
+    try {
+        const result = await services.DeleteOwner(idOwner)
+        if(result.completed){
+            dispatch({
+                type: DELETE_OWNER_SUCCESS
+            })
+        }else{
+            dispatch({
+                type: DELETE_OWNER_FAIL,
+                payload: result.error
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: DELETE_OWNER_FAIL,
+            payload: error
+        })
+    }
+}

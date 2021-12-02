@@ -36,3 +36,12 @@ export async function NewOwner (info) {
     return { error: `${error}`, completed: false }
   }
 }
+
+export async function DeleteOwner (idOwner) {
+  try {
+    await api.delete(`/Owner/${idOwner}`)
+    return { completed: true }
+  } catch (error) {
+    return {error : `${error}`, completed: false}
+  }
+}

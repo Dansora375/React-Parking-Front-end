@@ -29,7 +29,7 @@ export default function resReducer(state=dataRes,action) {
         case GET_RES_WITH_PARKING_ERROR:
             return {...state, error:action.payload}
         case NEW_OWNER_SUCCESS:
-            return {...state, residentes:action.payload}
+            return state
         case NEW_OWNER_ERROR:
             return {...state, error:action.payload}
         default:
@@ -109,6 +109,7 @@ export const NewOwner=(info) => async (dispatch, getState)=>{
       
     try {
         await services.NewOwner(info)
+        
         
       } catch (error) {
           dispatch({

@@ -6,28 +6,16 @@ import Modal1 from '../Hogares/Modal1';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import '../../views/Residentes/Residentes.css';
-import {useDispatch, useSelector} from 'react-redux';
-import { NewOwner } from '../../services/residente.service';
-import { GetResidentsAction } from '../../redux/Ducks/residenteDuck';
+import submitOwner from './conexionBack/FormCrearResidente';
 
 export default function CrearResidente() {
-
+  
     const [estadoModal1, cambiarEstadoModal1] = useState(false);
-    const dispatch = useDispatch();
-    const Residentes = useSelector(store => store.residentes.residentes);
-
-    React.useEffect (() => {
-        dispatch(GetResidentsAction(info))
-      },[])
 
     const [Name, setName] = React.useState('');
     const [Cedula, setCedula] = React.useState('');
     const [telefono, settelefono] = React.useState('');
     const [Home, setHome] = React.useState('');
-
-    const info = {
-        IdNeighborhood:"619cc7d78011c2969719fedd"
-      }
 
     const cambiarEstadoModal = (event) => {
         cambiarEstadoModal1(!estadoModal1);
@@ -40,13 +28,11 @@ export default function CrearResidente() {
     // Toca corregirlo
     const CrearResidente = () => {
 
-        dispatch(NewOwner({
-          IdNeighborhood: info.IdNeighborhood,
-          name: Name,
-          identification: Cedula,
-          telephone: telefono,
-          homeId: Home
-      }))
+        submitOwner(Name,
+          Cedula,
+          telefono,
+          Home
+        )
 
       cambiarEstadoModal()
   
@@ -61,7 +47,7 @@ export default function CrearResidente() {
             <Modal1 
                 estado = {estadoModal1}
                 cambiarEstado = {cambiarEstadoModal}
-                funcion = {cambiarEstadoModal}>
+                funcion = {CrearResidente}>
                 <h2>Agregar nuevo Residente </h2>
                 <Grid container spacing={2}>  
                     <Grid item xs={6} sx={{textAlign: 'right'}}>

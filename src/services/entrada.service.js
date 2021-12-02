@@ -1,5 +1,18 @@
 import api from '../api/api';
 
+function Success (Data, Completed){
+  return {
+    data:Data,
+    completed:Completed
+  }
+}
+function Error (Error, Completed){
+  return {
+    error:Error,
+    completed:Completed
+  }
+}
+
 // Mostrar los parqueaderos de visitantes que no estan en uso
 export async function EmptyVisitParking (info) {
     try {
@@ -35,5 +48,29 @@ export async function IngresoResidente (info) {
     return {data:ingresores, completed:true}
   } catch (error) {
     return { error: `${error}`, completed: false }
+  }
+}
+
+// para llamar los parqueaderos de residentes y colocar los
+// datos en los items
+export async function entradasResident(info) {
+  try {
+    const Entradas = await api.get('/Entries/list-entry-resident/'+info.IdNeighborhood)
+    return new Success(Entradas, true)
+  } catch (error) {
+    return new Error(`${error}`, false) 
+  }
+}
+
+
+// para llamar los parqueaderos de VISITANTES y colocar los
+// datos en los items
+export async function entradasVisitant (info) {
+  try {
+    const Entradas = await api.get('/Entries/list-entry-visitant/'+info.IdNeighborhood)
+    // console.log(list_R.data);
+    return new Success(Entradas, true)
+  } catch (error) {
+    return new Error(`${error}`, false) 
   }
 }

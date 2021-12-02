@@ -5,9 +5,11 @@ const entradas = {
 
     emptyviparkings: [],
 
-    entradasvis: [],
+    entradasResi:[],
 
-    entradares: []
+    entradasVisi:[],
+
+    error:[]
 
 }
 
@@ -21,6 +23,11 @@ const NEW_ENTRY_VISIT_ERROR='NEW_ENTRY_VISIT_ERROR';
 const NEW_ENTRY_RESIDENT_SUCCESS='NEW_ENTRY_RESIDENT_SUCCESS';
 const NEW_ENTRY_RESIDENT_ERROR='NEW_ENTRY_RESIDENT_ERROR';
 
+const GET_RESI_ENTRADAS_TO_ITEM_SUCCESS='GET_ENTRADAS_TO_ITEM_SUCCESS'
+const GET_RESI_ENTRADAS_TO_ITEM_ERROR='GET_ENTRADAS_TO_ITEM_ERROR'
+const GET_VISI_ENTRADAS_TO_ITEM_SUCCESS='GET_VISI_ENTRADAS_TO_ITEM_SUCCESS'
+const GET_VISI_ENTRADAS_TO_ITEM_ERROR='GET_VISI_ENTRADAS_TO_ITEM_ERROR'
+
 // Reducer
 export default function entradasReducer(state = entradas, action) {
     switch (action.type) {
@@ -30,13 +37,21 @@ export default function entradasReducer(state = entradas, action) {
         case GET_EMPTYVISP_ERROR:
             return {...state, error:action.payload}
         case NEW_ENTRY_VISIT_SUCCESS:
-            return {...state, entradasvis:action.payload.data}
+            return {...state, entradasVisi:action.payload.data}
         case NEW_ENTRY_VISIT_ERROR:
             return {...state.errors, error:action.payload, }
         case NEW_ENTRY_RESIDENT_SUCCESS:
-            return {...state, entradasvis:action.payload.data}
+            return {...state, entradasResi:action.payload.data}
         case NEW_ENTRY_RESIDENT_ERROR:
             return {...state.errors, error:action.payload, }
+        case GET_RESI_ENTRADAS_TO_ITEM_SUCCESS:
+          return {...state, entradasResi:action.payload }
+        case GET_RESI_ENTRADAS_TO_ITEM_ERROR:
+          return {...state, error:action.payload }
+        case GET_VISI_ENTRADAS_TO_ITEM_SUCCESS:
+          return {...state, entradasVisi:action.payload }
+        case GET_VISI_ENTRADAS_TO_ITEM_ERROR:
+          return {...state, error:action.payload }
         default:
             return state
     }
@@ -96,4 +111,55 @@ export const NewEntryResident=(info)=> async (dispatch, getState)=>{
           
         })
     }
+  }
+
+export const getEntradasResiAction=(info)=> async (dispatch, getState)=>{
+
+    try {
+      const res = await services.entradasResident(info)
+      if (res.completed) {
+        dispatch({
+          type:GET_RESI_ENTRADAS_TO_ITEM_SUCCESS,
+          payload:res.data.data.list
+        })
+      }else if(res.completed===false) {
+        dispatch({
+          type:GET_RESI_ENTRADAS_TO_ITEM_ERROR,
+          payload:res.error
+        })
+      } 
+    } catch (error) {
+      dispatch({
+          type:GET_RESI_ENTRADAS_TO_ITEM_ERROR,
+          payload: `ha ocurrido un error al obtener los 
+          parquederos de residentes: ${error}` 
+        })
+    }
+  
+  }
+  
+  
+export const getEntradasVisiAction=(info)=> async (dispatch, getState)=>{
+  
+    try {
+      const res = await services.entradasVisitant(info)
+      if (res.completed) {
+        dispatch({
+          type:GET_VISI_ENTRADAS_TO_ITEM_SUCCESS,
+          payload:res.data.data.list
+        })
+      }else if(res.completed===false) {
+        dispatch({
+          type:GET_VISI_ENTRADAS_TO_ITEM_ERROR,
+          payload:res.error
+        })
+      } 
+    } catch (error) {
+      dispatch({
+          type:GET_VISI_ENTRADAS_TO_ITEM_ERROR,
+          payload: `ha ocurrido un error al obtener los 
+          parquederos de visitantes: ${error}` 
+        })
+    }
+  
   }

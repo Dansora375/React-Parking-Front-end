@@ -113,7 +113,7 @@ function ItemParking(props) {
           </Grid> 
         </Grid>      
         <Grid item xs={0}>
-          <ItemOptions ParkingType={personType} idParking={idParking} />
+          <ItemOptions ParkingType={personType} idParking={idParking} vehicleType={vehicleType}/>
         </Grid>      
       </Grid> 
       </Box> 

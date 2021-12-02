@@ -43,7 +43,7 @@ function MoreInfoParking(props) {
     {key:'Datos extra', value:'No establecido/a'}, 
   ])
 
-  const {children, ParkingType, idParking}= props
+  const {children, ParkingType, idParking, vehicleType}= props
 
   const handleOpenAndGet = () => {
     setOpen(true);
@@ -51,7 +51,6 @@ function MoreInfoParking(props) {
       const  dataArray=[]
       // console.log(dataArray)
       if(ParkingResi.home){
-
           dataArray[9]=ParkingResi.home.name
 
           if(ParkingResi.home.owner){
@@ -71,7 +70,6 @@ function MoreInfoParking(props) {
           dataArray[11]=ParkingResi.vehicle.extra
         
       }
-      
       if(ParkingResi){
           dataArray[6]=ParkingResi.lastEntryTime
           dataArray[7]=ParkingResi.lastExitTime
@@ -80,16 +78,13 @@ function MoreInfoParking(props) {
 
           const DatosResi2=JSON.parse(JSON.stringify(datosResi))
           // console.log(dataArray)
-      
           for(const index in DatosResi2){
             if(dataArray[index]){
-
               DatosResi2[index].value=dataArray[index]
-              // DatosResi2[index].value='No establecido/a'
+        
             }else if (dataArray[index]===null ||  typeof empty) {
               continue
             }
-
           }
           setDatosResi(DatosResi2)
           // console.log(datosResi)
@@ -105,20 +100,16 @@ function MoreInfoParking(props) {
        dataArray[5]=ParkingVisi.idLastEntryVisitant.homeName
        dataArray[7]=ParkingVisi.idLastEntryVisitant.extra
       }
-      
         dataArray[6]=ParkingVisi.name
       
-
       const DatosVisi2=JSON.parse(JSON.stringify(datosVisi))
       for(const index in DatosVisi2){
         if(dataArray[index]){
-
           DatosVisi2[index].value=dataArray[index]
-          // DatosResi2[index].value='No establecido/a'
+
         }else if (dataArray[index]===null ||  typeof empty) {
           continue
         }
-
       }
       setDatosVisi(DatosVisi2)
     }
@@ -128,7 +119,6 @@ function MoreInfoParking(props) {
     setOpen(false);
   };
 
-  
   // console.log(ParkingType)
   // console.log(idParking)
 
@@ -146,10 +136,6 @@ function MoreInfoParking(props) {
   const ParkingResi=useSelector(store=>store.Parkings.parkingsResiMoreInfo)
   const ParkingVisi=useSelector(store=>store.Parkings.parkingsVisiMoreInfo)
   
- 
-  
-
-  
   return (
     <>
     <Box onClick={handleOpenAndGet}>
@@ -164,20 +150,16 @@ function MoreInfoParking(props) {
         height: fullScreen?950:"auto",  border:1, borderColor:'tertiary.main'}}>
         <DialogTitle  sx={{alignContent:"center"}} >
           <Box  m={2} color='tertiary.main'sx={{fontSize: 28, fontWeight: '500',textAlign:"center"}}>
-            
-            {
-              
-
-            }
-            Informacion residente
+            Informacion {ParkingType}
           </Box>
         </DialogTitle>
         <DialogContent>
             <Box  m={2} sx={{fontSize: 28, fontWeight: '500',textAlign:"center"}}>
-            <CarInfoParking></CarInfoParking>
+              {
+                 vehicleType==='Carro'?<CarInfoParking/>:
+                 <MotoInfoParking/>
+              }
           </Box>
-
-
           {
             ParkingType==='Residente'?
             datosResi.map(item=>(
@@ -211,22 +193,7 @@ function MoreInfoParking(props) {
               </Grid>
               </Grid>
             ))
-
-          }
-            {/* <Grid 
-            container
-            justifyContent="right"
-            alignItems="center">
-            <Grid item rowSpacing={6} sx={{fontSize:19,color:'tertiary.main'}}  xs={6} >
-              <Box m={1} sx={{textAlign:'right'}} >
-              Vehiculo :
-              </Box>
-            </Grid>
-            <Grid item rowSpacing={6}  xs={6} >
-              
-            </Grid>
-            </Grid> */}
-            
+            }
         </DialogContent>
         <DialogActions alignItems="center" sx={{'justify-content': 'center'}}>
           <Box sx={{textAlign:'center', widht:'full widht' }}>

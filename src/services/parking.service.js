@@ -51,3 +51,18 @@ export async function NewParking (info) {
     return new Error(`${error}`, false) 
   }
 }
+
+
+// para EL MODAL mas info del un parqueadero
+// residente o visitante  
+export async function getMoreInfoParking(info) {
+  try {
+    const Parking = await api.get('/Parking/MoreInfo/'+info)
+    
+    return new Success(Parking, true)
+  } catch (error) {
+    return new Error(`${error}`, false) 
+  }
+}
+
+

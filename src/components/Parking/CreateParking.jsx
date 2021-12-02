@@ -19,13 +19,14 @@ export default function CreateParkingDialog(props) {
   // el id del nieghborhood se obtendra del sessionStorage
   // por ahora sera id estatico
   
-  const [datos, setDatos]=React.useState({
+const [datos, setDatos]=React.useState({
     vehicleType:' ',
     personType:' ',
     parkingName:' ',
     IdNeighborhood:'619cc7d78011c2969719fedd'
 
   })
+
   const {children}= props
   
   const theme = useTheme();
@@ -164,7 +165,7 @@ export default function CreateParkingDialog(props) {
             </Grid>
             </Grid>
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{'justify-content': 'space-evenly'}}>
           <Button onClick={handleClose}>
              {children[0]}
           </Button>

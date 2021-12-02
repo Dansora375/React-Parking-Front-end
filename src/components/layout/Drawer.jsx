@@ -19,14 +19,14 @@ import Tooltip from '@mui/material/Tooltip';
 
 
 // importando los iconos personalizados
-import EntradasIcon from './icons/Entradas'
-import ParqueaderoIcon from './icons/Parqueadero'
-import ResidenteIcon from './icons/Residentes'
-import VehiculosIcon from './icons/Vehiculos'
-import HomeIcon from './icons/Home'
-import CarLogo from './icons/car_logo.svg'
+import EntradasIcon from '../icons/Entradas'
+import ParqueaderoIcon from '../icons/Parqueadero'
+import ResidenteIcon from '../icons/Residentes'
+import VehiculosIcon from '../icons/Vehiculos'
+import HomeIcon from '../icons/Home'
+// import CarLogo from './icons/car_logo.svg'
 
-import { Link, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {Hogares} from "../../views/Hogares/Hogares"
 import Usuario from '../../views/Entrada/Usuario';

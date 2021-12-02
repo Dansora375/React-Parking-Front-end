@@ -9,21 +9,21 @@ import { ThemeProvider } from 'styled-components'
 import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles'
 import themes from './themes/themes'
 import {darkTheme} from './themes/muiThemes'
-import MiniDrawer from './components/Drawer';
+import MiniDrawer from './components/layout/Drawer';
 
 import { Hogares } from './views/Hogares/Hogares';
 // importamos la acción
 // import { loguinWithEmailAction } from './redux/Ducks/authDuck'
 
-import MiniDrawer from './components/layout/Drawer';
-import { Hogares } from './views/Hogares/Hogares';
+// import MiniDrawer from './components/layout/Drawer';
+// import { Hogares } from './views/Hogares/Hogares';
 import { Residentes } from './views/Residentes/Residentes';
 import {Entrada} from './views/Entrada/Entrada';
 // import {Register} from './views/Registro/Register';
-import { ThemeProvider } from 'styled-components';
-import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles';
-import themes from './themes/themes';
-import {darkTheme} from './themes/muiThemes';
+// import { ThemeProvider } from 'styled-components';
+// import { ThemeProvider as MuiThemeProvider} from '@mui/material/styles';
+// import themes from './themes/themes';
+// import {darkTheme} from './themes/muiThemes';
 import Parking from './views/Parking/Parking';
 
 // import {Register} from './views/Registro/Register';
@@ -37,7 +37,7 @@ import {
 } from "react-router-dom";
 
 import { useEffect } from 'react'
-import Parking from './views/Parking/Parking';
+// import Parking from './views/Parking/Parking';
 
 function App() {
   // iniciando las variables de history y location para navegacion programatica

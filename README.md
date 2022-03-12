@@ -1,5 +1,21 @@
 # Getting Started with Create React App
 
+Proyecto React-Parking
+En la rama por defecto  se encuentra la  aplicacion web con los ultimos avances, se empleo:
+
+React.js
+Redux 
+
+----------------------------------------------------------------------
+
+React-Parking Project
+In the default branch is the web application with the latest advances, it was used:
+
+React.js
+Redux
+
+--------------------------------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
